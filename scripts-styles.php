@@ -129,7 +129,7 @@ endif; //we need infscroll
 if ( get_theme_mod( '_sf_masonry' ) == '' ) :
 if (! function_exists('_sf_scripts_masonry') ) :
 function _sf_scripts_masonry() {
-	wp_enqueue_script('masonry', get_template_directory_uri().'/lib/js/jquery.masonry.min.js');
+	wp_enqueue_script('jquery-masonry');
 }
 add_action( 'wp_enqueue_scripts', '_sf_scripts_masonry' );
 endif; //! _sf_scripts_masonry exists
