@@ -17,7 +17,7 @@
  */
 if (! function_exists('_sf_customize_preview_js') ) :
 function _sf_customize_preview_js() {
-	wp_enqueue_script( '_s_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20130304', true );
+	wp_enqueue_script( '_s_customizer', get_template_directory_uri() . '/lib/js/customizer.js', array( 'customize-preview' ), '20130304', true );
 }
 add_action( 'customize_preview_init', '_sf_customize_preview_js' );
 endif; //! _sf_customize_preview_js exists
