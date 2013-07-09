@@ -124,4 +124,23 @@ function _sf_masonry_width() {
 	//echo it with a % sign.
 	echo $percent.'%;';
 }
-endif; //_sf_masonry_width exsits
+endif; //_sf_masonry_width exists
+
+/**
+* The container that begins masonry
+*
+* @since 1.0.0
+*/
+
+if (! function_exists('_sf_start_masonry') ) :
+function _sf_start_masonry() {
+	//get masonry options, doing it this dumb way for now to remind me I need to serialize options from customizer
+	$gutter = get_theme_mod('_sf_masonry_gutter', 10);
+	$stamp = get_theme_mod('sf_masonry_stamp', '#secondary');
+	echo "
+			<div id=\"masonry-loop\" class=\"js-masonry\" data-masonry-options='{ \"itemSelector\": \".masonry-entry\", \"guttersize\": \"".$gutter."\", \"stamp\": \"".$stamp."\" }'><!--start masonry-loop-->
+		";
+}
+endif; //! _sf_start_masonry exists		
+
+
