@@ -139,12 +139,16 @@ endif; //! _sf_scripts_masonry exists
 
 if (! function_exists('_sf_js_init_masonry_code') ) :
 function _sf_js_init_masonry_code() {
-	//get the theme_mod that tells us how many wide we want to go. If it isn't set return 4 so we don't get an error and it goes 4 wide, because I said so and you didn't.
-	$howmany = get_theme_mod('masonry_how_many', 4);
+	//get our options set in customizer
+	//TODO create these options
+	$gutter = get_theme_mod('_sf_masonry_gutter', 10);
+	$stamp = get_theme_mod('sf_masonry_stamp', '#secondary');
 	echo "
 
 			$('#masonry-loop').masonry({
 			  itemSelector: '.masonry-entry',
+			  'gutter': ".$gutter.",
+			  'stamp': '".$stamp."'
 			});
 		";
 }
