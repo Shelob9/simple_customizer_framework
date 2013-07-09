@@ -123,31 +123,33 @@ endif; //we need infscroll
 
 /**
 *masonry
+* @since 1.1.0 using Masonry 3.0.1
 */
 
 //first check if masonry is being used, if so do all the things we need, if not fuck it.
 if ( get_theme_mod( '_sf_masonry' ) == '' ) :
 if (! function_exists('_sf_scripts_masonry') ) :
 function _sf_scripts_masonry() {
-	wp_enqueue_script('jquery-masonry');
+	//deregister built in jQuery since it is old.
+	wp_deregister_script('jquery-masonry');
+	wp_enqueue_script('jquery-masonry', get_template_directory_uri().'/lib/js/masonry.pkgd.min.js', array('jquery'), false, true );
 }
 add_action( 'wp_enqueue_scripts', '_sf_scripts_masonry' );
 endif; //! _sf_scripts_masonry exists
 
 if (! function_exists('_sf_js_init_masonry_code') ) :
 function _sf_js_init_masonry_code() {
-	//get the theme_mod that tells us how many wide we want to go. If it isn't set return 4 so we don't get an error and it goes 4 wide, because I said so and you didn't.
-	$howmany = get_theme_mod('masonry_how_many', 4);
+	//get our options set in customizer
+	//TODO create these options
+	$gutter = get_theme_mod('_sf_masonry_gutter', 10);
+	$stamp = get_theme_mod('sf_masonry_stamp', '#secondary');
 	echo "
-				$('#masonry-loop').masonry({
-					  itemSelector: '.masonry-entry',
-					  // set columnWidth a fraction of the container width
-					  columnWidth: function( containerWidth ) {
-		
-	";
-	echo "					return containerWidth / ".$howmany.";
-					  }
-				});
+
+			$('#masonry-loop').masonry({
+			  itemSelector: '.masonry-entry',
+			  'gutter': ".$gutter.",
+			  'stamp': '".$stamp."'
+			});
 		";
 }
 endif; // if ! _sf_js_init_masonry_code exists
