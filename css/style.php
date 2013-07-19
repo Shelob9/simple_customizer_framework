@@ -113,8 +113,7 @@ echo '<style>'; ?>
 		echo $masonry_bg_color;
 		echo '; border-color:';
 		echo $masonry_border_color;
-		echo '; margin: 2px, 4px, 2px, 4px;';
-		echo 'width:';
+		echo '; width:';
 		_sf_masonry_width($use='css');
 		echo '}';
 		echo '.masonry-post-title{color:';
@@ -122,7 +121,8 @@ echo '<style>'; ?>
 		echo ';}';
 		echo '.masonry-post-excerpt .excerpt{color:';
 		echo $masonry_excerpt_text_color;
-		echo ';}';	
+		echo ';}';
+		echo '#content {padding: 0 0 0 0;}';
 	}
 
 //style home page slider, if we are using it.
