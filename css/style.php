@@ -9,7 +9,7 @@ add_action('wp_head','_sf_custom_style');
 //add_action('wp_head','dragonstone_background_img');
 
 function _sf_custom_style() {
-	$options = $options['_sf');
+	$options = get_option('_sf');
 	$content_text_color = $options['content_text_color'];
 	$content_link_color = $options['content_link_color'];
 	$site_description_color = $options['site_description_color'];
