@@ -424,17 +424,17 @@ function _sf_customize_register( $wp_customize ){
 	'label' => __('Content Text Color', 'sf')
 	);
 	$content[] = array(
-		'slug'=>'page_link_color', 
+		'slug'=>'content_link_color', 
 		'default' => '#1e73be',
 		'label' => __('Page/ Post Link Color', 'sf')
 	);
 	$content[] = array(
-		'slug'=>'page_linkHvr_color', 
+		'slug'=>'content_linkHvr_color', 
 		'default' => '#fff',
 		'label' => __('Page/ Post Link Hover Color', 'sf')
 	);
 	$content[] = array(
-		'slug'=>'page_linkVstd_color', 
+		'slug'=>'content_linkVstd_color', 
 		'default' => '#800080',
 		'label' => __('Page/ Post Visited Link Color', 'sf')
 	);
@@ -529,12 +529,12 @@ function _sf_customize_register( $wp_customize ){
 		'label' => __('Read More Button Link Color', 'sf')
 	);
 	$readmore[] = array(
-		'slug'=>'content_readMore_Button_linkHvr_color', 
+		'slug'=>'content_readMore_linkHvr_color', 
 		'default' => '#fff',
 		'label' => __('Read More Button Link Hover Color', 'sf')
 	);
 	$readmore[] = array(
-		'slug'=>'content_readMore_Button_linkVstd_color', 
+		'slug'=>'content_readMore_linkVstd_color', 
 		'default' => '#800080',
 		'label' => __('Read More Button Visited Link Color', 'sf')
 	);
