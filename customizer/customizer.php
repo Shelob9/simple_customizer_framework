@@ -190,17 +190,17 @@ function _sf_customize_register( $wp_customize ){
 		'label' => __('Slider Read More Button Background Color', 'sf')
 	);
 		$slider[] = array(
-		'slug'=>'Slider Read More Button_link_color', 
+		'slug'=>'slider_readMore_link_color', 
 		'default' => '#1e73be',
 		'label' => __('Slider Read More Button Link Color', 'sf')
 	);
 	$slider[] = array(
-		'slug'=>'Slider Read More Button_linkHvr_color', 
+		'slug'=>'slider_readMore_linkHvr_color', 
 		'default' => '#fff',
 		'label' => __('Slider Read More Button Link Hover Color', 'sf')
 	);
 	$slider[] = array(
-		'slug'=>'Slider Read More Button_linkVstd_color', 
+		'slug'=>'slider_readMore_linkVstd_color', 
 		'default' => '#800080',
 		'label' => __('Slider Read More Button Visited Link Color', 'sf')
 	);
@@ -524,17 +524,17 @@ function _sf_customize_register( $wp_customize ){
 		'label' => __('Read More Button Background Color', 'sf')
 	);
 		$readmore[] = array(
-		'slug'=>'Read More Button_link_color', 
+		'slug'=>'content_readMore_link_color', 
 		'default' => '#1e73be',
 		'label' => __('Read More Button Link Color', 'sf')
 	);
 	$readmore[] = array(
-		'slug'=>'Read More Button_linkHvr_color', 
+		'slug'=>'content_readMore_Button_linkHvr_color', 
 		'default' => '#fff',
 		'label' => __('Read More Button Link Hover Color', 'sf')
 	);
 	$readmore[] = array(
-		'slug'=>'Read More Button_linkVstd_color', 
+		'slug'=>'content_readMore_Button_linkVstd_color', 
 		'default' => '#800080',
 		'label' => __('Read More Button Visited Link Color', 'sf')
 	);
