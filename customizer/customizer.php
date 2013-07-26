@@ -322,7 +322,6 @@ function _sf_customize_register( $wp_customize ){
     //  ==================
     
 //menu/header colors
-	$menu = array();
 	//MENU
 	$menu[] = array(
 		'slug'=>'site_name_color', 
@@ -366,26 +365,26 @@ function _sf_customize_register( $wp_customize ){
 		'default' => ' ',
 		'label' => __('Site Description Color', 'sf')
 	);
-		foreach( $menu as $color ) {
-		// SETTINGS
-		$wp_customize->add_setting(
-			$color['slug'], array(
-				'default' => $color['default'],
-				'type' => 'option', 
-				'capability' => 
-				'edit_theme_options'
-			)
+	foreach ($menu as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section' 		=> '_sf_header_colors',
+			//'priority'      => $things['priority'],
+			'settings'      => $id
+			) 
 		);
-		// CONTROLS
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$color['slug'], 
-				array('label' => $color['label'], 
-				'section' => '_sf_header_colors',
-				'settings' => $color['slug'])
-			)
-		);
+		$wp_customize->add_control($control); 
 	}
 	
 //content area colors
