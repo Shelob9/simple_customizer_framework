@@ -23,7 +23,7 @@ function _sf_custom_style() {
 		//$menu_text_color = $options['menu_text_color'];
 		$search_but_txt = $options['menu_search_txt_color'];
 		$search_but_bg = $options['menu_search_bg_color'];
-		$search_but_txt_hv = $options['menu_search_txt_color_hv'];
+		//$search_but_txt_hv = $options['menu_search_txt_color_hv'];
 		$search_but_bg_hv = $options['menu_search_bg_color_hv'];
 	/*Content*/
 	$content_bg_color = $options['content_bg_color'];
@@ -35,8 +35,8 @@ function _sf_custom_style() {
 	//$content_link_color = $options['content_linkVstd_color'];
 	$excerpt_button_bg_color = $options['content_readMore_link_color'];
 	$excerpt_button_text_color = $options['excerpt_button_text_color'];
-	//$content_readMore_linkHvr_color = $options['content_readMore_linkHvr_color'];
-	//$content_readMore_linkVstd_color = $options['content_readMore_linkVstd_color'];
+	$content_readMore_linkHvr_color = $options['content_readMore_linkHvr_color'];
+	$content_readMore_linkVstd_color = $options['content_readMore_linkVstd_color'];
 	
 		/*Slider*/
 		$slider_bg_color = $options['slider_bg_color'];
@@ -94,12 +94,15 @@ echo '<style>';
 		';
 	
 	/*content*/
-	echo'
+	echo '
 		h1.entry-title {color: '.$page_title_color.';}
 		#content h1.entry-title a {color: '.$post_title_color.';}
 		.entry-content { color:  '.$content_text_color.';}
-		#content a.read-more-button.button	{color: '.$excerpt_button_text_color.';}
 		.read-more a.button {background-color: '.$excerpt_button_bg_color.';}
+		#content .read-more-button.button a	{color: '.$excerpt_button_text_color.';}
+		#content .read-more-button.button a:hover	{color: '.$content_readMore_linkHvr_color.';}
+		#content .read-more-button.button a:visited	{color: '.$content_readMore_linkVstd_color.';}
+		
 	';
 		/*slider*/
 		echo'
