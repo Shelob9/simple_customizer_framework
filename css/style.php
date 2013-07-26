@@ -55,32 +55,60 @@ function _sf_custom_style() {
 	/*Footer*/
 	$footer_bg_color = $options['footer_bg_color'];
 
-echo '<style>'; ?>
-	.entry-content { color:  <?php echo $content_text_color; ?>; }
-	#content a { color:  <?php echo $content_link_color; ?>; }
-	.site-description {color: <?php echo $site_description_color; ?> }
-	#content h1.entry-title a {color: <?php echo $post_title_color; ?> }
-	.top-bar-section ul li>a {color: <?php echo $menu_text_color; ?> }
-	.top-bar .name h1 a, h1.site-title a {color: <?php echo $site_name_color; ?> }
-	.top-bar, .top-bar-section li a:not(.button) {background-color: <?php echo $menu_bg_color; ?> }
-	.top-bar-section>ul>.divider
-	{border-bottom-color: <?php echo $menu_bg_color; ?>;
-	 border-top-color: <?php echo $menu_bg_color; ?>;
-	 border-left-color: <?php echo $menu_bg_color; ?>;
-	 border-right-color: <?php echo $menu_bg_color; ?>;
-	 }
-	.top-bar-section ul li>a.button {<?php echo 'color:'. $search_but_txt.'; background-color:'.$search_but_bg.';'; ?>}
-	.top-bar-section ul li>a.button:hover{<?php echo 'color:'. $search_but_txt_hv.'; background-color:'.$search_but_bg_hv.';'; ?>}
-	.top-bar-section li a:not(.button):hover {background-color: <?php echo $menu_hover_color; ?> }
-	.top-bar-section .dropdown li a {color: <?php echo $menu_text_color; ?> }
-	.top-bar-section ul.right {background-color: <?php echo $menu_bg_color; ?> }
-	#secondary {color: <?php echo $sidebar_text_color; ?>;}
-	#secondary a {color: <?php echo $sidebar_link_color; ?>;}
-	h5.widget-title {color: <?php echo $widget_title_color; ?>;}
-	h1.entry-title {color: <?php echo $page_title_color; ?>;}
-	#content a.read-more-button.button	{color: <?php echo $excerpt_button_text_color; ?>;}
-	.read-more a.button {background-color: <?php echo $excerpt_button_bg_color; ?>;}
-	<?php
+echo '<style>'; 
+	
+	/*header*/
+	echo'
+		.site-description {color: <?php echo $site_description_color; ?> }
+		#content a { color:  <?php echo $content_link_color; ?>; }
+		
+	';
+		/*Menu*/
+		echo '
+			.top-bar-section ul li>a {color: <?php echo $menu_text_color; ?> }
+			.top-bar .name h1 a, h1.site-title a {color: <?php echo $site_name_color; ?> }
+			.top-bar, .top-bar-section li a:not(.button) {background-color: <?php echo $menu_bg_color; ?> }
+			.top-bar-section>ul>.divider
+			{border-bottom-color: <?php echo $menu_bg_color; ?>;
+			 border-top-color: <?php echo $menu_bg_color; ?>;
+			 border-left-color: <?php echo $menu_bg_color; ?>;
+			 border-right-color: <?php echo $menu_bg_color; ?>;
+			 }
+			.top-bar-section ul li>a.button {<?php echo 'color:'. $search_but_txt.'; background-color:'.$search_but_bg.';'; ?>}
+			.top-bar-section ul li>a.button:hover{<?php echo 'color:'. $search_but_txt_hv.'; background-color:'.$search_but_bg_hv.';'; ?>}
+			.top-bar-section li a:not(.button):hover {background-color: <?php echo $menu_hover_color; ?> }
+			.top-bar-section .dropdown li a {color: <?php echo $menu_text_color; ?> }
+			.top-bar-section ul.right {background-color: <?php echo $menu_bg_color; ?> }
+		';
+	
+	/*content*/
+	echo'
+		h1.entry-title {color: <?php echo $page_title_color; ?>;}
+		#content h1.entry-title a {color: <?php echo $post_title_color; ?> }
+		.entry-content { color:  <?php echo $content_text_color; ?>; }
+		#content a.read-more-button.button	{color: <?php echo $excerpt_button_text_color; ?>;}
+		.read-more a.button {background-color: <?php echo $excerpt_button_bg_color; ?>;}
+	';
+		/*slider*/
+		echo'
+	
+		';
+		
+		/*masonry*/
+		echo'
+	
+		';
+	/*sidebar*/
+	echo'
+		#secondary {color: <?php echo $sidebar_text_color; ?>;}
+		#secondary a {color: <?php echo $sidebar_link_color; ?>;}
+		h5.widget-title {color: <?php echo $widget_title_color; ?>;}
+	';
+	
+	/*footer*/
+	echo'
+	
+	';
 
 	//if the background for the header is not set to transparent use $header_bg_color else just let it transparent.
 	if (! get_theme_mod( 'header-trans-bg' ) == '' ) { 	
