@@ -345,10 +345,25 @@ function _sf_customize_register( $wp_customize ){
 		'label' => __('Site Name Color', 'sf'),
 	);
 	$menu[] = array(
+		'slug'=>'site_description_color', 
+		'default' => ' ',
+		'label' => __('Site Description Color', 'sf')
+	);
+	$menu[] = array(
 		'slug'=>'menu_text_color', 
 		'default' => ' ',
 		'label' => __('Menu Text Color', 'sf'),
 		
+	);
+	$menu[] = array(
+		'slug'=>'menu_bg_color', 
+		'default' => ' ',
+		'label' => __('Menu Background Color', 'sf')
+	);
+	$menu[] = array(
+		'slug'=>'menu_hover_color', 
+		'default' => ' ',
+		'label' => __('Menu Background Hover Color', 'sf')
 	);
 	$menu[] = array(
 		'slug'=>'menu_search_txt_color', 
@@ -365,22 +380,8 @@ function _sf_customize_register( $wp_customize ){
 		'default' => '',
 		'label' => __('Search Button Background Hover Color', 'sf')
 	);
-	$menu[] = array(
-		'slug'=>'menu_bg_color', 
-		'default' => ' ',
-		'label' => __('Menu Background Color', 'sf')
-	);
 	
-	$menu[] = array(
-		'slug'=>'menu_hover_color', 
-		'default' => ' ',
-		'label' => __('Menu Hover Color', 'sf')
-	);
-	$menu[] = array(
-		'slug'=>'site_description_color', 
-		'default' => ' ',
-		'label' => __('Site Description Color', 'sf')
-	);
+	
 	$section = '_sf_header_colors';
 	$count = 5;
 	foreach ($menu as $things) {
