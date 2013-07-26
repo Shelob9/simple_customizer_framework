@@ -10,39 +10,51 @@ add_action('wp_head','_sf_custom_style');
 
 function _sf_custom_style() {
 	$options = get_option('_sf');
+	/*Page*/
+	$page_bg_color = $options['page_bg_color'];	
+	/*Header*/
+	$header_bg_color = $options['header_bg_color'];
+	$site_name_color = $options['site_name_color'];
+	$site_description_color = $options['site_description_color'];
+		/*Menu*/
+		$menu_bg_color = $options['menu_bg_color'];
+		$menu_hover_color = $options['menu_hover_color'];
+		$menu_text_color = $options['menu_text_color'];
+		$search_but_txt = $options['menu_search_txt_color'];
+		$search_but_bg = $options['menu_search_bg_color'];
+		$search_but_txt_hv = $options['menu_search_txt_color_hv'];
+		$search_but_bg_hv = $options['menu_search_bg_color_hv'];
+	/*Content*/
+	$content_bg_color = $options['content_bg_color'];
 	$content_text_color = $options['content_text_color'];
 	$content_link_color = $options['content_link_color'];
-	$site_description_color = $options['site_description_color'];
 	$post_title_color = $options['post_title_color'];
-	$menu_text_color = $options['menu_text_color'];
-	$site_name_color = $options['site_name_color'];
-	$content_bg_color = $options['content_bg_color'];
-	$header_bg_color = $options['header_bg_color'];
-	$menu_bg_color = $options['menu_bg_color'];
-	$menu_hover_color = $options['menu_hover_color'];
-	$search_but_txt = $options['menu_search_txt_color'];
-	$search_but_bg = $options['menu_search_bg_color'];
-	$search_but_txt_hv = $options['menu_search_txt_color_hv'];
-	$search_but_bg_hv = $options['menu_search_bg_color_hv'];
-	$page_bg_color = $options['page_bg_color'];
-	$sidebar_bg_color = $options['sidebar_bg_color'];
-	$footer_bg_color = $options['footer_bg_color'];
-	$masonry_bg_color = $options['masonry_bg_color'];
-	$masonry_excerpt_text_color = $options['masonry_excerpt_text_color'];
-	$masonry_title_color = $options['masonry_title_color'];
-	$masonry_border_color = $options['masonry_border_color'];
-	$sidebar_text_color = $options['sidebar_text_color'];
-	$sidebar_link_color = $options['sidebar_link_color'];
-	$widget_title_color = $options['widget_title_color'];
 	$page_title_color = $options['page_title_color'];
-	$slider_bg_color = $options['slider_bg_color'];
-	$slider_title_color = $options['slider_title_color'];
-	$slider_button_bg_color = $options['slider_button_bg_color'];
-	$slider_button_text_color = $options['slider_button_text_color'];
-	$slider_excerpt_text_color = $options['slider_excerpt_text_color'];
 	$excerpt_button_bg_color = $options['excerpt_button_bg_color'];
 	$excerpt_button_text_color = $options['excerpt_button_text_color'];
 	
+		/*Slider*/
+		$slider_bg_color = $options['slider_bg_color'];
+		$slider_title_color = $options['slider_title_color'];
+		$slider_excerpt_text_color = $options['slider_excerpt_text_color'];
+		$slider_button_bg_color = $options['slider_button_bg_color'];
+		$slider_button_text_color = $options['slider_button_text_color'];
+	
+		/*Masonry*/
+		$masonry_bg_color = $options['masonry_bg_color'];
+		$masonry_excerpt_text_color = $options['masonry_excerpt_text_color'];
+		$masonry_title_color = $options['masonry_title_color'];
+		$masonry_border_color = $options['masonry_border_color'];
+	
+	/*Sidebar*/
+	$sidebar_bg_color = $options['sidebar_bg_color'];
+	$widget_title_color = $options['widget_title_color'];
+	$sidebar_text_color = $options['sidebar_text_color'];
+	$sidebar_link_color = $options['sidebar_link_color'];
+	
+	/*Footer*/
+	$footer_bg_color = $options['footer_bg_color'];
+
 echo '<style>'; ?>
 	.entry-content { color:  <?php echo $content_text_color; ?>; }
 	#content a { color:  <?php echo $content_link_color; ?>; }
