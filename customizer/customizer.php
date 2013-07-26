@@ -309,6 +309,7 @@ function _sf_customize_register( $wp_customize ){
         'type' => 'checkbox',
         'label' => __('Disable Masonry?', '_sf'),
         'section' => '_sf_masonry_options',
+        'priority' => 3,
         )
     );
 
@@ -786,7 +787,7 @@ $wp_customize->add_setting(
 			'type' => 'checkbox',
 			'label' => __('Show Excerpt In Masonry Box?', '_sf'),
 			'section' => '_sf_masonry_options',
-			'priority' => '50',
+			'priority' => '20',
 			)
     );
     
@@ -805,7 +806,7 @@ $wp_customize->add_setting(
    			'label' => __('Masonry Excerpt Length (enter numbers only)', '_sf'),
    			'section' => '_sf_masonry_options',
    			'callback' => '_sf_sanitize_number',
-   			'priority' => '52',
+   			'priority' => '25',
    			)
    	);
    	
@@ -813,22 +814,26 @@ $wp_customize->add_setting(
 	$masonry[] = array(
 		'slug'=>'masonry_bg_color', 
 		'default' => '#fff',
-		'label' => __('Background Color', '_sf')
+		'label' => __('Background Color', '_sf'),
+		'priority' => 30,
 	);
 	$masonry[] = array(
 	'slug'=>'masonry_excerpt_text_color', 
 	'default' => ' ',
-	'label' => __('Excerpt Text Color', '_sf')
+	'label' => __('Excerpt Text Color', '_sf'),
+	'priority' => 27,
 	);
 	$masonry[] = array(
 		'slug'=>'masonry_title_color', 
 		'default' => ' ',
-		'label' => __('Title Color', '_sf')
+		'label' => __('Title Color', '_sf'),
+		'priority' => 15,
 	);
 	$masonry[] = array(
 		'slug'=>'masonry_border_color', 
 		'default' => ' ',
-		'label' => __('Border Color', '_sf')
+		'label' => __('Border Color', '_sf'),
+		'priority' => 35,
 	);
 	$section = '_sf_masonry_options';
 	foreach ($masonry as $things) {
