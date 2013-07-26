@@ -111,28 +111,28 @@ echo '<style>';
 	';
 
 	//if the background for the header is not set to transparent use $header_bg_color else just let it transparent.
-	if (! get_theme_mod( 'header-trans-bg' ) == '' ) { 	
+	if (! $options['header-trans-bg'] == '' ) { 	
 		echo '#masthead {background-color:';
 		echo $header_bg_color;
 		echo '}';
 	}
 	
 	//if the background for the sidebar is not set to transparent use $sidebar_bg_color else just let it transparent.
-	if (! get_theme_mod( 'sidebar-trans-bg' ) == '' ) { 	
+	if (! $options['sidebar-trans-bg'] == '' ) { 	
 		echo '#secondary {background-color:';
 		echo $sidebar_bg_color;
 		echo '}';
 	}
 	
 	//if the background for the footer is not set to transparent set background color.
-	if (! get_theme_mod( 'footer-trans-bg' ) == '' ) { 	
+	if (! $options['footer-trans-bg'] == '' ) { 	
 		echo '.site-footer {background-color:';
 		echo $footer_bg_color;
 		echo '}';
 	}
 	
 	//if the background for the content is not set to transparent set background color.
-	if (! get_theme_mod( 'content-trans-bg' ) == '' ) { 
+	if (! $options['content-trans-bg'] == '' ) { 
 		echo '#primary {background-color:';
 		echo $content_bg_color;
 		echo '}';
@@ -140,7 +140,7 @@ echo '<style>';
 	}
 	
 	// If page background is not set to full-screen image set a color background.
-	if (! get_theme_mod( 'body_bg_choice' ) == '' ) { 
+	if (! $options['body_bg_choice'] == '' ) { 
 		echo 'body{background-color:';
 		echo $page_bg_color;
 		echo ';}';
@@ -148,7 +148,7 @@ echo '<style>';
 
 	
 //style masonry boxes if we are using masonry today
-	if ( get_theme_mod( '_sf_masonry' ) == '' ) {
+	if ( $options['_sf_masonry'] == '' ) {
 		echo '.masonry-entry{background-color:';
 		echo $masonry_bg_color;
 		echo '; border-color:';
@@ -166,7 +166,7 @@ echo '<style>';
 	}
 
 //style home page slider, if we are using it.
-	if (! get_theme_mod( '_sf_slider_visibility' ) == '' ) { 
+	if (! $options['_sf_slider_visibility'] == '' ) { 
 		echo '.orbit-container {background-color:';
 		echo $slider_bg_color;
 		echo ';}';
