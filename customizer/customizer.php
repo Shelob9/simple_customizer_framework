@@ -92,15 +92,16 @@ function _sf_customize_register( $wp_customize ){
 /**
 * Slider
 */    
+
     //  ============================
     //  = Show Slider on Home Page? =
     //  =============================
 	$wp_customize->add_setting(
-    '_sf_slider_visibility'
+    '_sf[slider_visibility]'
     );
 
     $wp_customize->add_control(
-    '_sf_slider_visibility',
+    '_sf[slider_visibility]',
     array(
         'type' => 'checkbox',
         'label' => __('Show Home Page Slider?', '_sf'),
@@ -114,14 +115,14 @@ function _sf_customize_register( $wp_customize ){
     //  ============================
  
     $wp_customize->add_setting(
-    '_sf_slide_numb', array(
+    '_sf[slide_numb]', array(
     	'default' => 5,
     	'sanitize_callback' => '_sf_sanitize_number'
     	)
     );
 
     $wp_customize->add_control(
-    '_sf_slide_numb',
+    '_sf[slide_numb]',
     array(
         'type' => 'text',
 		'default' => 5,
@@ -146,17 +147,17 @@ function _sf_customize_register( $wp_customize ){
 		$cats[$category->slug] = $category->name;
 	}
  
-	$wp_customize->add_setting('_sf_slide_cat', array(
+	$wp_customize->add_setting('_sf[slide_cat]', array(
 		'default'        => $default
 	));
 	$wp_customize->add_control( 'cat_select_box', array(
-		'settings' => '_sf_slide_cat',
+		'settings' => '_sf[slide_cat]',
 		'label'   => __('Select Category:', '_sf'),
 		'section'  => '_sf_home_slider',
 		'type'    => 'select',
 		'choices' => $cats,
 	));
-	
+
 	// =================
 	// = Slider Colors =
 	// =================
