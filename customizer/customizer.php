@@ -89,6 +89,11 @@ function _sf_customize_register( $wp_customize ){
         'title'    => __('Sidebar Colors', '_sf'),
         'priority' => 133,
     ));
+ //Footer Options
+     $wp_customize->add_section('_sf_footer_options', array(
+        'title'    => __('Footer Options', '_sf'),
+        'priority' => 145,
+    ));
 /**
 * Slider
 */    
@@ -557,7 +562,53 @@ function _sf_customize_register( $wp_customize ){
 		$wp_customize->add_control($control); 
 		$count++;
 	}
+//footer colors
+	$footer[] = array(
+		'slug'=>'footer_text_color', 
+		'default' => '#fff',
+		'label' => __('Footer Text Color', 'sf')
+	);
+	$footer[] = array(
+		'slug'=>'footer_link_color', 
+		'default' => '#1e73be',
+		'label' => __('Footer Link Color', 'sf')
+	);
+	$footer[] = array(
+		'slug'=>'footer_linkHvr_color', 
+		'default' => '#fff',
+		'label' => __('Footer Link Hover Color', 'sf')
+	);
+	$footer[] = array(
+		'slug'=>'footer_linkVstd_color', 
+		'default' => '#800080',
+		'label' => __('Footer Visited Link Color', 'sf')
+	);
 
+	$section = '_sf_footer_options';
+	$count = 5;
+	foreach ($footer as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section'       => $section,
+			'priority'      => $count,
+			'settings'      => $id
+			) 
+		);
+		$wp_customize->add_control($control); 
+		$count++;
+	}
+	
 /**
 * Background(s)
 * 
