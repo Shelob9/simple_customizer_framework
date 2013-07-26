@@ -412,7 +412,7 @@ function _sf_customize_register( $wp_customize ){
 		'default' => '#fff',
 		'label' => __('Page Title Color', 'sf')
 	);
-	$section = '_sf_sidebar_colors';
+	$section = '_sf_content_colors';
 	$count = 5;
 	foreach ($content as $things) {
 		$slug = $things['slug'];
@@ -553,7 +553,7 @@ function _sf_customize_register( $wp_customize ){
 
 	$section = '_sf_background_colors';
 	$count = 5;
-	foreach ($sidebar as $things) {
+	foreach ($bg as $things) {
 		$slug = $things['slug'];
 		$id = "_sf[{$slug}]";
 		$wp_customize->add_setting( $id, array(
