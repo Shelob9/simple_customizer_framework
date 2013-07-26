@@ -44,8 +44,8 @@ function _sf_customize_register( $wp_customize ){
         'title'    => __('Home Page Slider', '_s_f'),
         'priority' => 110,
     ));
-     $wp_customize->add_section('_sf_home_slider', array(
-        'title'    => __('Home Slider Colors', '_s_f'),
+     $wp_customize->add_section('_sf_home_slider_colors', array(
+        'title'    => __('Slider Colors', '_s_f'),
         'priority' => 115,
     ));
 //header options
@@ -194,7 +194,7 @@ function _sf_customize_register( $wp_customize ){
 	);
 	
 	foreach ($slider as $things) {
-		$section = '_sf_slider_colors';
+		
 		$slug = $things['slug'];
 		$id = "_sf[{$slug}]";
 		$wp_customize->add_setting( $id, array(
@@ -208,14 +208,14 @@ function _sf_customize_register( $wp_customize ){
 				$wp_customize, $slug, 
 			array(
 			'label'         => __( $things['label'], '_sf' ),
-			'section'       => $section,
+			'section'       => '_sf_home_slider_colors',
 			'priority'      => $things['priority'],
 			'settings'      => $id
 			) 
 		);
 		$wp_customize->add_control($control); 
 	}
- 
+
 /**
 * Topbar/nav
 */ 
