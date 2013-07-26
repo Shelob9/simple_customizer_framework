@@ -166,33 +166,42 @@ function _sf_customize_register( $wp_customize ){
 		'slug'=>'slider_bg_color', 
 		'default' => '',
 		'label' => __('Slider Background Color', 'sf'),
-		'priority' => 5,
 	);
 	$slider[] = array(
 		'slug'=>'slider_title_color', 
 		'default' => '#',
-		'label' => __('Slider Title Color', 'sf'),
-		'priority' => 10,
-	);
-	$slider[] = array(
-		'slug'=>'slider_button_bg_color', 
-		'default' => '',
-		'label' => __('Slider Button Background Color', 'sf'),
-		'priority' => 15
-	);
-	$slider[] = array(
-		'slug'=>'slider_button_text_color', 
-		'default' => '#000',
-		'label' => __('Slider Button Text Color', 'sf'),
-		'priority' => 20,
+		'label' => __('Slider Post Title Color', 'sf'),
+
 	);
 	$slider[] = array(
 		'slug'=>'slider_excerpt_text_color',
 		'default' => '',
 		'label' => __('Slider Excerpt Color', '_sf'),
-		'priority' => 25,
+	);
+		//read more button
+	$slider[] = array(
+		'slug'=>'excerpt_button_bg_color', 
+		'default' => ' ',
+		'label' => __('Slider Read More Button Background Color', 'sf')
+	);
+		$slider[] = array(
+		'slug'=>'Slider Read More Button_link_color', 
+		'default' => '#1e73be',
+		'label' => __('Slider Read More Button Link Color', 'sf')
+	);
+	$slider[] = array(
+		'slug'=>'Slider Read More Button_linkHvr_color', 
+		'default' => '#fff',
+		'label' => __('Slider Read More Button Link Hover Color', 'sf')
+	);
+	$slider[] = array(
+		'slug'=>'Slider Read More Button_linkVstd_color', 
+		'default' => '#800080',
+		'label' => __('Slider Read More Button Visited Link Color', 'sf')
 	);
 	
+	$count = 5;
+	$section = '_sf_home_slider_colors';
 	foreach ($slider as $things) {
 		
 		$slug = $things['slug'];
@@ -208,12 +217,13 @@ function _sf_customize_register( $wp_customize ){
 				$wp_customize, $slug, 
 			array(
 			'label'         => __( $things['label'], '_sf' ),
-			'section'       => '_sf_home_slider_colors',
-			'priority'      => $things['priority'],
+			'section'       => $section,
+			'priority'      => $count,
 			'settings'      => $id
 			) 
 		);
 		$wp_customize->add_control($control); 
+		$count++;
 	}
 
 /**
@@ -393,16 +403,6 @@ function _sf_customize_register( $wp_customize ){
 	
 //content area colors
 	$content[] = array(
-	'slug'=>'content_text_color', 
-	'default' => '#000',
-	'label' => __('Content Text Color', 'sf')
-	);
-	$content[] = array(
-		'slug'=>'content_link_color', 
-		'default' => '#fff',
-		'label' => __('Content Link Color', 'sf')
-	);
-	$content[] = array(
 		'slug'=>'post_title_color', 
 		'default' => '#fff',
 		'label' => __('Post Title Color', 'sf')
@@ -412,6 +412,27 @@ function _sf_customize_register( $wp_customize ){
 		'default' => '#fff',
 		'label' => __('Page Title Color', 'sf')
 	);
+	$content[] = array(
+	'slug'=>'content_text_color', 
+	'default' => '#000',
+	'label' => __('Content Text Color', 'sf')
+	);
+	$content[] = array(
+		'slug'=>'Page/ Post_link_color', 
+		'default' => '#1e73be',
+		'label' => __('Page/ Post Link Color', 'sf')
+	);
+	$content[] = array(
+		'slug'=>'Page/ Post_linkHvr_color', 
+		'default' => '#fff',
+		'label' => __('Page/ Post Link Hover Color', 'sf')
+	);
+	$content[] = array(
+		'slug'=>'Page/ Post_linkVstd_color', 
+		'default' => '#800080',
+		'label' => __('Page/ Post Visited Link Color', 'sf')
+	);
+
 	$section = '_sf_content_colors';
 	$count = 5;
 	foreach ($content as $things) {
@@ -444,14 +465,24 @@ function _sf_customize_register( $wp_customize ){
 	'label' => __('Sidebar Text Color', 'sf')
 	);
 	$sidebar[] = array(
-		'slug'=>'sidebar_link_color', 
-		'default' => '#fff',
-		'label' => __('Sidebar Link Color', 'sf')
-	);
-	$sidebar[] = array(
 		'slug'=>'widget_title_color', 
 		'default' => '#000',
 		'label' => __('Widget Title Color', 'sf')
+	);
+	$sidebar[] = array(
+		'slug'=>'sidebar_link_color', 
+		'default' => '#1e73be',
+		'label' => __('Sidebar Link Color', 'sf')
+	);
+	$sidebar[] = array(
+		'slug'=>'sidebar_linkHvr_color', 
+		'default' => '#fff',
+		'label' => __('Sidebar Link Hover Color', 'sf')
+	);
+	$sidebar[] = array(
+		'slug'=>'sidebar_linkVstd_color', 
+		'default' => '#800080',
+		'label' => __('Sidebar Visited Link Color', 'sf')
 	);
 	
 	$section = '_sf_sidebar_colors';
@@ -482,17 +513,27 @@ function _sf_customize_register( $wp_customize ){
 
 //read more button
 	$readmore[] = array(
-	'slug'=>'excerpt_button_text_color', 
-	'default' => '#fff',
-	'label' => __('Read More Button Text Color', 'sf')
-	);
-	$readmore[] = array(
 		'slug'=>'excerpt_button_bg_color', 
 		'default' => ' ',
 		'label' => __('Read More Button Background Color', 'sf')
 	);
-	$section = '_sf_page_options';
+		$readmore[] = array(
+		'slug'=>'Read More Button_link_color', 
+		'default' => '#1e73be',
+		'label' => __('Read More Button Link Color', 'sf')
+	);
+	$readmore[] = array(
+		'slug'=>'Read More Button_linkHvr_color', 
+		'default' => '#fff',
+		'label' => __('Read More Button Link Hover Color', 'sf')
+	);
+	$readmore[] = array(
+		'slug'=>'Read More Button_linkVstd_color', 
+		'default' => '#800080',
+		'label' => __('Read More Button Visited Link Color', 'sf')
+	);
 	
+	$section = '_sf_page_options';
 	$count = 5;
 	foreach ($readmore as $things) {
 		$slug = $things['slug'];
