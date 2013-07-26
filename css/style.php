@@ -19,26 +19,34 @@ function _sf_custom_style() {
 		/*Menu*/
 		$menu_bg_color = $options['menu_bg_color'];
 		$menu_hover_color = $options['menu_hover_color'];
-		$menu_text_color = $options['menu_text_color'];
+		//wrong index
+		//$menu_text_color = $options['menu_text_color'];
 		$search_but_txt = $options['menu_search_txt_color'];
 		$search_but_bg = $options['menu_search_bg_color'];
 		$search_but_txt_hv = $options['menu_search_txt_color_hv'];
 		$search_but_bg_hv = $options['menu_search_bg_color_hv'];
 	/*Content*/
 	$content_bg_color = $options['content_bg_color'];
-	$content_text_color = $options['content_text_color'];
-	$content_link_color = $options['content_link_color'];
 	$post_title_color = $options['post_title_color'];
 	$page_title_color = $options['page_title_color'];
-	$excerpt_button_bg_color = $options['excerpt_button_bg_color'];
+	$content_text_color = $options['content_text_color'];
+	$content_link_color = $options['content_link_color'];
+	//$content_linkHvr_color = $options['content_linkHvr_color'];
+	//$content_link_color = $options['content_linkVstd_color'];
+	$excerpt_button_bg_color = $options['content_readMore_link_color'];
 	$excerpt_button_text_color = $options['excerpt_button_text_color'];
+	//$content_readMore_linkHvr_color = $options['content_readMore_linkHvr_color'];
+	//$content_readMore_linkVstd_color = $options['content_readMore_linkVstd_color'];
 	
 		/*Slider*/
 		$slider_bg_color = $options['slider_bg_color'];
 		$slider_title_color = $options['slider_title_color'];
 		$slider_excerpt_text_color = $options['slider_excerpt_text_color'];
 		$slider_button_bg_color = $options['slider_button_bg_color'];
-		$slider_button_text_color = $options['slider_button_text_color'];
+		$slider_button_text_color = $options['slider_readMore_link_color'];
+		//$slider_readMore_linkHvr_color = $options['slider_readMore_linkHvr_color'];
+		//$slider_readMore_linkVstd_color = $options['slider_readMore_linkVstd_color'];
+		
 	
 		/*Masonry*/
 		$masonry_bg_color = $options['masonry_bg_color'];
@@ -51,10 +59,14 @@ function _sf_custom_style() {
 	$widget_title_color = $options['widget_title_color'];
 	$sidebar_text_color = $options['sidebar_text_color'];
 	$sidebar_link_color = $options['sidebar_link_color'];
-	
+	//$sidebar_linkHvr_color = $options['sidebar_linkHvr_color'];
+	//$sidebar_linkVstd_color = $options['sidebar_linkVstd_color'];
 	/*Footer*/
 	$footer_bg_color = $options['footer_bg_color'];
-
+	//$footer_text_color = $options['footer_text_color'];
+	//$footer_link_color = $options['footer_link_color'];
+	//$footer_linkHvr_color = $options['footer_linkHvr_color'];
+	//$footer_linkVstd_color = $options['footer_linkVstd_color'];
 echo '<style>'; 
 	
 	/*header*/
