@@ -418,17 +418,17 @@ function _sf_customize_register( $wp_customize ){
 	'label' => __('Content Text Color', 'sf')
 	);
 	$content[] = array(
-		'slug'=>'Page/ Post_link_color', 
+		'slug'=>'page_link_color', 
 		'default' => '#1e73be',
 		'label' => __('Page/ Post Link Color', 'sf')
 	);
 	$content[] = array(
-		'slug'=>'Page/ Post_linkHvr_color', 
+		'slug'=>'page_linkHvr_color', 
 		'default' => '#fff',
 		'label' => __('Page/ Post Link Hover Color', 'sf')
 	);
 	$content[] = array(
-		'slug'=>'Page/ Post_linkVstd_color', 
+		'slug'=>'page_linkVstd_color', 
 		'default' => '#800080',
 		'label' => __('Page/ Post Visited Link Color', 'sf')
 	);
