@@ -42,7 +42,11 @@ function _sf_customize_register( $wp_customize ){
 //slider
     $wp_customize->add_section('_sf_home_slider', array(
         'title'    => __('Home Page Slider', '_s_f'),
-        'priority' => 120,
+        'priority' => 110,
+    ));
+     $wp_customize->add_section('_sf_home_slider', array(
+        'title'    => __('Home Slider Colors', '_s_f'),
+        'priority' => 115,
     ));
 //header options
     $wp_customize->add_section('_sf_header_options', array(
