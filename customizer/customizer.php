@@ -539,8 +539,8 @@ function _sf_customize_register( $wp_customize ){
 		'label' => __('Read More Button Visited Link Color', 'sf')
 	);
 	
-	$section = '_sf_page_options';
-	$count = 5;
+	$section = '_sf_content_colors';
+	$count = 50;
 	foreach ($readmore as $things) {
 		$slug = $things['slug'];
 		$id = "_sf[{$slug}]";
