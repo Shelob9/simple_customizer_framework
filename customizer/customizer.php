@@ -161,53 +161,62 @@ function _sf_customize_register( $wp_customize ){
 	// =================
 	// = Slider Colors =
 	// =================
-	
+
 	$slider[] = array(
 		'slug'=>'slider_bg_color', 
 		'default' => '',
-		'label' => __('Slider Background Color', 'sf')
+		'label' => __('Slider Background Color', 'sf'),
+		'priority' => 5,
 	);
 	$slider[] = array(
 		'slug'=>'slider_title_color', 
 		'default' => '#',
-		'label' => __('Slider Title Color', 'sf')
+		'label' => __('Slider Title Color', 'sf'),
+		'priority' => 10,
 	);
 	$slider[] = array(
 		'slug'=>'slider_button_bg_color', 
 		'default' => '',
-		'label' => __('Slider Button Background Color', 'sf')
+		'label' => __('Slider Button Background Color', 'sf'),
+		'priority' => 15
 	);
 	$slider[] = array(
 		'slug'=>'slider_button_text_color', 
 		'default' => '#000',
-		'label' => __('Slider Button Text Color', 'sf')
+		'label' => __('Slider Button Text Color', 'sf'),
+		'priority' => 20,
 	);
 	$slider[] = array(
 		'slug'=>'slider_excerpt_text_color',
 		'default' => '',
-		'label' => __('Slider Excerpt Color', '_sf')
+		'label' => __('Slider Excerpt Color', '_sf'),
+		'priority' => 25,
 	);
-		foreach( $slider as $color ) {
-		// SETTINGS
-		$wp_customize->add_setting(
-			$color['slug'], array(
-				'default' => $color['default'],
-				'type' => 'option', 
-				'capability' => 
-				'edit_theme_options'
-			)
+	
+	foreach ($slider as $things) {
+		$section = '_sf_slider_colors';
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section'       => $section,
+			'priority'      => $things['priority'],
+			'settings'      => $id
+			) 
 		);
-		// CONTROLS
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$color['slug'], 
-				array('label' => $color['label'], 
-				'section' => '_sf_home_slider',
-				'settings' => $color['slug'])
-			)
-		);
+		$wp_customize->add_control($control); 
+	
 	}
+
  
 /**
 * Topbar/nav
