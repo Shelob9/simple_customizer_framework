@@ -365,6 +365,8 @@ function _sf_customize_register( $wp_customize ){
 		'default' => ' ',
 		'label' => __('Site Description Color', 'sf')
 	);
+	$section = '_sf_header_colors';
+	$count = 5;
 	foreach ($menu as $things) {
 		$slug = $things['slug'];
 		$id = "_sf[{$slug}]";
@@ -379,12 +381,13 @@ function _sf_customize_register( $wp_customize ){
 				$wp_customize, $slug, 
 			array(
 			'label'         => __( $things['label'], '_sf' ),
-			'section' 		=> '_sf_header_colors',
-			//'priority'      => $things['priority'],
+			'section' 		=> $section,
+			'priority'      => $count,
 			'settings'      => $id
 			) 
 		);
 		$wp_customize->add_control($control); 
+		$count++;
 	}
 	
 //content area colors
@@ -408,27 +411,29 @@ function _sf_customize_register( $wp_customize ){
 		'default' => '#fff',
 		'label' => __('Page Title Color', 'sf')
 	);
-	
-			foreach( $content as $color ) {
-		// SETTINGS
-		$wp_customize->add_setting(
-			$color['slug'], array(
-				'default' => $color['default'],
-				'type' => 'option', 
-				'capability' => 
-				'edit_theme_options'
-			)
+	$section = '_sf_sidebar_colors';
+	$count = 5;
+	foreach ($content as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section' 		=> $section,
+			'priority'      => $count,
+			'settings'      => $id
+			) 
 		);
-		// CONTROLS
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$color['slug'], 
-				array('label' => $color['label'], 
-				'section' => '_sf_content_colors',
-				'settings' => $color['slug'])
-			)
-		);
+		$wp_customize->add_control($control); 
+		$count++;
 	}
 //sidebar area colors
 
@@ -447,31 +452,34 @@ function _sf_customize_register( $wp_customize ){
 		'default' => '#000',
 		'label' => __('Widget Title Color', 'sf')
 	);
-			foreach( $sidebar as $color ) {
-		// SETTINGS
-		$wp_customize->add_setting(
-			$color['slug'], array(
-				'default' => $color['default'],
-				'type' => 'option', 
-				'capability' => 
-				'edit_theme_options'
-			)
+	
+	$section = '_sf_sidebar_colors';
+	$count = 5;
+	foreach ($sidebar as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section'       => $section,
+			'priority'      => $count,
+			'settings'      => $id
+			) 
 		);
-		// CONTROLS
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$color['slug'], 
-				array('label' => $color['label'], 
-				'section' => '_sf_sidebar_colors',
-				'settings' => $color['slug'])
-			)
-		);
+		$wp_customize->add_control($control); 
+		$count++;
 	}
+		
 
 //read more button
-	//sidebar area colors
-
 	$readmore[] = array(
 	'slug'=>'excerpt_button_text_color', 
 	'default' => '#fff',
@@ -482,27 +490,30 @@ function _sf_customize_register( $wp_customize ){
 		'default' => ' ',
 		'label' => __('Read More Button Background Color', 'sf')
 	);
-
-			foreach( $readmore as $color ) {
-		// SETTINGS
-		$wp_customize->add_setting(
-			$color['slug'], array(
-				'default' => $color['default'],
-				'type' => 'option', 
-				'capability' => 
-				'edit_theme_options'
-			)
+	$section = '_sf_page_options';
+	
+	$count = 5;
+	foreach ($readmore as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section'       => $section,
+			'priority'      => $count,
+			'settings'      => $id
+			) 
 		);
-		// CONTROLS
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$color['slug'], 
-				array('label' => $color['label'], 
-				'section' => '_sf_page_options',
-				'settings' => $color['slug'])
-			)
-		);
+		$wp_customize->add_control($control); 
+		$count++;
 	}
 
 /**
@@ -538,28 +549,32 @@ function _sf_customize_register( $wp_customize ){
 		'default' => '#fff',
 		'label' => __('Footer Background Color', 'sf')
 	);
-	
-		foreach( $bg as $color ) {
-		// SETTINGS
-		$wp_customize->add_setting(
-			$color['slug'], array(
-				'default' => $color['default'],
-				'type' => 'option', 
-				'capability' => 
-				'edit_theme_options'
-			)
+
+	$section = '_sf_background_colors';
+	$count = 5;
+	foreach ($sidebar as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section'       => $section,
+			'priority'      => $count,
+			'settings'      => $id
+			) 
 		);
-		// CONTROLS
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$color['slug'], 
-				array('label' => $color['label'], 
-				'section' => '_sf_background_colors',
-				'settings' => $color['slug'])
-			)
-		);
+		$wp_customize->add_control($control); 
+		$count++;
 	}
+		
   // =====================================
   // = Content/ Header Area Transperancy =
   // =====================================
@@ -815,27 +830,29 @@ $wp_customize->add_setting(
 		'default' => ' ',
 		'label' => __('Border Color', '_sf')
 	);
-			foreach( $masonry as $color ) {
-		// SETTINGS
-		$wp_customize->add_setting(
-			$color['slug'], array(
-				'default' => $color['default'],
-				'type' => 'option', 
-				'capability' => 
-				'edit_theme_options'
-			)
+	$section = '_sf_masonry_options';
+	foreach ($masonry as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section'       => $section,
+			'priority'      => $things['priority'],
+			'settings'      => $id
+			) 
 		);
-		// CONTROLS
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$color['slug'], 
-				array('label' => $color['label'], 
-				'section' => '_sf_masonry_options',
-				'settings' => $color['slug'])
-			)
-		);
+		$wp_customize->add_control($control); 
 	}
+	
 }
 add_action('customize_register', '_sf_customize_register');
 endif; //! _sf_customize_register exists
