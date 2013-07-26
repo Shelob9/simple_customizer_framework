@@ -214,9 +214,7 @@ function _sf_customize_register( $wp_customize ){
 			) 
 		);
 		$wp_customize->add_control($control); 
-	
 	}
-
  
 /**
 * Topbar/nav
