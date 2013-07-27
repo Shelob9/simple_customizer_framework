@@ -92,7 +92,16 @@ function _sf_customize_content() {
 		'default' => '#fff',
 		'label' => __('Content Area Background Color', 'sf')
 	);
-	
+	$content[] = array(
+		'slug'=>'article_bg_color', 
+		'default' => '#fff',
+		'label' => __('Article Background Color', 'sf')
+	);
+	$content[] = array(
+		'slug'=>'articleSingle_bg_color', 
+		'default' => '#fff',
+		'label' => __('Article Background Color For Single Post/Page', 'sf')
+	);
 	$content[] = array(
 		'slug'=>'post_title_color', 
 		'default' => '#fff',
