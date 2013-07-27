@@ -27,7 +27,7 @@ function _sf_customize_footer() {
 			'type' => 'checkbox',
 			'label' => 'Use A Background Color For Footer Area',
 			'section' => $section,
-			'priority' => '3',
+			'priority' => '5',
 			'settings' => '_sf[footer-trans-bg]',
 			)
     );
@@ -38,7 +38,7 @@ function _sf_customize_footer() {
 		'slug'=>'footer_bg_color', 
 		'default' => '#000',
 		'label' => __('Footer Background Color', 'sf'),
-		'priority' => '1',
+		'priority' => '10',
 	);
 	$colors[] = array(
 		'slug'=>'footer_text_color', 
@@ -62,8 +62,8 @@ function _sf_customize_footer() {
 	);
 
 	
-	$countStart = 15;
-	_sf_customzier_color_loop($colors, $countStart = 10, $section);
+	$countStart = 20;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 	
 }
 endif; //! _sf_customize_footer
