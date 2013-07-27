@@ -7,6 +7,7 @@
  * since 1.5.1
  */
  
+ global $options;
  /**
  * Add all image sizes at once
  */
@@ -16,15 +17,12 @@
 	//for interchange responsive image thing
 	add_image_size( 'fd-lrg', 1024, 99999);
 	add_image_size( 'fd-med', 768, 99999);
-	add_image_size( 'fd-sm', 320, 9999);
-
-	
+	add_image_size( 'fd-sm', 320, 9999);	
 }
 
 
-
 /**
-* FGt id of attachment by full url
+* Get id of attachment by full url
 * http://pippinsplugins.com/retrieve-attachment-id-from-image-url/
 * as of 1.0.5.1 is no longer used. But I'm keeping it beacuse it is neat.
 */
@@ -39,13 +37,11 @@ function _sf_get_image_id($image_url) {
 }
 endif; // !  _sf_get_image_id exists
 
-
- 
 /**
 * Responsive Image Thing
 *
 */
-if (! get_theme_mod( '_sf_masonry' ) == '' ) :
+if ( $options['masonry'] != '' ) :
 if (! function_exists('_sf_responsive_img') ) :
 function _sf_responsive_img($html, $post_id, $post_thumbnail_id, $size, $attr) {
 	//make image links
@@ -74,8 +70,8 @@ endif; //we're using masonry
 */
 if (! function_exists('_sf_home_slider') ) :
 function _sf_home_slider() { 
-
-	if (! get_theme_mod( '_sf_slider_visibility' ) == '' ) { 
+	global $options;
+	if ( $options['slider_visibility'] != '' ) { 
 	if ( is_front_page() ) : 
 	get_template_part( 'slider' );
 	endif;
