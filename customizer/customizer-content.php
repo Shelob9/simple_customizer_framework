@@ -9,7 +9,7 @@ add_action('customize_register', '_sf_customize_content');
 
 function _sf_customize_content() {
 	global $wp_customize;
-	$section = '_sf_content_colors';
+	$section = '_sf_content_options';
 	//  ==============
 	//  = Background =
 	//  ==============
