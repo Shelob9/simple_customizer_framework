@@ -62,12 +62,8 @@ function _sf_customize_sidebar() {
 	$sidebar[] = array(
 		'slug'=>'sidebar_bg_color', 
 		'default' => '#fff',
-		'label' => __('Sidebar Background Color', 'sf')
-	);
-	$sidebar[] = array(
-	'slug'=>'sidebar_text_color', 
-	'default' => '#000',
-	'label' => __('Sidebar Text Color', 'sf')
+		'label' => __('Sidebar Background Color', 'sf'),
+		'priority' => 5,
 	);
 	$sidebar[] = array(
 		'slug'=>'widget_title_color', 
@@ -75,19 +71,24 @@ function _sf_customize_sidebar() {
 		'label' => __('Widget Title Color', 'sf')
 	);
 	$sidebar[] = array(
+	'slug'=>'sidebar_text_color', 
+	'default' => '#000',
+	'label' => __('Widget Text Color', 'sf')
+	);
+	$sidebar[] = array(
 		'slug'=>'sidebar_link_color', 
 		'default' => '#1e73be',
-		'label' => __('Sidebar Link Color', 'sf')
+		'label' => __('Widget Link Color', 'sf')
 	);
 	$sidebar[] = array(
 		'slug'=>'sidebar_linkHvr_color', 
 		'default' => '#fff',
-		'label' => __('Sidebar Link Hover Color', 'sf')
+		'label' => __('Widget Link Hover Color', 'sf')
 	);
 	$sidebar[] = array(
 		'slug'=>'sidebar_linkVstd_color', 
 		'default' => '#800080',
-		'label' => __('Sidebar Visited Link Color', 'sf')
+		'label' => __('Widget Visited Link Color', 'sf')
 	);
 	
 	$colors = $sidebar;
