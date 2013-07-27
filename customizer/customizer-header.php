@@ -85,6 +85,7 @@ function _sf_customize_header() {
 				'label' => __('Disable AJAX Page Loads?', '_sf'),
 				'section' => $section,
 				'settings' => '_sf[ajaxMenu]',
+				'priority' => 7,
 			)
     );
     
@@ -103,7 +104,7 @@ function _sf_customize_header() {
         'label'    => __('Don\'t display Name of site in Menu?', '_sf'),
         'section' => $section,
         'type'     => 'checkbox',
-        'priority'	 => '5',
+        'priority'	 => '10',
     ));
     
  	//  ================
@@ -121,7 +122,7 @@ function _sf_customize_header() {
         'label'    => __('Stick Menu To Top Of Page?', '_sf'),
         'section' => $section,
         'type'     => 'checkbox',
-        'priority'	 => '10',
+        'priority'	 => '5',
     ));
     
     //  ======================
@@ -140,7 +141,7 @@ function _sf_customize_header() {
 			'label'    => __('Search Bar In Menu?', '_sf'),
 			'section' => $section,
 			'type'     => 'checkbox',
-			'priority'	=> '15',
+			'priority'	=> '200',
 		)
     );
     
@@ -158,16 +159,24 @@ function _sf_customize_header() {
 		'slug'=>'site_name_color', 
 		'default' => ' ',
 		'label' => __('Site Name Color', 'sf'),
+		'priority' => 12,
 	);
 	$menu[] = array(
 		'slug'=>'site_description_color', 
 		'default' => ' ',
-		'label' => __('Site Description Color', 'sf')
+		'label' => __('Site Description Color', 'sf'),
+		'priority' => 13,
 	);
 	$menu[] = array(
 		'slug'=>'menu_text_color', 
 		'default' => ' ',
 		'label' => __('Menu Text Color', 'sf'),
+		
+	);
+	$menu[] = array(
+		'slug'=>'menu_textHvr_color', 
+		'default' => ' ',
+		'label' => __('Menu Text Hover Color', 'sf'),
 		
 	);
 	$menu[] = array(
@@ -183,17 +192,26 @@ function _sf_customize_header() {
 	$menu[] = array(
 		'slug'=>'menu_search_txt_color', 
 		'default' => '#fff',
-		'label' => __('Search Button Text Color', 'sf')
+		'label' => __('Search Button Text Color', 'sf'),
+		'priority' => 205,
+	);
+	$menu[] = array(
+		'slug'=>'menu_search_txtHvr_color', 
+		'default' => '#000',
+		'label' => __('Search Button Text Hover Color', 'sf'),
+		'priority' => 210,
 	);
 	$menu[] = array(
 		'slug'=>'menu_search_bg_color', 
 		'default' => '',
-		'label' => __('Search Button Background Color', 'sf')
+		'label' => __('Search Button Background Color', 'sf'),
+		'priority' => 220,
 	);
 	$menu[] = array(
-		'slug'=>'menu_search_bg_color_hv', 
+		'slug'=>'menu_search_bgHvr_color', 
 		'default' => '',
-		'label' => __('Search Button Background Hover Color', 'sf')
+		'label' => __('Search Button Background Hover Color', 'sf'),
+		'priority' => 225,
 	);
 	
 	$colors = $menu;
