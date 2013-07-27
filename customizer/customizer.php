@@ -101,19 +101,25 @@ function _sf_customize_register( $wp_customize ){
     //  ============================
     //  = Show Slider on Home Page? =
     //  =============================
+   
 	$wp_customize->add_setting(
-    '_sf[slider_visibility]'
+    	'_sf[slider_visibility]',
+    	array(
+    		'capability'  => 'edit_theme_options',
+			'type' => 'option',
+		)
     );
 
     $wp_customize->add_control(
-    '_sf[slider_visibility]',
-    array(
-        'type' => 'checkbox',
-        'label' => __('Show Home Page Slider?', '_sf'),
-        'section' => '_sf_home_slider',
-        'priority' => '1',
-        )
-    );
+		'slider_visibility',
+		array(
+			'type' => 'checkbox',
+			'label' => __('Show Home Page Slider?', '_sf'),
+			'section' => '_sf_home_slider',
+			'priority' => '1',
+			'settings' => '_sf[slider_visibility]'
+			)
+		);
  
     //  ============================
     //  = Number of Slides To Show =
@@ -122,18 +128,19 @@ function _sf_customize_register( $wp_customize ){
     $wp_customize->add_setting(
     '_sf[slide_numb]', array(
     	'default' => 5,
-    	'sanitize_callback' => '_sf_sanitize_number'
+    	'type' => 'option',
     	)
     );
 
     $wp_customize->add_control(
-    '_sf[slide_numb]',
+    'slide_numb',
     array(
         'type' => 'text',
 		'default' => 5,
         'label' => __('Number Of Slides To Show - Default is 5. Enter numbers only.', '_sf'),
         'section' => '_sf_home_slider',
-        'sanitize_callback' => '_sf_sanitize_number'
+        'sanitize_callback' => '_sf_sanitize_number',
+        'settings' => '_sf[slidenumb]',
         )
     );
    
@@ -153,8 +160,11 @@ function _sf_customize_register( $wp_customize ){
 	}
  
 	$wp_customize->add_setting('_sf[slide_cat]', array(
-		'default'        => $default
-	));
+		'default'        => $default,
+		'capability'  => 'edit_theme_options',
+			'type' => 'option',
+		)
+	);
 	$wp_customize->add_control( 'cat_select_box', array(
 		'settings' => '_sf[slide_cat]',
 		'label'   => __('Select Category:', '_sf'),
@@ -237,12 +247,14 @@ function _sf_customize_register( $wp_customize ){
     //  =============================
     //  = Site Name In Menu? =
     //  =============================
-    $wp_customize->add_setting('_sf[name_in_menu]', array(
-        'capability' => 'edit_theme_options',
-        
-    ));
+    $wp_customize->add_setting('_sf[name_in_menu]',
+    	 array(
+        	'capability' => 'edit_theme_options',
+    		'type' => 'option',
+    	)
+    );
  
-    $wp_customize->add_control('display_menu_name', array(
+    $wp_customize->add_control('name_in_menu', array(
         'settings' => '_sf[name_in_menu]',
         'label'    => __('Don\'t display Name of site in Menu?', '_sf'),
         'section'  => '_sf_header_options',
@@ -252,9 +264,12 @@ function _sf_customize_register( $wp_customize ){
  	//  =============================
     //  = Menu Sticky? =
     //  =============================
-    $wp_customize->add_setting('_sf[menu_sticky]', array(
-        'capability' => 'edit_theme_options',
-    ));
+    $wp_customize->add_setting('_sf[menu_sticky]',
+    	array(
+			'capability' => 'edit_theme_options',
+			'type' => 'option',
+		)
+    );
  
     $wp_customize->add_control('menu_sticky', array(
         'settings' => '_sf[menu_sticky]',
@@ -263,69 +278,88 @@ function _sf_customize_register( $wp_customize ){
         'type'     => 'checkbox',
         'priority'	 => '10',
     ));
+    
     //  ======================
     //  = Search Bar In Menu =
     //  ======================
-    $wp_customize->add_setting('_sf[menu_search]', array(
-        'capability' => 'edit_theme_options',
-    ));
+    $wp_customize->add_setting(
+		'_sf[menu_search]', array(
+			'capability' => 'edit_theme_options',
+			'type' => 'option',
+			)
+	);
  
-    $wp_customize->add_control('menu_search', array(
-        'settings' => '_sf[menu_search]',
-        'label'    => __('Search Bar In Menu?', '_sf'),
-        'section'  => '_sf_header_options',
-        'type'     => 'checkbox',
-        'priority'	 => '15',
-    ));
+    $wp_customize->add_control('menu_search',
+		array(
+			'settings' => '_sf[menu_search]',
+			'label'    => __('Search Bar In Menu?', '_sf'),
+			'section'  => '_sf_header_options',
+			'type'     => 'checkbox',
+			'priority'	=> '15',
+		)
+    );
  
 /**
 * Fancy JS
 */
+//TODO: PUT these in better places
     //  ============================
     //  = Disable Infinite Scroll? =
     //  =============================
 	$wp_customize->add_setting(
-    '_sf[inf-scroll]'
+    	'_sf[infScroll]', array(
+			'capability'  => 'edit_theme_options',
+			'type' => 'option',
+		)
     );
 
     $wp_customize->add_control(
-    '_sf[inf-scroll]',
-    array(
-        'type' => 'checkbox',
-        'label' => __('Disable Infinite Scroll?', '_sf'),
-        'section' => '_sf_page_options',
-        )
+		'infScroll',
+		array(
+			'type' => 'checkbox',
+			'label' => __('Disable Infinite Scroll?', '_sf'),
+			'section' => '_sf_page_options',
+			'settings' => '_sf[infScroll]'
+			)
     );
     //  ============================
     //  = Disable AJAX Page Loads? =
     //  ============================
 	$wp_customize->add_setting(
-    '_sf[ajax]'
+    	'_sf[ajaxMenu]', array(
+    		'type' => 'option',
+    		'capability'  => 'edit_theme_options',
+    	)
     );
 
     $wp_customize->add_control(
-    '_sf[ajax]',
-    array(
-        'type' => 'checkbox',
-        'label' => __('Disable AJAX Page Loads?', '_sf'),
-        'section' => '_sf_page_options',
-        )
+		'ajaxMenu',
+			array(
+				'type' => 'checkbox',
+				'label' => __('Disable AJAX Page Loads?', '_sf'),
+				'section' => '_sf_page_options',
+				'settings' => '_sf[ajaxMenu]',
+			)
     );
     //  ============================
     //  = Use Masonry? =
     //  ============================
 	$wp_customize->add_setting(
-    '_sf[masonry]'
+    	'_sf[masonry]', array(
+			'capability'  => 'edit_theme_options',
+    		'type' => 'option',
+    	)
     );
 
     $wp_customize->add_control(
-    '_sf[masonry]',
-    array(
-        'type' => 'checkbox',
-        'label' => __('Disable Masonry?', '_sf'),
-        'section' => '_sf_masonry_options',
-        'priority' => 3,
-        )
+		'_sf[masonry]',
+		array(
+			'type' => 'checkbox',
+			'label' => __('Disable Masonry?', '_sf'),
+			'section' => '_sf_masonry_options',
+			'priority' => 3,
+			'settings' => '_sf[masonry]',
+			)
     );
 
  
@@ -675,59 +709,75 @@ function _sf_customize_register( $wp_customize ){
 
 //content area
     $wp_customize->add_setting(
-    '_sf[content-trans-bg]'
+    	'_sf[content-trans-bg]', array(
+    		'type' => 'option',
+    		'capability'  => 'edit_theme_options',
+    	)
     );
 
     $wp_customize->add_control(
-    '_sf[content-trans-bg]',
-    array(
-        'type' => 'checkbox',
-        'label' => 'Use A Background Color For Content Area, If Not Using An Image Background?',
-        'section' => '_sf_background_options',
-        'priority' => '23',
-        )
+    	'content-trans-bg',
+		array(
+			'type' => 'checkbox',
+			'label' => 'Use A Background Color For Content Area, If Not Using An Image Background?',
+			'section' => '_sf_background_options',
+			'priority' => '23',
+			'settings' => '_sf[content-trans-bg]',
+			)
     );
 //header area
     $wp_customize->add_setting(
-    '_sf[header-trans-bg]'
+    	'_sf[header-trans-bg]', array(
+    		'type' => 'option',
+    		'capability'  => 'edit_theme_options',
+    	)
     );
 
     $wp_customize->add_control(
-    '_sf[header-trans-bg]',
-    array(
-        'type' => 'checkbox',
-        'label' => 'Use A Background Color For Header Area, If Not Using An Image Background?',
-        'section' => '_sf_background_options',
-        'priority' => '13',
-        )
+		'header-trans-bg',
+		array(
+			'type' => 'checkbox',
+			'label' => 'Use A Background Color For Header Area, If Not Using An Image Background?',
+			'section' => '_sf_background_options',
+			'priority' => '13',
+			'settings' => '_sf[header-trans-bg]',
+			)
     );
 //sidebar area
     $wp_customize->add_setting(
-    '_sf[sidebar-trans-bg]'
+    	'_sf[sidebar-trans-bg]', array(
+    		'type' => 'option',
+    		'capability'  => 'edit_theme_options',
+    	)
     );
 
     $wp_customize->add_control(
-    '_sf[sidebar-trans-bg]',
-    array(
-        'type' => 'checkbox',
-        'label' => 'Use A Background Color For Sidebar Area',
-        'section' => '_sf_background_options',
-        'priority' => '30',
-        )
+		'sidebar-trans-bg',
+		array(
+			'type' => 'checkbox',
+			'label' => 'Use A Background Color For Sidebar Area',
+			'section' => '_sf_background_options',
+			'priority' => '30',
+			'settings' => '_sf[sidebar-trans-bg]',
+		)
     );
 //footer area
     $wp_customize->add_setting(
-    '_sf[footer-trans-bg]'
+   		'_sf[footer-trans-bg]', array(
+   			'type' => 'option',
+   			'capability'  => 'edit_theme_options',
+    	)
     );
 
     $wp_customize->add_control(
-    '_sf[footer-trans-bg]',
-    array(
-        'type' => 'checkbox',
-        'label' => 'Use A Background Color For Footer Area',
-        'section' => '_sf_background_options',
-        'priority' => '40',
-        )
+		'footer-trans-bg',
+		array(
+			'type' => 'checkbox',
+			'label' => 'Use A Background Color For Footer Area',
+			'section' => '_sf_background_options',
+			'priority' => '40',
+			'settings' => '_sf[footer-trans-bg]',
+			)
     );
   	// =========
 	// BG IMGs =
@@ -735,30 +785,35 @@ function _sf_customize_register( $wp_customize ){
 	
 	//Background Color or Full-Width Image?
 	$wp_customize->add_setting(
-		'_sf[body_bg_choice]'
-
+		'_sf[body_bg_choice]', array(
+			'type' => 'option',
+			'capability'  => 'edit_theme_options',
+    	)
 	);
 
     $wp_customize->add_control(
-		'_sf[body_bg_choice]',
+		'body_bg_choice',
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use Background Color Instead of Image For Page?',
 			'section' => '_sf_background_options',
 			'settings'   => '_sf[body_bg_choice]',
 			'priority' => '5',
-			)
+		)
     );
+    
     $defaultbg = get_template_directory_uri().'/images/bg.jpg';
 	//page background img
 	    $wp_customize->add_setting(
 	    '_sf[body_bg_img]', array(
 			'default'           => $defaultbg,
 			'capability'        => 'edit_theme_options',
-    ));
+			'type' => 'option',
+    	)
+    );
  
     $wp_customize->add_control( 
-		new WP_Customize_Image_Control($wp_customize, '_sf[body_bg_img]', array(
+		new WP_Customize_Image_Control($wp_customize, 'body_bg_img', array(
 			'label'    => __('Upload Page Background', 'sf'),
 			'section'    => '_sf_background_options',
 			'settings' => '_sf[body_bg_img]',
@@ -767,28 +822,32 @@ function _sf_customize_register( $wp_customize ){
     
     //Background Color or Image For Header?
 	$wp_customize->add_setting(
-		'_sf[header_bg_choice]', array()
+		'_sf[header_bg_choice]', array(
+			'capability'  => 'edit_theme_options',
+        	'type' => 'option',
+    	)
 	 );
 
     $wp_customize->add_control(
-    	'_sf[header_bg_choice]',
+    	'header_bg_choice',
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use Background Image Instead of Color For Header?',
 			'section' => '_sf_background_options',
 			'settings'   => '_sf[header_bg_choice]',
 			'priority' => '12',
-			)
+		)
     );
 	//header background img
 	    $wp_customize->add_setting(
 	    '_sf[header_bg_img]', array(
-        	'capability'        => 'edit_theme_options',
+        	'capability'  => 'edit_theme_options',
+        	'type' => 'option',
     	)
     );
  
     $wp_customize->add_control(
-		new WP_Customize_Image_Control($wp_customize, '_sf[header_bg_img]', array(
+		new WP_Customize_Image_Control($wp_customize, 'header_bg_img', array(
 			'label'    => __('Upload Background Image For Header', 'sf'),
 			'section'    => '_sf_background_options',
 			'settings' => '_sf[header_bg_img]',
@@ -797,42 +856,49 @@ function _sf_customize_register( $wp_customize ){
     
     //Background Color or Image For Content-Area?
 	$wp_customize->add_setting(
-		'_sf[content_bg_choice]', array() 
+		'_sf[content_bg_choice]', array(
+			'capability'  => 'edit_theme_options',
+        	'type' => 'option',
+        )
 	);
 
     $wp_customize->add_control(
-    	'_sf[content_bg_choice]',
-    array(
-        'type' => 'checkbox',
-        'label' => 'Use Background Image Instead of Color For Content Area?',
-        'section' => '_sf_background_options',
-        'settings'   => '_sf[content_bg_choice]',
-        'priority' => '22',
-        )
+    	'content_bg_choice',
+		array(
+			'type' => 'checkbox',
+			'label' => 'Use Background Image Instead of Color For Content Area?',
+			'section' => '_sf_background_options',
+			'settings'   => '_sf[content_bg_choice]',
+			'priority' => '22',
+		)
     );
 	//content background img
 	    $wp_customize->add_setting(
-	    '_sf[content_bg_img]', array(
-        	'capability'        => 'edit_theme_options',
-    	));
+			'_sf[content_bg_img]', array(
+				'capability'  => 'edit_theme_options',
+				'type' => 'option'
+			)
+    	);
  
     $wp_customize->add_control(
-    new WP_Customize_Image_Control($wp_customize, '_sf[content_bg_img]', array(
+    new WP_Customize_Image_Control($wp_customize, 'content_bg_img', array(
         'label'    => __('Upload Background Image For Content Area', 'sf'),
         'section'    => '_sf_background_options',
         'settings' => '_sf[content_bg_img]',
         'priority' => '25',
     )));
+    
 /**
 * Default Sidebar Location
 */
-$wp_customize->add_setting(
+	$wp_customize->add_setting(
 			'_sf[default_sidebar]', array(
-				'capability'     => 'edit_theme_options'
+				'capability'  => 'edit_theme_options',
+        		'type' => 'option',
 			)
 		);
 	$wp_customize->add_control(
-   		 '_sf[default_sidebar]',
+   		'default_sidebar',
 		array(
 			'label' => __('Sidebar Location', '_s_f'),
 			'section' => '_sf_page_options',
@@ -842,7 +908,8 @@ $wp_customize->add_setting(
 				'value1' => 'Right',
 				'value2' => 'Left',
 				'value3' => 'None',
-			)
+			),
+			'settings' => '_sf[default_sidebar]',
 		)
     );
 
@@ -855,31 +922,40 @@ $wp_customize->add_setting(
     $wp_customize->add_setting(
     	'_sf[masonry_how_many]',
     		array(
-    			'default' => '4',
+    			'default'	=> '4',
+    			'capability'  => 'edit_theme_options',
+        		'type' => 'option',
     		)
     );
     
     $wp_customize->add_control(
-    	'_sf[masonry_how_many]',
+    	'masonry_how_many',
     	array(
     		'type' => 'text',
     		'label' => __('How Many Bricks Per Row', '_sf'),
     		'priority' => '10',
     		'section' => '_sf_masonry_options',
+    		'settings' => '_sf[masonry_how_many]',
     		'callback' => '_sf_sanitize_number',
     	)
     );
  	//show excerpt
  	$wp_customize->add_setting(
-   	 '_sf[masonry_excerpt]'
+   	 '_sf[masonry_excerpt]',
+   	 	array(
+   			'default'	=> '',
+   			'capability'  => 'edit_theme_options',
+			'type' => 'option',
+		)
     );
 
     $wp_customize->add_control(
-    	'_sf[masonry_excerpt]',
+    	'masonry_excerpt',
 		array(
 			'type' => 'checkbox',
 			'label' => __('Show Excerpt In Masonry Box?', '_sf'),
 			'section' => '_sf_masonry_options',
+			'settings' => '_sf[masonry_excerpt]',
 			'priority' => '20',
 			)
     );
@@ -888,17 +964,20 @@ $wp_customize->add_setting(
     $wp_customize->add_setting(
    		'_sf[masonry_excerpt_length]',
    		array(
-   			'default' => '10',
+   			'default'	=> '10',
+   			'capability'  => 'edit_theme_options',
+        	'type' => 'option',
    		)
    	);
    	
    	$wp_customize->add_control(
-   		'_sf[masonry_excerpt_length]',
+   		'masonry_excerpt_length',
    		array (
    			'type' => 'text',
    			'label' => __('Masonry Excerpt Length (enter numbers only)', '_sf'),
    			'section' => '_sf_masonry_options',
    			'callback' => '_sf_sanitize_number',
+   			'settings' => '_sf[masonry_excerpt_length]',
    			'priority' => '25',
    			)
    	);
