@@ -52,8 +52,8 @@ function _sf_customizer_sections( $wp_customize ){
         'priority' => 120,
     ));
 //header colors
-    $wp_customize->add_section('_sf_header_colors', array(
-        'title'    => __('Header Colors', '_sf'),
+    $wp_customize->add_section('_sf_menu_options', array(
+        'title'    => __('Menu Options', '_sf'),
         'priority' => 121,
     ));
 
@@ -73,8 +73,8 @@ function _sf_customizer_sections( $wp_customize ){
         'priority' => 129,
     ));
 //content colors
-    $wp_customize->add_section('_sf_content_colors', array(
-        'title'    => __('Content Area Colors', '_sf'),
+    $wp_customize->add_section('_sf_content_options', array(
+        'title'    => __('Content Area Options', '_sf'),
         'priority' => 132,
     ));
 // Masonry Options

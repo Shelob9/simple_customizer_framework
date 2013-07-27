@@ -9,12 +9,13 @@ add_action('customize_register', '_sf_customize_header');
 
 function _sf_customize_header() {
 	global $wp_customize;
-	$section = '_sf_header_colors';
+	//Note section changes to menu later
+	$section = '_sf_header_options';
 	//  ==============
 	//  = Background =
 	//  ==============
 		$wp_customize->add_setting(
-    	'_sf[header-trans-bg]', array(
+    	'_sf[header_trans_bg]', array(
     		'type' => 'option',
     		'capability'  => 'edit_theme_options',
     	)
@@ -27,7 +28,7 @@ function _sf_customize_header() {
 			'label' => 'Use A Background Color For Header Area, If Not Using An Image Background?',
 			'section' => $section,
 			'priority' => '13',
-			'settings' => '_sf[header-trans-bg]',
+			'settings' => '_sf[header_trans_bg]',
 			)
     );
     
@@ -49,6 +50,7 @@ function _sf_customize_header() {
 			'priority' => '12',
 		)
     );
+   
 	//header background img
 	    $wp_customize->add_setting(
 	    '_sf[header_bg_img]', array(
@@ -65,6 +67,7 @@ function _sf_customize_header() {
 			'priority' => '15',
 	)));
     
+    $section = '_sf_menu_options';
     //  ============================
     //  = Disable AJAX Page Loads? =
     //  ============================
@@ -80,7 +83,7 @@ function _sf_customize_header() {
 			array(
 				'type' => 'checkbox',
 				'label' => __('Disable AJAX Page Loads?', '_sf'),
-				'section' => '_sf_page_options',
+				'section' => $section,
 				'settings' => '_sf[ajaxMenu]',
 			)
     );
@@ -98,7 +101,7 @@ function _sf_customize_header() {
     $wp_customize->add_control('name_in_menu', array(
         'settings' => '_sf[name_in_menu]',
         'label'    => __('Don\'t display Name of site in Menu?', '_sf'),
-        'section'  => '_sf_header_options',
+        'section' => $section,
         'type'     => 'checkbox',
         'priority'	 => '5',
     ));
@@ -116,7 +119,7 @@ function _sf_customize_header() {
     $wp_customize->add_control('menu_sticky', array(
         'settings' => '_sf[menu_sticky]',
         'label'    => __('Stick Menu To Top Of Page?', '_sf'),
-        'section'  => '_sf_header_options',
+        'section' => $section,
         'type'     => 'checkbox',
         'priority'	 => '10',
     ));
@@ -135,7 +138,7 @@ function _sf_customize_header() {
 		array(
 			'settings' => '_sf[menu_search]',
 			'label'    => __('Search Bar In Menu?', '_sf'),
-			'section'  => '_sf_header_options',
+			'section' => $section,
 			'type'     => 'checkbox',
 			'priority'	=> '15',
 		)
@@ -145,7 +148,7 @@ function _sf_customize_header() {
     //  = Color Controls =
     //  ==================
     
-	$menu[] = array(
+	$header[] = array(
 		'slug'=>'header_bg_color', 
 		'default' => '#fff',
 		'label' => __('Header Background Color', 'sf')
@@ -193,6 +196,10 @@ function _sf_customize_header() {
 	);
 	
 	$colors = $menu;
+	$countStart = 50;
+	_sf_customzier_color_loop($colors, $countStart, $section);
+	$section = '_sf_header_options';
+	$colors = $header;
 	$countStart = 5;
 	_sf_customzier_color_loop($colors, $countStart, $section);
 }
