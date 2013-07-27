@@ -97,8 +97,56 @@ add_action('customize_register', '_sf_customize_register');
 endif; //! _sf_customize_register exists
 
 /**
+
+/**
+* Customizer Color Control Loop
+*
+* @since _sf 1.1.0
+*/
+if (! function_exists('_sf_customzier_color_loop') ) :
+function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
+	//Not sure why I have to do this first thing
+	global $wp_customize;
+	//start the counter at 10 or whatever was set.
+	$count = $countStart;
+	foreach ($colors as $things) {
+		$slug = $things['slug'];
+		$id = "_sf[{$slug}]";
+		//If current array has a priority set, use it, if not use the counter.
+		if (! isset($things['priority']) ) {
+			$priority = $count;
+		}
+		else {
+			$priority = $things['priority'];
+		}
+		$wp_customize->add_setting( $id, array(
+			'type'              => 'option', 
+			'transport'     => 'postMessage',
+			'capability'     => 'edit_theme_options',
+			'default' 		=> $things['default'],
+		) );
+ 
+		$control = 
+		new WP_Customize_Color_Control(
+				$wp_customize, $slug, 
+			array(
+			'label'         => __( $things['label'], '_sf' ),
+			'section'       => $section,
+			'priority'      => $priority,
+			'settings'      => $id
+			) 
+		);
+		$wp_customize->add_control($control);
+		//advance priority counter
+		$count++;
+	}
+}
+endif; // ! _sf_customzier_color_loop exists
+
+
+/**
 * Add links to Customizer
-* 1.0.5.1
+* @since _sf1.0.5.1
 */
 //Add WordPress customizer page to the admin menu.
 if(!function_exists('_sf_add_options_menu')) :
