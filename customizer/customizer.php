@@ -185,17 +185,17 @@ function _sf_auto_style() {
 	$customizerData = get_option('cData');
 	//create the css by looping through $customizerData
 	//create $return to be populated in this loop
-	$return = array();
+	$return = '';
 	foreach ($customizerData as $data) {
 		$return .= $data['selector'];
+		$return .= "{";
 		$return .= $data['property'].":";
-		$return .= $options[$data['slug']].";}";
+		$return .= $options[$data['slug']].";} ";
 	}
 	//echos
-	echo "<style> \n ";
-	echo 'entwash';
+	echo "<style>";
 	echo $return;
-	echo " /n </style>";
+	echo "</style>";
 }
 add_action('wp_head', '_sf_auto_style');
 endif; // ! _sf_auto_style exists
@@ -205,14 +205,14 @@ endif; // ! _sf_auto_style exists
 *
 * @since _sf 1.1.0
 */
-/*
+
 if (! function_exists('_sf_localize_customizer') ):
 function _sf_localize_customizer() {
 	global $customizerData;
 	wp_localize_script('customizer-preview', 'custStyle', $customizerData);
 }
 endif; // ! _sf_localize_customizer exists
-*/
+
 
 
 /**
