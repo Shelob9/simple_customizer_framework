@@ -17,7 +17,7 @@
  */
 if (! function_exists('_sf_customize_preview_js') ) :
 function _sf_customize_preview_js() {
-	wp_enqueue_script( '_s_customizer', get_template_directory_uri() . '/lib/js/customizer.js', array( 'customize-preview' ), '20130304', true );
+	wp_enqueue_script( 'customizer-preview', get_template_directory_uri() . '/lib/js/customizer.js', array( 'customize-preview' ), '20130304', true );
 }
 add_action( 'customize_preview_init', '_sf_customize_preview_js' );
 endif; //! _sf_customize_preview_js exists
@@ -112,6 +112,8 @@ if (! function_exists('_sf_customzier_color_loop') ) :
 function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 	//Not sure why I have to do this first thing
 	global $wp_customize;
+	//declare $customizerData as a global variable
+	global $customizerData;
 	//start the counter at 10 or whatever was set.
 	$count = $countStart;
 	foreach ($colors as $things) {
@@ -145,7 +147,7 @@ function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 		//create array to be used by preview js and style.php
 		$customizerData [] = array(
         	'id' => $id,
-        	'selector' => $things['slug'],
+        	'selector' => $things['selector'],
         	'property' => $things['property'],
         );
 		
@@ -154,6 +156,47 @@ function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 	}
 }
 endif; // ! _sf_customzier_color_loop exists
+
+/**
+* Set styles set in customizer dynamically
+*
+* @since _sf 1.1.0
+*/
+
+if (! function_exists('_sf_auto_style') ) :
+function _sf_auto_style() {
+	//get the options array
+	global $options;
+	//get the data we need
+	global $customizerData;
+	//create the css by looping through $customizerData
+	//create $return to be populated in this loop
+	$return;
+	foreach ($customizerData as $data) {
+		$return .= $data['selector'];
+		$return .=  $data['property'].": ".$options['{$data['id']}'].";}";
+	}
+	//echos
+	echo "<style> \n ";
+	echo $return;
+	echo " /n </style>";
+}
+add_action('wp_head', '_sf_auto_style');
+endif; // ! _sf_auto_style exists
+
+/**
+* Localize customizer.js
+*
+* @since _sf 1.1.0
+*/
+
+if (! function_exists('_sf_localize_customizer') ):
+function _sf_localize_customizer() {
+	global $customizerData;
+	wp_localize_script('customizer-preview', 'custStyle', $customizerData);
+}
+endif; // ! _sf_localize_customizer exists
+
 
 
 /**
