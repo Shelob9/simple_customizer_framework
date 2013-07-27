@@ -9,7 +9,9 @@
 * Create Header, Topbar according to various options
 */
 if (! function_exists('_sf_header') ) :
-function _sf_header() { ?>
+function _sf_header() {
+	global $options;
+?>
 <header id="masthead" class="site-header row" role="banner">
 		<div class="row" id="header image">
 			<div class="large-12 columns centered">
@@ -23,14 +25,14 @@ function _sf_header() { ?>
 			</div>
 		</div>
 		<?php 
-		if (! get_theme_mod( '_sf_name_in_menu' ) == '' ) { ?>
+		if ( $options['name_in_menu'] != '' ) { ?>
 		<hgroup>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
 		</hgroup>
 		<?php } ?>
 		
-		<?php if ( get_theme_mod( '_sf_menu_sticky' ) == '' ) { 
+		<?php if ( $options['menu_sticky'] == '' ) { 
 			echo '<div class="contain-to-grid ">';
 			
 		} 
@@ -42,7 +44,7 @@ function _sf_header() { ?>
 				<nav id="site-navigation" class="navigation-main top-bar" role="navigation">
 					<ul class="title-area">
 						<?php 
-						if ( get_theme_mod( '_sf_name_in_menu' ) == '' ) { ?>
+						if ( $options['name_in_menu'] == '' ) { ?>
 						<li class="name">
 							<h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 						</li>
@@ -70,7 +72,7 @@ function _sf_header() { ?>
 					
 						<?php
 						//include the search form, or not depending on user settings.
-						if ( ! get_theme_mod( '_sf_menu_search' ) == '' ) {
+						if (  $options['menu_search'] != '' ) {
 						echo '
 						<ul class="right">
 							<li class="divider hide-for-small"></li>
@@ -91,7 +93,7 @@ function _sf_header() { ?>
 						
 						<?php
 							//if name is being shown in menu put description underneath.
-							if ( get_theme_mod( '_sf_name_in_menu' ) == '' ) { ?>
+							if ( $options['name_in_menu'] == '' ) { ?>
 							<div class="row">
 								<div class="large-12 columns">
 									<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>	
