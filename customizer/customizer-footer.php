@@ -8,8 +8,9 @@ if (! function_exists('_sf_customize_footer') ) :
 add_action('customize_register', '_sf_customize_footer');
 
 function _sf_customize_footer() {
+	$section = '_sf_footer_options';
 	//todo: creditlink/additional text options
-	
+	global $wp_customize;
 	//  ==============
 	//  = Background =
 	//  ==============
@@ -25,71 +26,44 @@ function _sf_customize_footer() {
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use A Background Color For Footer Area',
-			'section' => '_sf_background_options',
-			'priority' => '5',
+			'section' => $section,
+			'priority' => '3',
 			'settings' => '_sf[footer-trans-bg]',
 			)
     );
 	//  ==================
 	//  = Color Controls =
 	//  ==================
-	$footer[] = array(
+	$colors[] = array(
 		'slug'=>'footer_bg_color', 
 		'default' => '#000',
 		'label' => __('Footer Background Color', 'sf'),
 		'priority' => '1',
 	);
-	$footer[] = array(
+	$colors[] = array(
 		'slug'=>'footer_text_color', 
 		'default' => '#fff',
 		'label' => __('Footer Text Color', 'sf')
 	);
-	$footer[] = array(
+	$colors[] = array(
 		'slug'=>'footer_link_color', 
 		'default' => '#1e73be',
 		'label' => __('Footer Link Color', 'sf')
 	);
-	$footer[] = array(
+	$colors[] = array(
 		'slug'=>'footer_linkHvr_color', 
 		'default' => '#fff',
 		'label' => __('Footer Link Hover Color', 'sf')
 	);
-	$footer[] = array(
+	$colors[] = array(
 		'slug'=>'footer_linkVstd_color', 
 		'default' => '#800080',
 		'label' => __('Footer Visited Link Color', 'sf')
 	);
 
-	$section = '_sf_footer_options';
-	$count = 10;
-	foreach ($footer as $things) {
-		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
-		if (! isset($things['priority']) ) {
-			$priority = $count;
-		}
-		else {
-			$priority = $things['priority'];
-		}
-		$wp_customize->add_setting( $id, array(
-			'type'              => 'option', 
-			'transport'     => 'postMessage',
-			'capability'     => 'edit_theme_options',
-		) );
- 
-		$control = 
-		new WP_Customize_Color_Control(
-				$wp_customize, $slug, 
-			array(
-			'label'         => __( $things['label'], '_sf' ),
-			'section'       => $section,
-			'priority'      => $priority,
-			'settings'      => $id
-			) 
-		);
-		$wp_customize->add_control($control); 
-		$count++;
-	}
+	
+	$countStart = 15;
+	_sf_customzier_color_loop($colors, $countStart = 10, $section);
 	
 }
 endif; //! _sf_customize_footer

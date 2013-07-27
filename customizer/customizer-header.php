@@ -8,6 +8,7 @@ if (! function_exists('_sf_customize_header') ) :
 add_action('customize_register', '_sf_customize_header');
 
 function _sf_customize_header() {
+	$section = '_sf_header_colors';
 	//  ==============
 	//  = Background =
 	//  ==============
@@ -23,7 +24,7 @@ function _sf_customize_header() {
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use A Background Color For Header Area, If Not Using An Image Background?',
-			'section' => '_sf_background_options',
+			'section' => $section,
 			'priority' => '13',
 			'settings' => '_sf[header-trans-bg]',
 			)
@@ -42,7 +43,7 @@ function _sf_customize_header() {
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use Background Image Instead of Color For Header?',
-			'section' => '_sf_background_options',
+			'section' => $section,
 			'settings'   => '_sf[header_bg_choice]',
 			'priority' => '12',
 		)
@@ -190,31 +191,9 @@ function _sf_customize_header() {
 		'label' => __('Search Button Background Hover Color', 'sf')
 	);
 	
-	
-	$section = '_sf_header_colors';
-	$count = 5;
-	foreach ($menu as $things) {
-		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
-		$wp_customize->add_setting( $id, array(
-			'type'              => 'option', 
-			'transport'     => 'postMessage',
-			'capability'     => 'edit_theme_options',
-		) );
- 
-		$control = 
-		new WP_Customize_Color_Control(
-				$wp_customize, $slug, 
-			array(
-			'label'         => __( $things['label'], '_sf' ),
-			'section' 		=> $section,
-			'priority'      => $count,
-			'settings'      => $id
-			) 
-		);
-		$wp_customize->add_control($control); 
-		$count++;
-	}
+	$menu = $colors;
+	$countStart = 5;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_header
 ?>

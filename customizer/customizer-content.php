@@ -170,29 +170,8 @@ function _sf_customize_content() {
 	);
 	
 	$section = '_sf_content_colors';
-	$count = 50;
-	foreach ($readmore as $things) {
-		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
-		$wp_customize->add_setting( $id, array(
-			'type'              => 'option', 
-			'transport'     => 'postMessage',
-			'capability'     => 'edit_theme_options',
-		) );
- 
-		$control = 
-		new WP_Customize_Color_Control(
-				$wp_customize, $slug, 
-			array(
-			'label'         => __( $things['label'], '_sf' ),
-			'section'       => $section,
-			'priority'      => $count,
-			'settings'      => $id
-			) 
-		);
-		$wp_customize->add_control($control); 
-		$count++;
-	}
+	$countStart = 50;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_content
 ?>

@@ -8,10 +8,11 @@ if (! function_exists('_sf_customize_sidebar') ) :
 add_action('customize_register', '_sf_customize_sidebar');
 
 function _sf_customize_sidebar() {
+	$section = '_sf_sidebar_options';
 	//  ==============
 	//  = Background =
 	//  ==============
-	
+	//what happened to sidebar transparency??
 	
 	//  ====================
 	//  = Sidebar Location =
@@ -26,7 +27,7 @@ function _sf_customize_sidebar() {
    		'default_sidebar',
 		array(
 			'label' => __('Sidebar Location', '_s_f'),
-			'section' => '_sf_page_options',
+			'section' => $section,
 			'default'        => 'value1',
 			'type'       => 'select',
 			'choices'    => array(
@@ -72,31 +73,8 @@ function _sf_customize_sidebar() {
 		'label' => __('Sidebar Visited Link Color', 'sf')
 	);
 	
-	
-	$section = '_sf_sidebar_colors';
-	$count = 5;
-	foreach ($sidebar as $things) {
-		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
-		$wp_customize->add_setting( $id, array(
-			'type'              => 'option', 
-			'transport'     => 'postMessage',
-			'capability'     => 'edit_theme_options',
-		) );
- 
-		$control = 
-		new WP_Customize_Color_Control(
-				$wp_customize, $slug, 
-			array(
-			'label'         => __( $things['label'], '_sf' ),
-			'section'       => $section,
-			'priority'      => $count,
-			'settings'      => $id
-			) 
-		);
-		$wp_customize->add_control($control); 
-		$count++;
-	}
+	$sidebar = $colors;
+	_sf_customzier_color_loop($colors, $countStart, $section)
 	
 }
 endif; //! _sf_customize_sidebar

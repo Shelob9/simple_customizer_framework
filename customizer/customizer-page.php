@@ -8,6 +8,7 @@ if (! function_exists('_sf_customize_page') ) :
 add_action('customize_register', '_sf_customize_page');
 
 function _sf_customize_page() {
+	$section = '_sf_background_colors';
 	//  ==============
 	//  = Background =
 	//  ==============
@@ -57,30 +58,9 @@ function _sf_customize_page() {
 		'label' => __('Page Background Color', 'sf')
 	);
 
-	$section = '_sf_background_colors';
-	$count = 5;
-	foreach ($color as $things) {
-		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
-		$wp_customize->add_setting( $id, array(
-			'type'              => 'option', 
-			'transport'     => 'postMessage',
-			'capability'     => 'edit_theme_options',
-		) );
- 
-		$control = 
-		new WP_Customize_Color_Control(
-				$wp_customize, $slug, 
-			array(
-			'label'         => __( $things['label'], '_sf' ),
-			'section'       => $section,
-			'priority'      => $count,
-			'settings'      => $id
-			) 
-		);
-		$wp_customize->add_control($control); 
-		$count++;
-	}
+	
+	$countStart = 5;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_page
 ?>

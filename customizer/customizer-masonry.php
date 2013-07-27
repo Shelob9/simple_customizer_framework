@@ -10,6 +10,7 @@ add_action('customize_register', '_sf_customize_masonry');
 function _sf_customize_masonry() {
     //TODO: seperate settings for mobile.
     
+	$section = '_sf_masonry_options';
    //enable/disable?
 	$wp_customize->add_setting(
     	'_sf[masonry]', array(
@@ -119,28 +120,9 @@ function _sf_customize_masonry() {
 		'label' => __('Border Color', '_sf'),
 		'priority' => 35,
 	);
-	$section = '_sf_masonry_options';
-	foreach ($masonry as $things) {
-		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
-		$wp_customize->add_setting( $id, array(
-			'type'              => 'option', 
-			'transport'     => 'postMessage',
-			'capability'     => 'edit_theme_options',
-		) );
- 
-		$control = 
-		new WP_Customize_Color_Control(
-				$wp_customize, $slug, 
-			array(
-			'label'         => __( $things['label'], '_sf' ),
-			'section'       => $section,
-			'priority'      => $things['priority'],
-			'settings'      => $id
-			) 
-		);
-		$wp_customize->add_control($control); 
-	}
+	
+	$masonry = $colors;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_masonry
 ?>
