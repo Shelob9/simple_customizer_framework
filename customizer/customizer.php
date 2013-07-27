@@ -142,6 +142,14 @@ function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 			) 
 		);
 		$wp_customize->add_control($control);
+		//create array to be used by preview js and style.php
+		$customizerData [] = array(
+        	'id' => $id,
+        	'selector' => $things['slug'],
+        	'property' => $things['property'],
+        	'value' => $things['value']
+        );
+		
 		//advance priority counter
 		$count++;
 	}
