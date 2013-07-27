@@ -83,8 +83,8 @@ function _sf_customize_register( $wp_customize ){
         'priority' => 140,
     ));
  //Sidebar Colors
-    $wp_customize->add_section('_sf_sidebar_colors', array(
-        'title'    => __('Sidebar Colors', '_sf'),
+    $wp_customize->add_section('_sf_sidebar_options', array(
+        'title'    => __('Sidebar Options', '_sf'),
         'priority' => 133,
     ));
  //Footer Options
