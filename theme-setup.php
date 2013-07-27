@@ -18,7 +18,6 @@ function _sf_global_options() {
 	$options = get_option('_sf');
 }
 add_action('init', '_sf_global_options');
-global $options;
 endif; // _sf_global_options exists
 
  /**
@@ -112,9 +111,15 @@ endif; //! _sf_new_excerpt_more exists
 
 if (! function_exists('_sf_custom_excerpt_length') ) :
 function _sf_custom_excerpt_length( $length ) {
+	global $options;
 	//get the value of the masonry excerpt length option, or set it to 10 if !isset
-	$masonry_excerpt_length = get_theme_mod('masonry_excerpt_length', 10);
-	//if masonry functions exists, since we're using it set using $masonry_excerpt_length, else leave at 55.
+	if ($options['masonry_excerpt_length'] != '' ) {
+		$masonry_excerpt_length = $options['masonry_excerpt_length'];
+	}
+	else {
+		$masonry_excerpt_length = 10;
+	}
+	//if masonry functions exists, since we're using it, set using $masonry_excerpt_length, else leave at 55.
 	if (function_exists('_sf_scripts_masonry')) {
 		return $masonry_excerpt_length;
 	}
