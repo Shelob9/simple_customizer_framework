@@ -13,7 +13,23 @@ function _sf_customize_sidebar() {
 	//  ==============
 	//  = Background =
 	//  ==============
-	//what happened to sidebar transparency??
+	 $wp_customize->add_setting(
+   		'_sf[sidebar-trans-bg]', array(
+   			'type' => 'option',
+   			'capability'  => 'edit_theme_options',
+    	)
+    );
+
+    $wp_customize->add_control(
+		'sidebar-trans-bg',
+		array(
+			'type' => 'checkbox',
+			'label' => 'Use A Background Color For Sidebar Area',
+			'section' => $section,
+			'priority' => '3',
+			'settings' => '_sf[sidebar-trans-bg]',
+			)
+    );
 	
 	//  ====================
 	//  = Sidebar Location =

@@ -137,17 +137,17 @@ function _sf_customize_content() {
 	$readmore[] = array(
 		'slug'=>'content_readMore_link_color', 
 		'default' => '#1e73be',
-		'label' => __('Read More Button Link Color', 'sf')
+		'label' => __('Read More Button Text Color', 'sf')
 	);
 	$readmore[] = array(
 		'slug'=>'content_readMore_linkHvr_color', 
 		'default' => '#fff',
-		'label' => __('Read More Button Link Hover Color', 'sf')
+		'label' => __('Read More Button Link Text Color', 'sf')
 	);
 	$readmore[] = array(
 		'slug'=>'content_readMore_linkVstd_color', 
 		'default' => '#800080',
-		'label' => __('Read More Button Visited Link Color', 'sf')
+		'label' => __('Read More Button Visited Text Color', 'sf')
 	);
 	
 	$colors = $readmore;

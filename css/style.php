@@ -24,7 +24,7 @@ function _sf_custom_style() {
 		$search_but_txt = $options['menu_search_txt_color'];
 		$search_but_bg = $options['menu_search_bg_color'];
 		//$search_but_txt_hv = $options['menu_search_txt_color_hv'];
-		$search_but_bg_hv = $options['menu_search_bg_color_hv'];
+		$search_but_bg_hv = $options['menu_search_bgHvr_color'];
 	/*Content*/
 	$content_bg_color = $options['content_bg_color'];
 	$post_title_color = $options['post_title_color'];

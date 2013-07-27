@@ -116,17 +116,17 @@ function _sf_customize_slider() {
 		$slider[] = array(
 		'slug'=>'slider_readMore_link_color', 
 		'default' => '#1e73be',
-		'label' => __('Slider Read More Button Link Color', 'sf')
+		'label' => __('Slider Read More Button Text Color', 'sf')
 	);
 	$slider[] = array(
 		'slug'=>'slider_readMore_linkHvr_color', 
 		'default' => '#fff',
-		'label' => __('Slider Read More Button Link Hover Color', 'sf')
+		'label' => __('Slider Read More Button Link Text Color', 'sf')
 	);
 	$slider[] = array(
 		'slug'=>'slider_readMore_linkVstd_color', 
 		'default' => '#800080',
-		'label' => __('Slider Read More Button Visited Link Color', 'sf')
+		'label' => __('Slider Read More Button Visited Text Color', 'sf')
 	);
 	
 	$colors = $slider;
