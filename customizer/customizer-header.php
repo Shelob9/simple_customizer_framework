@@ -8,6 +8,7 @@ if (! function_exists('_sf_customize_header') ) :
 add_action('customize_register', '_sf_customize_header');
 
 function _sf_customize_header() {
+	global $wp_customize;
 	$section = '_sf_header_colors';
 	//  ==============
 	//  = Background =
@@ -191,7 +192,7 @@ function _sf_customize_header() {
 		'label' => __('Search Button Background Hover Color', 'sf')
 	);
 	
-	$menu = $colors;
+	$colors = $menu;
 	$countStart = 5;
 	_sf_customzier_color_loop($colors, $countStart, $section);
 }

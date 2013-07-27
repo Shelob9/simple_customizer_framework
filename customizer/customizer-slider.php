@@ -8,7 +8,8 @@ if (! function_exists('_sf_customize_slider') ) :
 add_action('customize_register', '_sf_customize_slider');
 
 function _sf_customize_slider() {
-	$section = '_sf_home_slider_colors';
+	$section = '_sf_home_slider';
+	global $wp_customize;
 	//  ============================
     //  = Show Slider on Home Page? =
     //  =============================
@@ -126,8 +127,9 @@ function _sf_customize_slider() {
 		'label' => __('Slider Read More Button Visited Link Color', 'sf')
 	);
 	
-	$slider = $colors;
-	_sf_customzier_color_loop($colors, $countStart, $section)
+	$colors = $slider;
+	$countStart = 50;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_slider
 ?>

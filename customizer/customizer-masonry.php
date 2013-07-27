@@ -10,6 +10,7 @@ add_action('customize_register', '_sf_customize_masonry');
 function _sf_customize_masonry() {
     //TODO: seperate settings for mobile.
     
+    global $wp_customize;
 	$section = '_sf_masonry_options';
    //enable/disable?
 	$wp_customize->add_setting(
@@ -121,7 +122,8 @@ function _sf_customize_masonry() {
 		'priority' => 35,
 	);
 	
-	$masonry = $colors;
+	$colors = $masonry;
+	$countStart = 50;
 	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_masonry

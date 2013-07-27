@@ -8,6 +8,8 @@ if (! function_exists('_sf_customize_content') ) :
 add_action('customize_register', '_sf_customize_content');
 
 function _sf_customize_content() {
+	global $wp_customize;
+	$section = '_sf_content_colors';
 	//  ==============
 	//  = Background =
 	//  ==============
@@ -23,7 +25,7 @@ function _sf_customize_content() {
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use A Background Color For Content Area, If Not Using An Image Background?',
-			'section' => '_sf_background_options',
+			'section' => $section,
 			'priority' => '23',
 			'settings' => '_sf[content-trans-bg]',
 			)
@@ -42,7 +44,7 @@ function _sf_customize_content() {
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use Background Image Instead of Color For Content Area?',
-			'section' => '_sf_background_options',
+			'section' => $section,
 			'settings'   => '_sf[content_bg_choice]',
 			'priority' => '22',
 		)
@@ -58,7 +60,7 @@ function _sf_customize_content() {
     $wp_customize->add_control(
     new WP_Customize_Image_Control($wp_customize, 'content_bg_img', array(
         'label'    => __('Upload Background Image For Content Area', 'sf'),
-        'section'    => '_sf_background_options',
+        'section'    => $section,
         'settings' => '_sf[content_bg_img]',
         'priority' => '25',
     )));
@@ -77,7 +79,7 @@ function _sf_customize_content() {
 		array(
 			'type' => 'checkbox',
 			'label' => __('Disable Infinite Scroll?', '_sf'),
-			'section' => '_sf_page_options',
+			'section' => $section,
 			'settings' => '_sf[infScroll]'
 			)
     );
@@ -122,30 +124,9 @@ function _sf_customize_content() {
 		'label' => __('Page/ Post Visited Link Color', 'sf')
 	);
 
-	$section = '_sf_content_colors';
-	$count = 5;
-	foreach ($content as $things) {
-		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
-		$wp_customize->add_setting( $id, array(
-			'type'              => 'option', 
-			'transport'     => 'postMessage',
-			'capability'     => 'edit_theme_options',
-		) );
- 
-		$control = 
-		new WP_Customize_Color_Control(
-				$wp_customize, $slug, 
-			array(
-			'label'         => __( $things['label'], '_sf' ),
-			'section' 		=> $section,
-			'priority'      => $count,
-			'settings'      => $id
-			) 
-		);
-		$wp_customize->add_control($control); 
-		$count++;
-	}
+	$colors = $content;
+	$countStart = 50;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 	
 	//read more button
 	$readmore[] = array(
@@ -153,7 +134,7 @@ function _sf_customize_content() {
 		'default' => ' ',
 		'label' => __('Read More Button Background Color', 'sf')
 	);
-		$readmore[] = array(
+	$readmore[] = array(
 		'slug'=>'content_readMore_link_color', 
 		'default' => '#1e73be',
 		'label' => __('Read More Button Link Color', 'sf')
@@ -169,8 +150,8 @@ function _sf_customize_content() {
 		'label' => __('Read More Button Visited Link Color', 'sf')
 	);
 	
-	$section = '_sf_content_colors';
-	$countStart = 50;
+	
+	$countStart = 150;
 	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_content

@@ -9,6 +9,7 @@ add_action('customize_register', '_sf_customize_sidebar');
 
 function _sf_customize_sidebar() {
 	$section = '_sf_sidebar_options';
+	global $wp_customize;
 	//  ==============
 	//  = Background =
 	//  ==============
@@ -73,8 +74,9 @@ function _sf_customize_sidebar() {
 		'label' => __('Sidebar Visited Link Color', 'sf')
 	);
 	
-	$sidebar = $colors;
-	_sf_customzier_color_loop($colors, $countStart, $section)
+	$colors = $sidebar;
+	$countStart = 50;
+	_sf_customzier_color_loop($colors, $countStart, $section);
 	
 }
 endif; //! _sf_customize_sidebar

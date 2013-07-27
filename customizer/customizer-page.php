@@ -9,6 +9,7 @@ add_action('customize_register', '_sf_customize_page');
 
 function _sf_customize_page() {
 	$section = '_sf_background_colors';
+	global $wp_customize;
 	//  ==============
 	//  = Background =
 	//  ==============
@@ -52,7 +53,7 @@ function _sf_customize_page() {
     //  ==================
 	//  = Color Controls =
 	//  ==================
-    $color[] = array(
+    $colors[] = array(
 		'slug'=>'page_bg_color', 
 		'default' => '#fff',
 		'label' => __('Page Background Color', 'sf')
