@@ -7,6 +7,21 @@
  */
  
  /**
+* Create a global variable $options filled with all theme options.
+*
+* @since 1.1.0
+*/
+
+if (! function_exists('_sf_global_options') ) :
+function _sf_global_options() {
+	global $options;
+	$options = get_option('_sf');
+}
+add_action('init', '_sf_global_options');
+global $options;
+endif; // _sf_global_options exists
+
+ /**
  * Set the content width based on the theme's design and stylesheet.
  */
 if ( ! isset( $content_width ) )
@@ -125,6 +140,4 @@ function _sf_masonry_width() {
 	echo $percent.'%;';
 }
 endif; //_sf_masonry_width exists
-
-
 
