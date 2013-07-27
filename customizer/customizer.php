@@ -25,8 +25,8 @@ endif; //! _sf_customize_preview_js exists
 /**
 * Theme Customizer Settings
 **/
-if (! function_exists('_sf_customize_register') ) :
-function _sf_customize_register( $wp_customize ){
+if (! function_exists('_sf_customizer_sections') ) :
+function _sf_customizer_sections( $wp_customize ){
 
 	//Remove unnecessary defaults controls, settings and sections
 	$wp_customize-> remove_section('background_image');
@@ -93,10 +93,23 @@ function _sf_customize_register( $wp_customize ){
         'priority' => 145,
     ));
 }
-add_action('customize_register', '_sf_customize_register');
-endif; //! _sf_customize_register exists
+add_action('customize_register', '_sf_customizer_sections');
+endif; //! _sf_customizer_sections
 
 /**
+* Bring In Other Parts Of Customizer
+*
+* @since _sf 1.1.0
+*/
+
+	locate_template('lib/customizer/customizer-page.php', true);
+	locate_template('lib/customizer/customizer-header.php', true);
+	locate_template('lib/customizer/customizer-content.php', true);
+	locate_template('lib/customizer/customizer-slider.php', true);
+	locate_template('lib/customizer/customizer-masonry.php', true);
+	locate_template('lib/customizer/customizer-sidebar.php', true);
+	locate_template('lib/customizer/customizer-footer.php', true);
+
 
 /**
 * Customizer Color Control Loop
