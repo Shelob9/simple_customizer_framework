@@ -14,12 +14,15 @@
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
+ *
+ * @since _sf 1.1.0 action removed in favor of _sf_localize_customizer() below. Keeping this here for now, for saftey/ testing.
  */
+ 
 if (! function_exists('_sf_customize_preview_js') ) :
 function _sf_customize_preview_js() {
 	wp_enqueue_script( 'customizer-preview', get_template_directory_uri() . '/lib/js/customizer.js', array( 'customize-preview' ), '20130304', true );
 }
-add_action( 'customize_preview_init', '_sf_customize_preview_js' );
+//add_action( 'customize_preview_init', '_sf_customize_preview_js' );
 endif; //! _sf_customize_preview_js exists
 
 /**
