@@ -37,45 +37,37 @@ function _sf_customizer_sections( $wp_customize ){
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
-//slider
-    $wp_customize->add_section('_sf_home_slider', array(
-        'title'    => __('Home Page Slider', '_s_f'),
-        'priority' => 110,
-    ));
-     $wp_customize->add_section('_sf_home_slider_colors', array(
-        'title'    => __('Slider Colors', '_s_f'),
-        'priority' => 115,
-    ));
+
+
+
+//Page Options 
+    $wp_customize->add_section('_sf_page_options', array(
+        'title'    => __('Page Options', '_sf'),
+        'priority' => 100,
+    )); 
 //header options
     $wp_customize->add_section('_sf_header_options', array(
         'title'    => __('Header Options', '_sf'),
         'priority' => 120,
     ));
-//header colors
+//menu options
     $wp_customize->add_section('_sf_menu_options', array(
         'title'    => __('Menu Options', '_sf'),
-        'priority' => 121,
-    ));
-
-//Page Options 
-    $wp_customize->add_section('_sf_page_options', array(
-        'title'    => __('Page Options', '_sf'),
         'priority' => 125,
     ));
-//Section For Background Options
-	 $wp_customize->add_section('_sf_background_options', array(
-        'title'    => __('Background Options', '_sf'),
-        'priority' => 128,
-    ));
-//Section For Background Colors
-	 $wp_customize->add_section('_sf_background_colors', array(
-        'title'    => __('Background Colors', '_sf'),
-        'priority' => 129,
-    ));
-//content colors
+//content options
     $wp_customize->add_section('_sf_content_options', array(
         'title'    => __('Content Area Options', '_sf'),
-        'priority' => 132,
+        'priority' => 130,
+    ));
+//slider
+    $wp_customize->add_section('_sf_home_slider', array(
+        'title'    => __('Home Page Slider Options', '_s_f'),
+        'priority' => 130,
+    ));
+     $wp_customize->add_section('_sf_home_slider_colors', array(
+        'title'    => __('Slider Colors', '_s_f'),
+        'priority' => 135,
     ));
 // Masonry Options
     $wp_customize->add_section('_sf_masonry_options', array(
@@ -85,12 +77,12 @@ function _sf_customizer_sections( $wp_customize ){
  //Sidebar Colors
     $wp_customize->add_section('_sf_sidebar_options', array(
         'title'    => __('Sidebar Options', '_sf'),
-        'priority' => 133,
+        'priority' => 145,
     ));
  //Footer Options
      $wp_customize->add_section('_sf_footer_options', array(
         'title'    => __('Footer Options', '_sf'),
-        'priority' => 145,
+        'priority' => 155,
     ));
 }
 add_action('customize_register', '_sf_customizer_sections');
