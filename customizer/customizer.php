@@ -204,16 +204,19 @@ add_action('wp_head', '_sf_auto_style');
 endif; // ! _sf_auto_style exists
 
 /**
-* Localize customizer.js
+* Binds JS handlers to make Theme Customizer preview reload changes asynchronously with customizer.js
+* Also localize the customizer options so they can be added dynamically in customizer.js
 *
 * @since _sf 1.1.0
 */
 
 if (! function_exists('_sf_localize_customizer') ):
 function _sf_localize_customizer() {
-	global $customizerData;
+	wp_enqueue_script( 'customizer-preview', get_template_directory_uri() . '/lib/js/customizer.js', array( 'customize-preview' ), '20130304', true );
+	$customizerData = get_option('cData');
 	wp_localize_script('customizer-preview', 'custStyle', $customizerData);
 }
+add_action('wp_enqueue_scripts', '_sf_localize_customizer');
 endif; // ! _sf_localize_customizer exists
 
 
