@@ -112,8 +112,6 @@ if (! function_exists('_sf_customzier_color_loop') ) :
 function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 	//Not sure why I have to do this first thing
 	global $wp_customize;
-	//declare $customizerData as a global variable
-	global $customizerData;
 	//start the counter at 10 or whatever was set.
 	$count = $countStart;
 	foreach ($colors as $things) {
@@ -144,15 +142,31 @@ function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 			) 
 		);
 		$wp_customize->add_control($control);
-		//create array to be used by preview js and style.php
+		//create array to be used for the outputting styles to wp_head and customizer.js
 		$customizerData [] = array(
         	'id' => $id,
+        	'slug' => $slug, 
         	'selector' => $things['selector'],
         	'property' => $things['property'],
         );
 		
 		//advance priority counter
 		$count++;
+	}
+	//save the $customizerData array in the option '_sf_cData'
+	$option_name = '_sf_cData';
+	$new_value = $customizerData;
+	if ( get_option( $option_name ) !== false ) {
+
+		// The option already exists, so we just update it.
+		update_option( $option_name, $new_value );
+
+	} else {
+
+		// The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+		$deprecated = null;
+		$autoload = 'yes';
+		add_option( $option_name, $new_value, $deprecated, $autoload );
 	}
 }
 endif; // ! _sf_customzier_color_loop exists
@@ -167,17 +181,19 @@ if (! function_exists('_sf_auto_style') ) :
 function _sf_auto_style() {
 	//get the options array
 	global $options;
-	//get the data we need
-	global $customizerData;
+	//get the data we need fromt he option '_sf_cData' we save in the color loop.
+	$customizerData = get_option('cData');
 	//create the css by looping through $customizerData
 	//create $return to be populated in this loop
-	$return;
+	$return = array();
 	foreach ($customizerData as $data) {
 		$return .= $data['selector'];
-		$return .=  $data['property'].": ".$options['{$data['id']}'].";}";
+		$return .= $data['property'].":";
+		$return .= $options[$data['slug']].";}";
 	}
 	//echos
 	echo "<style> \n ";
+	echo 'entwash';
 	echo $return;
 	echo " /n </style>";
 }
@@ -189,14 +205,14 @@ endif; // ! _sf_auto_style exists
 *
 * @since _sf 1.1.0
 */
-
+/*
 if (! function_exists('_sf_localize_customizer') ):
 function _sf_localize_customizer() {
 	global $customizerData;
 	wp_localize_script('customizer-preview', 'custStyle', $customizerData);
 }
 endif; // ! _sf_localize_customizer exists
-
+*/
 
 
 /**
