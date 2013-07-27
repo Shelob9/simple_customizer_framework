@@ -59,12 +59,13 @@ function _sf_customize_header() {
     	)
     );
  
-    $wp_customize->add_control( new My_Customize_Image_Reloaded_Control( $wp_customize, 'my_logo', array(
-        'label'     => __( 'Logo', 'textdomain' ),
-        'section'   => $section,
-        'settings'  => '_sf[header_bg_img]',
-        'context'   => ''
-) ) );
+    $wp_customize->add_control(
+		new WP_Customize_Image_Control($wp_customize, 'header_bg_img', array(
+			'label'    => __('Upload Background Image For Header', 'sf'),
+			'section'    => $section,
+			'settings' => '_sf[header_bg_img]',
+			'priority' => '20',
+	)));
     
     $section = '_sf_menu_options';
     //  ============================
