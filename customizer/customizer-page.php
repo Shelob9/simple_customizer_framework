@@ -8,7 +8,7 @@ if (! function_exists('_sf_customize_page') ) :
 add_action('customize_register', '_sf_customize_page');
 
 function _sf_customize_page() {
-	$section = '_sf_background_colors';
+	$section = '_sf_page_options';
 	global $wp_customize;
 	//  ==============
 	//  = Background =
@@ -26,7 +26,7 @@ function _sf_customize_page() {
 		array(
 			'type' => 'checkbox',
 			'label' => 'Use Background Color Instead of Background Image For Page?',
-			'section' => '_sf_background_options',
+			'section' => $section,
 			'settings'   => '_sf[body_bg_choice]',
 			'priority' => '5',
 		)
@@ -45,7 +45,7 @@ function _sf_customize_page() {
     $wp_customize->add_control( 
 		new WP_Customize_Image_Control($wp_customize, 'body_bg_img', array(
 			'label'    => __('Upload Page Background', 'sf'),
-			'section'    => '_sf_background_options',
+			'section' => $section,
 			'settings' => '_sf[body_bg_img]',
 			'priority' => '10',
     )));
