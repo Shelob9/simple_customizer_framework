@@ -27,12 +27,14 @@ function _sf_custom_style() {
 		$search_but_bg_hv = $options['menu_search_bgHvr_color'];
 	/*Content*/
 	$content_bg_color = $options['content_bg_color'];
+	$article_bg_color = $options['article_bg_color'];
+	$articleSingle_bg_color = $options['articleSingle_bg_color'];
 	$post_title_color = $options['post_title_color'];
 	$page_title_color = $options['page_title_color'];
 	$content_text_color = $options['content_text_color'];
 	$content_link_color = $options['content_link_color'];
-	//$content_linkHvr_color = $options['content_linkHvr_color'];
-	//$content_link_color = $options['content_linkVstd_color'];
+	$content_linkHvr_color = $options['content_linkHvr_color'];
+	$content_linkVstd_color = $options['content_linkVstd_color'];
 	$excerpt_button_bg_color = $options['content_readMore_bg_color'];
 	$excerpt_button_text_color = $options['content_readMore_link_color'];
 	$content_readMore_linkHvr_color = $options['content_readMore_linkHvr_color'];
@@ -59,8 +61,8 @@ function _sf_custom_style() {
 	$widget_title_color = $options['widget_title_color'];
 	$sidebar_text_color = $options['sidebar_text_color'];
 	$sidebar_link_color = $options['sidebar_link_color'];
-	//$sidebar_linkHvr_color = $options['sidebar_linkHvr_color'];
-	//$sidebar_linkVstd_color = $options['sidebar_linkVstd_color'];
+	$sidebar_linkHvr_color = $options['sidebar_linkHvr_color'];
+	$sidebar_linkVstd_color = $options['sidebar_linkVstd_color'];
 	/*Footer*/
 	$footer_bg_color = $options['footer_bg_color'];
 	//$footer_text_color = $options['footer_text_color'];
@@ -109,9 +111,13 @@ echo '<style>';
 	
 	/*content*/
 	echo '
+		article  {background-color: '.$article_bg_color.';}
+		article .single-post, article .single-page {background-color: '.$articleSingle_bg_color.';}
 		#content a { color: '.$content_link_color.';}
-		h1.entry-title {color: '.$page_title_color.';}
-		#content h1.entry-title a {color: '.$post_title_color.';}
+		#content a:hover { color: '.$content_linkHvr_color.';}
+		#content a:visited { color: '.$content_linkVstd_color.';}
+		.page h1.entry-title {color: '.$page_title_color.';}
+		.post h1.entry-title, #content h1.entry-title a {color: '.$post_title_color.';}
 		.entry-content { color:  '.$content_text_color.';}
 		.read-more a.button {background-color: '.$excerpt_button_bg_color.';}
 		#content .read-more-button.button a	{color: '.$excerpt_button_text_color.';}
@@ -145,10 +151,15 @@ echo '<style>';
 			echo ';}';
 			echo '.slider-entry-content .excerpt{color:';
 			echo $slider_excerpt_text_color;
-			echo ';}';	
-			echo '#content .slider.button a:hover {color: '.$slider_readMore_linkHvr_color;
 			echo ';}';
-			echo '#content .slider.button a:visited {color: '.$slider_readMore_linkVstd_color;
+			echo '#content .slider.button a {color: ';
+			echo $slider_readMore_link_color;
+			echo ';}';
+			echo '#content .slider.button a:hover {color: ';
+			echo $slider_readMore_linkHvr_color;
+			echo ';}';
+			echo '#content .slider.button a:visited {color: ';
+			echo $slider_readMore_linkVstd_color;
 			echo ';}';
 		}
 		
@@ -173,8 +184,10 @@ echo '<style>';
 	/*sidebar*/
 	echo'
 		#secondary {color: '.$sidebar_text_color.';}
-		#secondary a {color: '.$sidebar_link_color.';}
 		h5.widget-title {color: '.$widget_title_color.';}
+		#secondary a {color: '.$sidebar_link_color.';}
+		#secondary a:hover {color: '.$sidebar_linkHvr_color.';}
+		#secondary a:visited {color: '.$sidebar_linkVstd_color.';}
 	';
 	//if the background for the sidebar is not set to transparent use $sidebar_bg_color else just let it transparent.
 	if (! $options['sidebar-trans-bg'] == '' ) { 	
@@ -185,7 +198,9 @@ echo '<style>';
 	
 	/*footer*/
 	echo'
-	
+		.site-footer a {color: '.$footer_link_color.';}
+		.site-footer a:hover {color: '.$footer_linkHvr_color.';}
+		.site-footer a:visited {color: '.$footer_linkVstd_color.';}
 	';
 	//if the background for the footer is not set to transparent set background color.
 	if (! $options['footer-trans-bg'] == '' ) { 	
