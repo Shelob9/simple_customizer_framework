@@ -5,8 +5,7 @@
 * Since 1.0.5
 *
 **/
-add_action('wp_head','_sf_custom_style');
-//add_action('wp_head','dragonstone_background_img');
+//add_action('wp_head','_sf_custom_style');
 
 function _sf_custom_style() {
 	$options = get_option('_sf');
