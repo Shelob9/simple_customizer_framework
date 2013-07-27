@@ -109,7 +109,7 @@ function _sf_customize_slider() {
 	);
 		//read more button
 	$slider[] = array(
-		'slug'=>'excerpt_button_bg_color', 
+		'slug'=>'slider_readMore_bg_color', 
 		'default' => ' ',
 		'label' => __('Slider Read More Button Background Color', 'sf')
 	);

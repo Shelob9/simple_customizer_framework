@@ -33,8 +33,8 @@ function _sf_custom_style() {
 	$content_link_color = $options['content_link_color'];
 	//$content_linkHvr_color = $options['content_linkHvr_color'];
 	//$content_link_color = $options['content_linkVstd_color'];
-	$excerpt_button_bg_color = $options['content_readMore_link_color'];
-	$excerpt_button_text_color = $options['excerpt_button_text_color'];
+	$excerpt_button_bg_color = $options['content_readMore_bg_color'];
+	$excerpt_button_text_color = $options['content_readMore_link_color'];
 	$content_readMore_linkHvr_color = $options['content_readMore_linkHvr_color'];
 	$content_readMore_linkVstd_color = $options['content_readMore_linkVstd_color'];
 	
@@ -42,7 +42,7 @@ function _sf_custom_style() {
 		$slider_bg_color = $options['slider_bg_color'];
 		$slider_title_color = $options['slider_title_color'];
 		$slider_excerpt_text_color = $options['slider_excerpt_text_color'];
-		$slider_button_bg_color = $options['slider_button_bg_color'];
+		$slider_button_bg_color = $options['slider_readMore_bg_color'];
 		$slider_button_text_color = $options['slider_readMore_link_color'];
 		$slider_readMore_linkHvr_color = $options['slider_readMore_linkHvr_color'];
 		$slider_readMore_linkVstd_color = $options['slider_readMore_linkVstd_color'];

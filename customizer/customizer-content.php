@@ -130,7 +130,7 @@ function _sf_customize_content() {
 	
 	//read more button
 	$readmore[] = array(
-		'slug'=>'excerpt_button_bg_color', 
+		'slug'=>'content_readMore_bg_color', 
 		'default' => ' ',
 		'label' => __('Read More Button Background Color', 'sf')
 	);
@@ -150,7 +150,7 @@ function _sf_customize_content() {
 		'label' => __('Read More Button Visited Link Color', 'sf')
 	);
 	
-	
+	$colors = $readmore;
 	$countStart = 150;
 	_sf_customzier_color_loop($colors, $countStart, $section);
 }

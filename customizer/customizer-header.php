@@ -27,7 +27,7 @@ function _sf_customize_header() {
 			'type' => 'checkbox',
 			'label' => 'Use A Background Color For Header Area, If Not Using An Image Background?',
 			'section' => $section,
-			'priority' => '13',
+			'priority' => '5',
 			'settings' => '_sf[header_trans_bg]',
 			)
     );
@@ -47,7 +47,7 @@ function _sf_customize_header() {
 			'label' => 'Use Background Image Instead of Color For Header?',
 			'section' => $section,
 			'settings'   => '_sf[header_bg_choice]',
-			'priority' => '12',
+			'priority' => '15',
 		)
     );
    
@@ -64,7 +64,7 @@ function _sf_customize_header() {
 			'label'    => __('Upload Background Image For Header', 'sf'),
 			'section'    => $section,
 			'settings' => '_sf[header_bg_img]',
-			'priority' => '15',
+			'priority' => '20',
 	)));
     
     $section = '_sf_menu_options';
@@ -151,7 +151,8 @@ function _sf_customize_header() {
 	$header[] = array(
 		'slug'=>'header_bg_color', 
 		'default' => '#fff',
-		'label' => __('Header Background Color', 'sf')
+		'label' => __('Header Background Color', 'sf'),
+		'priority' => 10,
 	);
 	$menu[] = array(
 		'slug'=>'site_name_color', 
@@ -200,7 +201,6 @@ function _sf_customize_header() {
 	_sf_customzier_color_loop($colors, $countStart, $section);
 	$section = '_sf_header_options';
 	$colors = $header;
-	$countStart = 5;
 	_sf_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! _sf_customize_header
