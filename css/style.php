@@ -44,8 +44,8 @@ function _sf_custom_style() {
 		$slider_excerpt_text_color = $options['slider_excerpt_text_color'];
 		$slider_button_bg_color = $options['slider_button_bg_color'];
 		$slider_button_text_color = $options['slider_readMore_link_color'];
-		//$slider_readMore_linkHvr_color = $options['slider_readMore_linkHvr_color'];
-		//$slider_readMore_linkVstd_color = $options['slider_readMore_linkVstd_color'];
+		$slider_readMore_linkHvr_color = $options['slider_readMore_linkHvr_color'];
+		$slider_readMore_linkVstd_color = $options['slider_readMore_linkVstd_color'];
 		
 	
 		/*Masonry*/
@@ -119,7 +119,7 @@ echo '<style>';
 		#content .read-more-button.button a:visited	{color: '.$content_readMore_linkVstd_color.';}
 		
 	';
-	//if the background for the content is not set to transparent set background color.
+		//if the background for the content is not set to transparent set background color.
 		if (! $options['content-trans-bg'] == '' ) { 
 			echo '#primary {background-color:';
 			echo $content_bg_color;
@@ -146,6 +146,10 @@ echo '<style>';
 			echo '.slider-entry-content .excerpt{color:';
 			echo $slider_excerpt_text_color;
 			echo ';}';	
+			echo '#content .slider.button a:hover {color: '.$slider_readMore_linkHvr_color;
+			echo ';}';
+			echo '#content .slider.button a:visited {color: '.$slider_readMore_linkVstd_color;
+			echo ';}';
 		}
 		
 		/*masonry*/
