@@ -60,7 +60,7 @@ function _sf_customize_header() {
     $wp_customize->add_control(
 		new WP_Customize_Image_Control($wp_customize, 'header_bg_img', array(
 			'label'    => __('Upload Background Image For Header', 'sf'),
-			'section'    => '_sf_background_options',
+			'section'    => $section,
 			'settings' => '_sf[header_bg_img]',
 			'priority' => '15',
 	)));
