@@ -69,12 +69,26 @@ function _sf_custom_style() {
 	//$footer_linkVstd_color = $options['footer_linkVstd_color'];
 echo '<style>'; 
 	
+	/*Page*/
+	// If page background is not set to full-screen image set a color background.
+	if (! $options['body_bg_choice'] == '' ) { 
+		echo 'body{background-color:';
+		echo $page_bg_color;
+		echo ';}';
+	}
+	
 	/*header*/
 	echo'
 		.site-description {color: '.$site_description_color.'}
-		#content a { color: '.$content_link_color.';}
+		
 		
 	';
+	//if the background for the header is not set to transparent use $header_bg_color else just let it transparent.
+	if (! $options['header-trans-bg'] == '' ) { 	
+		echo '#masthead {background-color:';
+		echo $header_bg_color;
+		echo '}';
+	}
 		/*Menu*/
 		echo '
 			.top-bar-section ul li>a {color: '.$menu_text_color.'}
@@ -95,6 +109,7 @@ echo '<style>';
 	
 	/*content*/
 	echo '
+		#content a { color: '.$content_link_color.';}
 		h1.entry-title {color: '.$page_title_color.';}
 		#content h1.entry-title a {color: '.$post_title_color.';}
 		.entry-content { color:  '.$content_text_color.';}
@@ -104,34 +119,59 @@ echo '<style>';
 		#content .read-more-button.button a:visited	{color: '.$content_readMore_linkVstd_color.';}
 		
 	';
-		/*slider*/
-		echo'
+	//if the background for the content is not set to transparent set background color.
+		if (! $options['content-trans-bg'] == '' ) { 
+			echo '#primary {background-color:';
+			echo $content_bg_color;
+			echo '}';
+			echo '.top-bar{paddding-right:15px}';
+		}
 	
-		';
+		/*slider*/
+		//style home page slider, if we are using it.
+		if (! $options['_sf_slider_visibility'] == '' ) { 
+			echo '.orbit-container {background-color:';
+			echo $slider_bg_color;
+			echo ';}';
+			echo '#content h1.slider-entry-title a {color:';
+			echo $slider_title_color;
+			echo ';}';
+			echo '#content a.slider.button {color:';
+			echo $slider_button_text_color;
+			echo ';}';
+			echo '.slider-read-more a.button {';
+			echo ';background-color:';
+			echo $slider_button_bg_color;
+			echo ';}';
+			echo '.slider-entry-content .excerpt{color:';
+			echo $slider_excerpt_text_color;
+			echo ';}';	
+		}
 		
 		/*masonry*/
-		echo'
-	
-		';
+		//style masonry boxes if we are using masonry today
+		if ( $options['_sf_masonry'] == '' ) {
+			echo '.masonry-entry{background-color:';
+			echo $masonry_bg_color;
+			echo '; border-color:';
+			echo $masonry_border_color;
+			echo '; width:';
+			_sf_masonry_width($use='css');
+			echo '}';
+			echo '.masonry-post-title{color:';
+			echo $masonry_title_color;
+			echo ';}';
+			echo '.masonry-post-excerpt .excerpt{color:';
+			echo $masonry_excerpt_text_color;
+			echo ';}';
+			echo '#content {padding: 0 0 0 0;}';
+		}
 	/*sidebar*/
 	echo'
 		#secondary {color: '.$sidebar_text_color.';}
 		#secondary a {color: '.$sidebar_link_color.';}
 		h5.widget-title {color: '.$widget_title_color.';}
 	';
-	
-	/*footer*/
-	echo'
-	
-	';
-
-	//if the background for the header is not set to transparent use $header_bg_color else just let it transparent.
-	if (! $options['header-trans-bg'] == '' ) { 	
-		echo '#masthead {background-color:';
-		echo $header_bg_color;
-		echo '}';
-	}
-	
 	//if the background for the sidebar is not set to transparent use $sidebar_bg_color else just let it transparent.
 	if (! $options['sidebar-trans-bg'] == '' ) { 	
 		echo '#secondary {background-color:';
@@ -139,65 +179,15 @@ echo '<style>';
 		echo '}';
 	}
 	
+	/*footer*/
+	echo'
+	
+	';
 	//if the background for the footer is not set to transparent set background color.
 	if (! $options['footer-trans-bg'] == '' ) { 	
 		echo '.site-footer {background-color:';
 		echo $footer_bg_color;
 		echo '}';
-	}
-	
-	//if the background for the content is not set to transparent set background color.
-	if (! $options['content-trans-bg'] == '' ) { 
-		echo '#primary {background-color:';
-		echo $content_bg_color;
-		echo '}';
-		echo '.top-bar{paddding-right:15px}';
-	}
-	
-	// If page background is not set to full-screen image set a color background.
-	if (! $options['body_bg_choice'] == '' ) { 
-		echo 'body{background-color:';
-		echo $page_bg_color;
-		echo ';}';
-	}
-
-	
-//style masonry boxes if we are using masonry today
-	if ( $options['_sf_masonry'] == '' ) {
-		echo '.masonry-entry{background-color:';
-		echo $masonry_bg_color;
-		echo '; border-color:';
-		echo $masonry_border_color;
-		echo '; width:';
-		_sf_masonry_width($use='css');
-		echo '}';
-		echo '.masonry-post-title{color:';
-		echo $masonry_title_color;
-		echo ';}';
-		echo '.masonry-post-excerpt .excerpt{color:';
-		echo $masonry_excerpt_text_color;
-		echo ';}';
-		echo '#content {padding: 0 0 0 0;}';
-	}
-
-//style home page slider, if we are using it.
-	if (! $options['_sf_slider_visibility'] == '' ) { 
-		echo '.orbit-container {background-color:';
-		echo $slider_bg_color;
-		echo ';}';
-		echo '#content h1.slider-entry-title a {color:';
-		echo $slider_title_color;
-		echo ';}';
-		echo '#content a.slider.button {color:';
-		echo $slider_button_text_color;
-		echo ';}';
-		echo '.slider-read-more a.button {';
-		echo ';background-color:';
-		echo $slider_button_bg_color;
-		echo ';}';
-		echo '.slider-entry-content .excerpt{color:';
-		echo $slider_excerpt_text_color;
-		echo ';}';	
 	}
 
 echo '</style>';
