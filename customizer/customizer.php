@@ -94,13 +94,13 @@ endif; //! _sf_customizer_sections
 * @since _sf 1.1.0
 */
 
-	locate_template('lib/customizer/customizer-page.php', true);
-	locate_template('lib/customizer/customizer-header.php', true);
-	locate_template('lib/customizer/customizer-content.php', true);
-	locate_template('lib/customizer/customizer-slider.php', true);
-	locate_template('lib/customizer/customizer-masonry.php', true);
+	//locate_template('lib/customizer/customizer-page.php', true);
+	//locate_template('lib/customizer/customizer-header.php', true);
+	//locate_template('lib/customizer/customizer-content.php', true);
+	//locate_template('lib/customizer/customizer-slider.php', true);
+	//locate_template('lib/customizer/customizer-masonry.php', true);
 	locate_template('lib/customizer/customizer-sidebar.php', true);
-	locate_template('lib/customizer/customizer-footer.php', true);
+	//locate_template('lib/customizer/customizer-footer.php', true);
 
 
 /**
