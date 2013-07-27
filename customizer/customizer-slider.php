@@ -27,11 +27,11 @@ function _sf_customize_slider() {
 		array(
 			'type' => 'checkbox',
 			'label' => __('Show Home Page Slider?', '_sf'),
-			'section' => '_sf_home_slider',
+			'section' => $section,
 			'priority' => '1',
 			'settings' => '_sf[slider_visibility]'
 			)
-		);
+	);
  
     //  ============================
     //  = Number of Slides To Show =
@@ -40,6 +40,7 @@ function _sf_customize_slider() {
     $wp_customize->add_setting(
     '_sf[slide_numb]', array(
     	'default' => 5,
+    	'capability'  => 'edit_theme_options',
     	'type' => 'option',
     	)
     );
@@ -50,15 +51,16 @@ function _sf_customize_slider() {
         'type' => 'text',
 		'default' => 5,
         'label' => __('Number Of Slides To Show - Default is 5. Enter numbers only.', '_sf'),
-        'section' => '_sf_home_slider',
+        'section' => $section,
         'sanitize_callback' => '_sf_sanitize_number',
-        'settings' => '_sf[slidenumb]',
+        'settings' => '_sf[slide_numb]',
         )
     );
    
    	// ==========================
    	// = Which Category To Show = 
    	// ==========================
+   	
  	//create category dropdown
     $categories = get_categories();
 	$cats = array();
@@ -74,13 +76,13 @@ function _sf_customize_slider() {
 	$wp_customize->add_setting('_sf[slide_cat]', array(
 		'default'        => $default,
 		'capability'  => 'edit_theme_options',
-			'type' => 'option',
+		'type' => 'option',
 		)
 	);
-	$wp_customize->add_control( 'cat_select_box', array(
+	$wp_customize->add_control( 'slide_cat', array(
 		'settings' => '_sf[slide_cat]',
 		'label'   => __('Select Category:', '_sf'),
-		'section'  => '_sf_home_slider',
+		'section' => $section,
 		'type'    => 'select',
 		'choices' => $cats,
 	));
