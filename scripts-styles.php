@@ -4,7 +4,7 @@
  * I am the Great Enqueuer!
  *
  * @package _sf
- * since 1.0.5.1
+ * @since 1.0.5.1
  *
  * Pattern used:
  * 3 functions per plugin. 1) _sf_init_SLUG enqueues scripts, styles. 2) _sf_scripts_SLUG_code contains initialization code. 3) _sf_scripts_SLUG_init calls _sf_scripts_SLUG_init and wraps it in script tags and /or JQuery no conflict wrapper.
@@ -22,11 +22,12 @@
  * In child theme can deactivate each one via remove_action
  * See: http://codex.wordpress.org/Function_Reference/remove_action
  *
- * Note: 
  */
 
 //first wrap all front-end scripts in a big, old if ! is_admin
 if (! is_admin() ) :
+//then get the options array
+global $options;
 
 /**
 * Foundation
@@ -78,7 +79,7 @@ endif; //! _sf_js_init_foundation
 */
 
 //first test to see if we need infinite scroll:
-if (  (get_theme_mod( '_sf_inf-scroll' ) == '' ) &&  (! get_theme_mod( '_sf_masonry' ) == '' ) ) :
+if (  $options['infScroll'] == ''  &&   $options['masonry'] != ''  ) :
 if (! function_exists('_sf_scripts_infScroll') ) :
 function _sf_scripts_infScroll() {
 	wp_register_script( 'infinite_scroll',  get_template_directory_uri() . '/lib/js/jquery.infinitescroll.min.js', array('jquery'), false, false );
@@ -127,7 +128,7 @@ endif; //we need infscroll
 */
 
 //first check if masonry is being used, if so do all the things we need, if not fuck it.
-if ( get_theme_mod( '_sf_masonry' ) == '' ) :
+if ( $options['masonry'] == '' ) :
 if (! function_exists('_sf_scripts_masonry') ) :
 function _sf_scripts_masonry() {
 	//deregister built in jQuery since it is old.
@@ -174,7 +175,8 @@ endif; //do we need masonry?
 
 if (! function_exists('_sf_scripts_ajaxMenus') ) :
 function _sf_scripts_ajaxMenus() {
-	if ( get_theme_mod( '_sf_ajax' ) == '' ) :
+	global $options;
+	if ( $options['ajaxMenu'] == '' ) :
 		wp_deregister_script('historyjs');
 		wp_register_script( 'historyjs', get_template_directory_uri(). '/lib/js/jquery.history.js', array( 'jquery' ), '1.7.1' );
 		wp_enqueue_script( 'historyjs' );	
@@ -281,16 +283,16 @@ endif; //! _sf_js_init_ajaxMenus
 */
 
 //get urls of background images. Doing this first to test if they have a value in the big if statement that is about to happen.
-$body_img_url = get_theme_mod('body_bg_img');
-$header_img_url = get_theme_mod('header_bg_img');
-$content_img_url = get_theme_mod('content_bg_img');
+$body_img_url = $options['body_bg_img'];
+$header_img_url = $options['header_bg_img'];
+$content_img_url = $options['content_bg_img'];
 if (
 //if we're using full screen background image, and one is set (which btw may be the default one.)
-get_theme_mod( 'body_bg_choice' ) == '' 
+$options['body_bg_choice'] == '' 
 //or we're using a background image for the header and  and one is set 
-|| ! get_theme_mod( 'header_bg_choice' ) == '' && ! $header_img_url == ''
+|| ! $options['header_bg_choice'] == '' && ! $header_img_url == ''
 //or we're using a background image for the content area and  and one is set 
-|| ! get_theme_mod( 'content_bg_choice' ) == '' && ! $content_img_url == ''
+|| ! $options['content_bg_choice'] == '' && ! $content_img_url == ''
 ) :
 if (! function_exists('_sf_scripts_backstretch') ) :
 function _sf_scripts_backstretch() {
@@ -301,14 +303,15 @@ endif; //! _sf_scripts exists
 
 if (! function_exists('_sf_js_init_backstretch') ) :
 function _sf_js_init_backstretch($use = '') {
-	if ( get_theme_mod('body_bg_img') == '' ) {
+	global $options;
+	if ($options['body_bg_img'] == '' ) {
 		$body_img_url = get_template_directory_uri().'/images/bg.jpg';
 	}
 	else {
-		$body_img_url = get_theme_mod('body_bg_img');
+		$body_img_url = $options['body_bg_img'];
 	}
-	$header_img_url = get_theme_mod('header_bg_img');
-	$content_img_url = get_theme_mod('content_bg_img');
+	$header_img_url = $options['header_bg_img'];
+	$content_img_url = $options['content_bg_img'];
 	
 	//$use = 'reinit' in the ajax menu callback, so we don't get style tags in the middle of that.
 	if (! $use == 'reinit') {
@@ -322,7 +325,7 @@ function _sf_js_init_backstretch($use = '') {
 		echo '");     ';
 	//} 
 	
-	if ( ! get_theme_mod( 'header_bg_choice' ) == '' && ! $header_img_url == '' ) {
+	if ( ! $options['header_bg_choice'] == '' && ! $header_img_url == '' ) {
 		// store the image ID in a var
 		$img = $header_img_url;
 		
@@ -330,7 +333,7 @@ function _sf_js_init_backstretch($use = '') {
 		echo $img;
 		echo '");    ';
 	}
-	if ( ! get_theme_mod( 'content_bg_choice' ) == '' && ! $content_img_url == '' ) {
+	if ( ! $options['content_bg_choice'] == '' && ! $content_img_url == '' ) {
 		$img = $content_img_url;
 		echo 'jQuery("#primary").backstretch("';
 		echo $img;
