@@ -31,15 +31,15 @@ $optionsList = array('scc-example.php');
 * @since scf 0.1
 */
 
-	//set the path
-	$scf_path = get_template_directory_URI().trailingslashit($dir);
-	//load the customzier functions
-	locate_template($scf_path.'customizer.php', true);
-	//load the sanitization file
-	locate_template($scf_path.'customizer-sanitizer.php', true);
-	//load the sections file
-	locate_template($scf_path.'scf-sections.php', true);
-	//load the actual controls/settings we need IE: the point of this
-	foreach ($optionsList as $options) {
-		locate_template($scf_path.'/settings/'.$options, true);
-	}
+//set the path
+$scf_path = trailingslashit( get_template_directory() ).trailingslashit( $dir);
+//load the customzier functions
+include_once($scf_path.'/customizer/customizer.php');
+//load the sanitization file
+include_once($scf_path.'/customizer/customizer-sanitizer.php');
+//load the sections file
+include_once($scf_path.'scf-sections.php');
+//load the actual controls/settings we need IE: the point of this
+foreach ($optionsList as $options) {
+	include_once($scf_path.'/settings/'.$options);
+}
