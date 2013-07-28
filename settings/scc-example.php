@@ -1,65 +1,20 @@
 <?php
 /**
-* Sidebar Customizer Options
+* Example Options
+* In this example we are setting up colors for our sidebar.
+* Use this example to create your own.
 *
-* @since _sf 1.1.0
+* @package scf
+* @since 0.1
 */
-if (! function_exists('_sf_customize_sidebar') ) :
-add_action('customize_register', '_sf_customize_sidebar');
+if (! function_exists('scc_customize_sidebar') ) :
+add_action('customize_register', 'scc_customize_sidebar');
 
 
-function _sf_customize_sidebar() {
-	$section = '_sf_sidebar_options';
+function scc_customize_sidebar() {
+	$section = 'scc_sidebar_options';
 	global $wp_customize;
-	//  ==============
-	//  = Background =
-	//  ==============
-	 $wp_customize->add_setting(
-   		'_sf[sidebar-trans-bg]', array(
-   			'type' => 'option',
-   			'capability'  => 'edit_theme_options',
-    	)
-    );
-
-    $wp_customize->add_control(
-		'sidebar-trans-bg',
-		array(
-			'type' => 'checkbox',
-			'label' => 'Use A Background Color For Sidebar Area',
-			'section' => $section,
-			'priority' => '3',
-			'settings' => '_sf[sidebar-trans-bg]',
-			)
-    );
 	
-	//  ====================
-	//  = Sidebar Location =
-	//  ====================
-	$wp_customize->add_setting(
-			'_sf[default_sidebar]', array(
-				'capability'  => 'edit_theme_options',
-        		'type' => 'option',
-			)
-		);
-	$wp_customize->add_control(
-   		'default_sidebar',
-		array(
-			'label' => __('Sidebar Location', '_s_f'),
-			'section' => $section,
-			'default'        => 'value1',
-			'type'       => 'select',
-			'choices'    => array(
-				'value1' => 'Right',
-				'value2' => 'Left',
-				'value3' => 'None',
-			),
-			'settings' => '_sf[default_sidebar]',
-		)
-    );
-    
-	//  ==================
-	//  = Color Controls =
-	//  ==================
 	$sidebar[] = array(
 		'slug'=>'sidebar_bg_color', 
 		'default' => '#fff',
@@ -108,8 +63,8 @@ function _sf_customize_sidebar() {
 	
 	$colors = $sidebar;
 	$countStart = 50;
-	_sf_customzier_color_loop($colors, $countStart, $section);
+	scc_customzier_color_loop($colors, $countStart, $section);
 	
 }
-endif; //! _sf_customize_sidebar
+endif; //! scc_customize_sidebar
 ?>
