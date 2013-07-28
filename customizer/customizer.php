@@ -12,7 +12,7 @@
 * @since scf 1.1.0
 */
 if (! function_exists('scf_customzier_color_loop') ) :
-functionscf_customzier_color_loop($colors, $countStart = 10, $section) {
+function scf_customzier_color_loop($colors, $countStart = 10, $section) {
 	//Not sure why I have to do this first thing
 	global $wp_customize;
 	//get theme slug

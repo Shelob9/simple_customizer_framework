@@ -21,7 +21,7 @@
 $dir = 'options';
 //the names of settings files to be included, the example file is included as an example.
 //seperate values with commas
-$optionsList = array('scc-example.php');
+$optionsList = array('scf-example.php');
 
 
 
