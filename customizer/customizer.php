@@ -15,7 +15,14 @@
 */
 if (! class_exists('scf_make_the_magic') ):
 class scf_make_the_magic {
+
 	public $customizerData;
+	
+	function init() {
+		add_action ('admin_menu', array($this, 'scf_add_options_menu') );
+		add_action( 'wp_before_admin_bar_render', array($this, 'scf_add_admin_bar_options_menu') );
+		add_action('wp_head', array($this, 'scf_auto_style') );
+	}
 	/**
 	* Customizer Color Control Loop
 	*
@@ -116,8 +123,7 @@ class scf_make_the_magic {
 		echo $return;
 		echo "</style>";
 	}
-	//add_action('wp_head', 'scf_auto_style');
-
+	
 	/**
 	* Add links to Customizer
 	* @since _sf 1.0.5.1
@@ -132,10 +138,8 @@ class scf_make_the_magic {
 			'customize.php'             // Menu slug, used to uniquely identify the page
 		);
 	}
-	//add_action ('admin_menu', 'scf_add_options_menu');
-
-	//Add WordPress customizer page to the admin bar menu.
 	
+	//Add WordPress customizer page to the admin bar menu.
 	function scf_add_admin_bar_options_menu() {
 	   if ( current_user_can( 'edit_theme_options' ) ) {
 		 global $wp_admin_bar;
@@ -147,7 +151,8 @@ class scf_make_the_magic {
 		 ));
 	   }
 	}
-	//add_action( 'wp_before_admin_bar_render', 'scf_add_admin_bar_options_menu' );
+	
 }
+$scf_make_the_magic = new scf_make_the_magic();
 endif; //! scf_make_the_magic exists
 ?>
