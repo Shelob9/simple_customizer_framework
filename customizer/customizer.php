@@ -3,13 +3,16 @@
  * scf Theme Customizer
  *
  * @package scf
- */
+ * @since scf 0.1
+*/
 
+/**
 
 /**
 * Customizer Color Control Loop
 *
-* @since scf 1.1.0
+* @since _sf 1.1.0
+* @since scf 0.1
 */
 if (! function_exists('scf_customzier_color_loop') ) :
 function scf_customzier_color_loop($colors, $countStart = 10, $section) {
@@ -110,7 +113,8 @@ endif; // ! scf_auto_style exists
 
 /**
 * Add links to Customizer
-* @since scf1.0.5.1
+* @since _sf 1.0.5.1
+* @since scf 0.1
 */
 //Add WordPress customizer page to the admin menu.
 if(!function_exists('scf_add_options_menu')) :
