@@ -51,12 +51,21 @@ foreach ($optionsList as $options) {
 *
 * @since scf 1.1.0
 */
-
 if (! function_exists('scf_localize_customizer') ):
+
+
 function scf_localize_customizer() {
-	wp_enqueue_script( 'customizer-preview', $scf_path.'/js/customizer.js', array( 'customize-preview' ), '20130304', true );
-	$customizerData = get_option('cData');
-	wp_localize_script('customizer-preview', 'custStyle', $customizerData);
+	//deregister twentytwelves theme customizer js. Need a more unviersal way to do this.
+	wp_deregister_script('twentytwelve-customizer');
+	$handle = 'customizer-preview';
+	//$src = trailingslashit( get_template_directory_uri() ).$dir.'/js/customizer.js';
+	$src = get_template_directory_uri().'/options/js/customizer.js';
+	$deps = array( 'jquery' );
+	$ver = 1;
+	$in_footer = true;
+	wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
+	$customizerData = get_option('scf_cData');
+	wp_localize_script(	$handle, 'custStyle', $customizerData);
 }
 add_action('wp_enqueue_scripts', 'scf_localize_customizer');
 endif; // ! scf_localize_customizer exists
