@@ -31,7 +31,7 @@ class simple_customzier_framework{
      * Class Constructor
      */
     function __construct() {
-        $this->scf_paths();
+        $this->paths();
         $this->setup_actions();
         
     }
@@ -40,19 +40,22 @@ class simple_customzier_framework{
      * Define Path(s)
      */
     function paths(){
-        define( 'SCF_PATH', trailingslashit( get_template_directory() ).trailingslashit( $dir);
+        define( 'SCF_PATH', trailingslashit( get_template_directory() ).trailingslashit( $dir) );
     }
-    add_action('wp_enqueue_scripts', array($this, 'scf_localize_customizer') );
     
     /**
     * Setup Actions
     */
-    
+    function setup_actions() {
+    	add_action ('admin_menu', array($this, 'add_options_menu') );
+		add_action( 'wp_before_admin_bar_render', array($this, 'add_admin_bar_options_menu') );
+		add_action('wp_enqueue_scripts', array($this, 'localize_customizer') );
+	}
 	
 	/**
 	* Include shit
-	*/
-	include_once(SCF_PATH.'/customizer/customizer.php');
+	
+	//include_once(SCF_PATH.'/customizer/customizer.php');
 	//load the sanitization file
 	include_once(SCF_PATH.'/customizer/customizer-sanitizer.php');
 	//load the sections file
@@ -61,7 +64,7 @@ class simple_customzier_framework{
 	foreach ($optionsList as $options) {
 		include_once(SCF_PATH.'/settings/'.$options);
 	}
-
+*/
 	/**
 	* Binds JS handlers to make Theme Customizer preview reload changes asynchronously with customizer.js
 	* Also localize the customizer options so they can be added dynamically in customizer.js
@@ -82,6 +85,33 @@ class simple_customzier_framework{
 		wp_localize_script(	$handle, 'custStyle', $customizerData);
 	}
 	
+	/**
+	* Add links to Customizer
+	* @since _sf 1.0.5.1
+	* @since scf 0.1
+	*/
+	function add_options_menu() {
+	//Add WordPress customizer page to the admin menu.
+		$theme_page = add_theme_page(
+			__( 'Customize Theme', 'scf' ),   // Name of page
+			__( 'Customize Theme', 'scf' ),   // Label in menu
+			'edit_theme_options',          // Capability required
+			'customize.php'             // Menu slug, used to uniquely identify the page
+		);
+	}
+	
+	//Add WordPress customizer page to the admin bar menu.
+	function add_admin_bar_options_menu() {
+	   if ( current_user_can( 'edit_theme_options' ) ) {
+		 global $wp_admin_bar;
+		 $wp_admin_bar->add_menu( array(
+		   'parent' => false,
+		   'id' => 'theme_editor_admin_bar',
+		   'title' =>  __( 'Customize Theme', 'scf' ),
+		   'href' => admin_url( 'customize.php')
+		 ));
+	   }
+	}
 
 }
 $simple_customzier_framework = new simple_customzier_framework;
