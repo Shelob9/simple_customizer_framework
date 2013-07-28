@@ -33,7 +33,6 @@ class simple_customzier_framework{
     function __construct() {
         $this->paths();
         $this->setup_actions();
-        
     }
     
      /**
@@ -47,24 +46,26 @@ class simple_customzier_framework{
     * Setup Actions
     */
     function setup_actions() {
-    	add_action ('admin_menu', array($this, 'add_options_menu') );
+    	add_action('admin_menu', array($this, 'add_options_menu') );
 		add_action( 'wp_before_admin_bar_render', array($this, 'add_admin_bar_options_menu') );
-		add_action('wp_enqueue_scripts', array($this, 'localize_customizer') );
+		add_action(	'wp_enqueue_scripts', array($this, 'localize_customizer') );
+		//add_action(	'admin_init', array($this, 'localize_shit') );
 	}
 	
 	/**
 	* Include shit
-	
+	*/
+	function include_shit() {
 	//include_once(SCF_PATH.'/customizer/customizer.php');
 	//load the sanitization file
 	include_once(SCF_PATH.'/customizer/customizer-sanitizer.php');
 	//load the sections file
 	include_once(SCF_PATH.'scf-sections.php');
 	//load the actual controls/settings we need IE: the point of this
-	foreach ($optionsList as $options) {
-		include_once(SCF_PATH.'/settings/'.$options);
+		foreach ($optionsList as $options) {
+			include_once(SCF_PATH.'/settings/'.$options);
+		}
 	}
-*/
 	/**
 	* Binds JS handlers to make Theme Customizer preview reload changes asynchronously with customizer.js
 	* Also localize the customizer options so they can be added dynamically in customizer.js
@@ -114,4 +115,6 @@ class simple_customzier_framework{
 	}
 
 }
+
 $simple_customzier_framework = new simple_customzier_framework;
+?>
