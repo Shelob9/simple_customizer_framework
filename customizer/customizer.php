@@ -15,14 +15,12 @@ if (! function_exists('scf_customzier_color_loop') ) :
 function scf_customzier_color_loop($colors, $countStart = 10, $section) {
 	//Not sure why I have to do this first thing
 	global $wp_customize;
-	//get theme slug
-	global $scf_themeSlug;
-	$themeSlug = $scf_themeSlug;
+
 	//start the counter at 10 or whatever was set.
 	$count = $countStart;
 	foreach ($colors as $things) {
 		$slug = $things['slug'];
-		$id = "{$theme_slug}[{$slug}]";
+		$id = "scf[{$slug}]";
 		//If current array has a priority set, use it, if not use the counter.
 		if (! isset($things['priority']) ) {
 			$priority = $count;

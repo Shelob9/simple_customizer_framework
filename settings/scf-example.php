@@ -15,7 +15,7 @@ function scf_customize_sidebar() {
 	
 	//STEP 1 tell us what section this goes in.
 	//This should correspond to a value set for 'slug' in sections.php
-	$sectionName = 'scf_sidebar_options';
+	$sectionName = 'sidebar_options';
 	
 	global $wp_customize;
 	
@@ -75,10 +75,8 @@ function scf_customize_sidebar() {
 	//STEP 3: Set the initial priority value
 	$countStart = 50;
 	
-	//get global theme slug
-	global $scf_themeSlug;
-	$themeSlug = $scf_themeSlug;
-	$section = $themeSlug.'_'.$sectionName;
+	//prefix the section name
+	$section = 'scf_'.$sectionName;
 	
 	//STEP 4: Watch the magic happen.
 	scf_customzier_color_loop($colors, $countStart, $section);

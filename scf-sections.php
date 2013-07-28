@@ -10,51 +10,50 @@ INSTRUCTIONS:
 			'slug'		=> '',
 			'label'		=> '',
 			'priority'	=> '',
-		),
+		);
 	'slug' is the section's name. You must use all lower case letters and no spaces.
 	'label' will be displayed in the customizer. You can use uppercase and spaces, etc.
 	'priority' determines the order of the settings. It is optional. If not set priorities will be set in increments of 10 starting at 100.
-	
-
 */
 
-	//this is for use with the settings in scc-example
-	$sections[] = array(
-		'slug'		=> 'sidebar_options',
-		'label'		=> 'Sidebar Settings',
-		'priority'	=> '',
-	)
-
+	
 
 /**
 * Define Sections
 *
 * @since scc 0.1
 */
-if (! function_exists('_scf_customizer_sections') ) :
-function scf_customizer_sections( $wp_customize, $sections){
-	//get global theme slug
-	global $scf_themeSlug;
-	$themeSlug = $scf_themeSlug;
+if (! function_exists('scf_customizer_sections') ) :
+
+function scf_customizer_sections( $wp_customize) {
+	//SET THE ARRAY HERE
+	//todo: move this out of the function itself
+	//this is for use with the settings in scf-example
+	$sections[] = array(
+		'slug'		=> 'sidebar_options',
+		'label'		=> 'Sidebar Settings',
+		'priority'	=> '',
+	);
+
 	
 	$count = 100;
-	foreach ($sectionsList as $section) {
+	foreach ($sections as $section) {
 		//If current array has a priority set, use it, if not use the counter.
-		if (! isset($things['priority']) ) {
+		if (! isset($section['priority']) ) {
 			$priority = $count;
 		}
 		else {
 			$priority = $section['priority'];
 		}
 		//make the sections id from theme slug and setting slug and put it in $id
-		$id = $themeslug.'_'.$section['slug'];
+		$id = 'scf_'.$section['slug'];
 		
 		//create the section
 		$wp_customize->add_section($id, array(
-			'title'    => __($section['label'], $themeSlug),
-			'priority' => $priority;
+			'title'    => __($section['label'], 'scf'),
+			'priority' => $priority,
 		)); 
 	}
 }
-add_action('customize_register', '_scf_customizer_sections');
+add_action('customize_register', 'scf_customizer_sections');
 endif; //! _scf_customizer_sections
