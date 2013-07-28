@@ -7,8 +7,8 @@
 INSTRUCTIONS:
  	For each desired section, create an array like in this example
 		$sections[] = array(
-			'slug'		=>	'',
-			'label'		=>  '',
+			'slug'		=> '',
+			'label'		=> '',
 			'priority'	=> '',
 		),
 	'slug' is the section's name. You must use all lower case letters and no spaces.
@@ -20,8 +20,8 @@ INSTRUCTIONS:
 
 	//this is for use with the settings in scc-example
 	$sections[] = array(
-		'slug'		=>	'',
-		'label'		=>  '',
+		'slug'		=> 'sidebar_options',
+		'label'		=> 'Sidebar Settings',
 		'priority'	=> '',
 	)
 
@@ -55,7 +55,6 @@ function scc_customizer_sections( $wp_customize, $sections){
 			'priority' => $priority;
 		)); 
 	}
-
 }
 add_action('customize_register', '_scc_customizer_sections');
 endif; //! _scc_customizer_sections
