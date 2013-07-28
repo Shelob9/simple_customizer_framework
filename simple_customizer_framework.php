@@ -26,24 +26,40 @@ class simple_customzier_framework{
 	//set your theme slug.
 	//todo: this/implement it.
 
-
+	
 	/**
-	* Get everything toghehter (sections, settings and sections.)
-	*
-	* @since scf 0.1
+     * Class Constructor
+     */
+    function __construct() {
+        $this->scf_paths();
+        $this->setup_actions();
+        
+    }
+    
+     /**
+     * Define Path(s)
+     */
+    function paths(){
+        define( 'SCF_PATH', trailingslashit( get_template_directory() ).trailingslashit( $dir);
+    }
+    add_action('wp_enqueue_scripts', array($this, 'scf_localize_customizer') );
+    
+    /**
+    * Setup Actions
+    */
+    
+	
+	/**
+	* Include shit
 	*/
-
-	//set the path
-	$scf_path = trailingslashit( get_template_directory() ).trailingslashit( $dir);
-	//load the customzier functions
-	include_once($scf_path.'/customizer/customizer.php');
+	include_once(SCF_PATH.'/customizer/customizer.php');
 	//load the sanitization file
-	include_once($scf_path.'/customizer/customizer-sanitizer.php');
+	include_once(SCF_PATH.'/customizer/customizer-sanitizer.php');
 	//load the sections file
-	include_once($scf_path.'scf-sections.php');
+	include_once(SCF_PATH.'scf-sections.php');
 	//load the actual controls/settings we need IE: the point of this
 	foreach ($optionsList as $options) {
-		include_once($scf_path.'/settings/'.$options);
+		include_once(SCF_PATH.'/settings/'.$options);
 	}
 
 	/**
@@ -52,20 +68,20 @@ class simple_customzier_framework{
 	*
 	* @since scf 1.1.0
 	*/
-	function scf_localize_customizer() {
+	function localize_customizer() {
 		//deregister twentytwelves theme customizer js. Need a more unviersal way to do this.
 		wp_deregister_script('twentytwelve-customizer');
 		$handle = 'customizer-preview';
-		//$src = trailingslashit( get_template_directory_uri() ).$dir.'/js/customizer.js';
-		$src = get_template_directory_uri().'/options/js/customizer.js';
+		$src = SCF_PATH.'/js/customizer.js';
+		//$src = get_template_directory_uri().'/options/js/customizer.js';
 		$deps = array( 'jquery' );
 		$ver = 1;
 		$in_footer = true;
 		wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
-		$customizerData = get_option('scf_cData');
+		//localize script with the css bits we need
 		wp_localize_script(	$handle, 'custStyle', $customizerData);
 	}
-	add_action('wp_enqueue_scripts', 'scf_localize_customizer');
+	
 
 }
 $simple_customzier_framework = new simple_customzier_framework;
