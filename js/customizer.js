@@ -2,6 +2,9 @@
  * Theme Customizer enhancements for a better user experience.
  *
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
+ *
+ * since _sf 
+ * Script is modified from _s
  */
 
 ( function( $ ) {
@@ -33,4 +36,20 @@
 			}
 		} );
 	} );
+	//loop through all variables that need css updates customizer
+	for(i=0; i<custStyle.length; i++) {
+		wp.customize( custStyle[i].slug, function( value ) {
+			value.bind( function( to ) {
+				$(custStyle[i].selector).css(custStyle.property[i], to ? to : '' );
+			});
+		});
+	};
+	
+	//console logging for testing purposes
+	console.log(custStyle);
+	for(i=0; i<custStyle.length; i++) {
+		console.log(custStyle[i].slug);
+		console.log(custStyle[i].property);
+		console.log(custStyle[i].selector);
+	};
 } )( jQuery );
