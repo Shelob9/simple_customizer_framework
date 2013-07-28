@@ -5,6 +5,8 @@
 * Use this example to create your own.
 * Steps to complete this challenge are inline with code and prefixed with STEP
 *
+* The css selectors set in this example will work with twentytwelve.
+*
 * @package scf
 * @since 0.1
 */
@@ -34,7 +36,7 @@ function scf_customize_sidebar() {
 		'slug'=>'widget_title_color', 
 		'default' => '#000',
 		'label' => 'Widget Title Color',
-		'selector' => 'h5.widget-title',
+		'selector' => 'h3.widget-title',
 		'property' => 'color',
 		'priority' => '',
 	);
