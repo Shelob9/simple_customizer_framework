@@ -1,6 +1,6 @@
 <?php
 /**
-* @package scc
+* @package scf
 * @since 0.1
 *
 *
@@ -21,7 +21,7 @@ INSTRUCTIONS:
 /**
 * Define Sections
 *
-* @since scc 0.1
+* @since scf 0.1
 */
 if (! function_exists('scf_customizer_sections') ) :
 
