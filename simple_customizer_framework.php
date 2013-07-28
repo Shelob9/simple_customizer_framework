@@ -43,3 +43,19 @@ include_once($scf_path.'scf-sections.php');
 foreach ($optionsList as $options) {
 	include_once($scf_path.'/settings/'.$options);
 }
+
+/**
+* Binds JS handlers to make Theme Customizer preview reload changes asynchronously with customizer.js
+* Also localize the customizer options so they can be added dynamically in customizer.js
+*
+* @since scf 1.1.0
+*/
+
+if (! function_exists('scf_localize_customizer') ):
+function scf_localize_customizer() {
+	wp_enqueue_script( 'customizer-preview', $scf_path.'/js/customizer.js', array( 'customize-preview' ), '20130304', true );
+	$customizerData = get_option('cData');
+	wp_localize_script('customizer-preview', 'custStyle', $customizerData);
+}
+add_action('wp_enqueue_scripts', 'scf_localize_customizer');
+endif; // ! scf_localize_customizer exists
