@@ -8,14 +8,14 @@
 * @package scf
 * @since 0.1
 */
-if (! function_exists('scc_customize_sidebar') ) :
-add_action('customize_register', 'scc_customize_sidebar');
+if (! function_exists('scf_customize_sidebar') ) :
+add_action('customize_register', 'scf_customize_sidebar');
 
-function scc_customize_sidebar() {
+function scf_customize_sidebar() {
 	
 	//STEP 1 tell us what section this goes in.
 	//This should correspond to a value set for 'slug' in sections.php
-	$sectionName = 'scc_sidebar_options';
+	$sectionName = 'scf_sidebar_options';
 	
 	global $wp_customize;
 	
@@ -76,12 +76,12 @@ function scc_customize_sidebar() {
 	$countStart = 50;
 	
 	//get global theme slug
-	global $scc_themeSlug;
-	$themeSlug = $scc_themeSlug;
+	global $scf_themeSlug;
+	$themeSlug = $scf_themeSlug;
 	$section = $themeSlug.'_'.$sectionName;
 	
 	//STEP 4: Watch the magic happen.
-	scc_customzier_color_loop($colors, $countStart, $section);
+	scf_customzier_color_loop($colors, $countStart, $section);
 }
-endif; //! scc_customize_sidebar
+endif; //! scf_customize_sidebar
 ?>

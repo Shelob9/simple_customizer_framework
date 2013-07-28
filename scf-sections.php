@@ -31,11 +31,11 @@ INSTRUCTIONS:
 *
 * @since scc 0.1
 */
-if (! function_exists('_scc_customizer_sections') ) :
-function scc_customizer_sections( $wp_customize, $sections){
+if (! function_exists('_scf_customizer_sections') ) :
+function scf_customizer_sections( $wp_customize, $sections){
 	//get global theme slug
-	global $scc_themeSlug;
-	$themeSlug = $scc_themeSlug;
+	global $scf_themeSlug;
+	$themeSlug = $scf_themeSlug;
 	
 	$count = 100;
 	foreach ($sectionsList as $section) {
@@ -56,5 +56,5 @@ function scc_customizer_sections( $wp_customize, $sections){
 		)); 
 	}
 }
-add_action('customize_register', '_scc_customizer_sections');
-endif; //! _scc_customizer_sections
+add_action('customize_register', '_scf_customizer_sections');
+endif; //! _scf_customizer_sections
