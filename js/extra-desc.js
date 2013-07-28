@@ -1,3 +1,0 @@
-jQuery(document).ready(function($) {
-	$('.theme-description').append('<p>Please be sure to see the theme <a href="https://github.com/Shelob9/_second_foundation/wiki" title="_Second Foundation Wiki">docs</a> for more information about the available options and how to optimize/ customize the theme using a child theme, especially on <a href="https://github.com/Shelob9/_second_foundation/wiki/The-Great-Deactivator" title="The Great Deactivator">this page.</a> A starter child theme, <a href="https://github.com/Shelob9/second_speaker/" title="_Second Speaker a child theme for _Second Foundation">is available for your convenience.</p>');
-});

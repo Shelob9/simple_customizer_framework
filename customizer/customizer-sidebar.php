@@ -7,6 +7,7 @@
 if (! function_exists('_sf_customize_sidebar') ) :
 add_action('customize_register', '_sf_customize_sidebar');
 
+
 function _sf_customize_sidebar() {
 	$section = '_sf_sidebar_options';
 	global $wp_customize;
