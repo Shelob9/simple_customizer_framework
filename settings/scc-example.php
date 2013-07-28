@@ -3,6 +3,7 @@
 * Example Options
 * In this example we are setting up colors for our sidebar.
 * Use this example to create your own.
+* Steps to complete this challenge are inline with code and prefixed with STEP
 *
 * @package scf
 * @since 0.1
@@ -10,61 +11,77 @@
 if (! function_exists('scc_customize_sidebar') ) :
 add_action('customize_register', 'scc_customize_sidebar');
 
-
 function scc_customize_sidebar() {
-	$section = 'scc_sidebar_options';
+	
+	//STEP 1 tell us what section this goes in.
+	//This should correspond to a value set for 'slug' in sections.php
+	$sectionName = 'scc_sidebar_options';
+	
 	global $wp_customize;
 	
-	$sidebar[] = array(
+	//STEP 2: Tell us about each option you wish to offer.
+	//slug- name of the option. default- default value (optional). Label- will be shown above the control. Priority- use to set order that options appear in (options.) If not set they will appear in the order you add them in. Selector- css selector this option controls. Property- CSS property this option defines.
+	$colors[] = array(
 		'slug'=>'sidebar_bg_color', 
 		'default' => '#fff',
-		'label' => __('Sidebar Background Color', 'sf'),
+		'label' => 'Sidebar Background Color',
 		'priority' => 5,
 		'selector' => '#secondary',
 		'property' => 'color',
+		'priority' => '',
 	);
-	$sidebar[] = array(
+	$colors[] = array(
 		'slug'=>'widget_title_color', 
 		'default' => '#000',
-		'label' => __('Widget Title Color', 'sf'),
+		'label' => 'Widget Title Color',
 		'selector' => 'h5.widget-title',
 		'property' => 'color',
-		
+		'priority' => '',
 	);
-	$sidebar[] = array(
+	$colors[] = array(
 		'slug'=>'sidebar_text_color', 
 		'default' => '#000',
-		'label' => __('Widget Text Color', 'sf'),
+		'label' => 'Widget Text Color',
 		'selector' => '#secondary',
 		'property' => 'color',
+		'priority' => '200',
 	);
-	$sidebar[] = array(
+	$colors[] = array(
 		'slug'=>'sidebar_link_color', 
 		'default' => '#1e73be',
-		'label' => __('Widget Link Color', 'sf'),
+		'label' => 'Widget Link Color',
 		'selector' => '#secondary a',
 		'property' => 'color',
+		'priority' => '',
 		
 	);
-	$sidebar[] = array(
+	$colors[] = array(
 		'slug'=>'sidebar_linkHvr_color', 
 		'default' => '#fff',
-		'label' => __('Widget Link Hover Color', 'sf'),
+		'label' => 'Widget Link Hover Color',
 		'selector' => '#secondary a:hover',
 		'property' => 'color',
+		'priority' => '',
 	);
-	$sidebar[] = array(
+	$colors[] = array(
 		'slug'=>'sidebar_linkVstd_color', 
 		'default' => '#800080',
-		'label' => __('Widget Visited Link Color', 'sf'),
+		'label' => 'Widget Visited Link Color',
 		'selector' => '#secondary a:visited',
 		'property' => 'color',
+		'priority' => '',
 	);
 	
-	$colors = $sidebar;
+	//STEP 3: Set the initial priority value
 	$countStart = 50;
-	scc_customzier_color_loop($colors, $countStart, $section);
 	
+	//get global theme slug
+	global $scc_themeSlug;
+	$themeSlug = $scc_themeSlug;
+	$section = $themeSlug.'_'.$sectionName;
+	
+	//STEP 4: Watch the magic happen.
+	scc_customzier_color_loop($colors, $countStart, $section);
 }
 endif; //! scc_customize_sidebar
 ?>
