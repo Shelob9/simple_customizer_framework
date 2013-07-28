@@ -49,7 +49,7 @@ class simple_customzier_framework{
     	add_action('admin_menu', array($this, 'add_options_menu') );
 		add_action( 'wp_before_admin_bar_render', array($this, 'add_admin_bar_options_menu') );
 		add_action(	'wp_enqueue_scripts', array($this, 'localize_customizer') );
-		//add_action(	'admin_init', array($this, 'localize_shit') );
+		add_action('wp_head', array($this, 'auto_style') );
 	}
 	
 	/**
@@ -112,6 +112,89 @@ class simple_customzier_framework{
 		   'href' => admin_url( 'customize.php')
 		 ));
 	   }
+	}
+	
+	/**
+	* Customizer Color Control Loop
+	*
+	* @since _sf 1.1.0
+	* @since scf 0.1
+	*/
+	public function customzier_color_loop($colors, $countStart = 10, $section) {
+		//Not sure why I have to do this first thing
+		global $wp_customize;
+		//get the options
+		//todo: set which option in a nonstupid way.
+		//get_option('scf');
+		
+		
+		//start the counter at 10 or whatever was set.
+		$count = $countStart;
+		foreach ($colors as $things) {
+			$slug = $things['slug'];
+			$id = "scf[{$slug}]";
+			//If current array has a priority set, use it, if not use the counter.
+			if (! isset($things['priority']) ) {
+				$priority = $count;
+			}
+			else {
+				$priority = $things['priority'];
+			}
+			$wp_customize->add_setting( $id, array(
+				'type'              => 'option', 
+				'transport'     => 'postMessage',
+				'capability'     => 'edit_theme_options',
+				'default' 		=> $things['default'],
+			) );
+ 
+			$control = 
+			new WP_Customize_Color_Control(
+					$wp_customize, $slug, 
+				array(
+				'label'         => __( $things['label'], $theme_slug ),
+				'section'       => $section,
+				'priority'      => $priority,
+				'settings'      => $id
+				) 
+			);
+			$wp_customize->add_control($control);
+			//create array to be used for the outputting styles to wp_head and customizer.js
+			$this->customizerData[] = array(
+				'id' => $id,
+				'slug' => $slug, 
+				'selector' => $things['selector'],
+				'property' => $things['property'],
+			);
+		
+			//advance priority counter
+			$count++;
+		}
+	}
+	/**
+	* Set styles set in customizer dynamically
+	*
+	* @since scf 1.1.0
+	*/
+	public function auto_style() {
+		/*
+		//get the options array
+		global $options;
+		//get the data we need fromt he option 'scf_cData' we save in the color loop.
+		$customizerData = get_option('scf_cData');
+		*/
+		//create the css by looping through $customizerData
+		//create $return to be populated in this loop
+		$return = '';
+		foreach ($this->customizerData as $data) {
+			$return .= $data['selector'];
+			$return .= "{";
+			$return .= $data['property'].":";
+			$return .= $options[$data['slug']].";} ";
+		}
+		//echos
+		echo "<style>";
+		echo $return;
+		echo "</style>";
 	}
 
 }
