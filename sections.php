@@ -47,7 +47,7 @@ function scc_customizer_sections( $wp_customize, $sections){
 			$priority = $section['priority'];
 		}
 		//make the sections id from theme slug and setting slug and put it in $id
-		$id = $themeslug.$section['slug'];
+		$id = $themeslug.'_'.$section['slug'];
 		
 		//create the section
 		$wp_customize->add_section($id, array(
