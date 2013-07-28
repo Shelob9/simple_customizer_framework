@@ -29,5 +29,15 @@ Current Status
 <strong>Things That Don't Work</strong>
 * The real time previewing isn't happening. If you look in customize.js you will see two loops I wrote. One is supposed to accomplish this goal. It doesn't, nor does it give me any console errors. I am even more of an egg when it comes to js than with PHP. The second loop console.logs real nice.
 
-In the "Enter postMessage" section of [http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/comment-page-3/#comment-11938](this article) Otto explains what I am trying to do.
+In the "Enter postMessage" section of (this article)[http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/comment-page-3/#comment-11938] Otto explains what I am trying to do.
+
+Long Term Goals
+===============
+Stage 1: Alpha version that is stable and works as intend for color picker controls in any theme.
+
+Stage 2: Incorporate all controls.
+
+Stage 3: Make custom controls easier or at the very least add acces to the media manager with image controls.
+
+Stage 4: World domination.
 
