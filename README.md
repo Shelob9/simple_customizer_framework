@@ -1,6 +1,6 @@
 simple_customizer_framework
 ===========================
-The goal of this project is to create a super simple to use framework for programming the WordPress Theme Customizer. It is designed to allow theme authors to specify what an option needs ot do, all in one array. The framework will then create the settings/controls, output any nessasary CSS to the header and create the js for real time previewing.
+The goal of this project is to create a super simple to use framework for programming the WordPress Theme Customizer. It is designed to allow theme authors to specify what an option needs to do, all in one array. The framework will then create the settings/controls, output any necessary CSS to the header and create the js for real time previewing.
 
 Currently it works for color pickers only and the short-term goal is to make a stable alpha for color pickers. See below for the current status. Pull requests are VERY WELCOME:) Keep in mind as of now <em>this will to work with twentytwelve only.</em>
 
@@ -17,17 +17,17 @@ Current Status
 <strong>Things That Work And Are Shiny</strong>
 * Settings, controls and sections are all created via nice easy to work with arrays.
 * The changes show up on the front end as intended.
-* All of the variables that are needed by customzier.js for real time preview are localized and availble. This has been confirmed by console.loging theme in customizer.js.
-* Instuructions for end user use is compelted in the code. Full documentation can easily be completed when 
+* All of the variables that are needed by customizer.js for real time preview are localized and available. This has been confirmed by console.loging theme in customizer.js.
+* Instructions for end user use is completed in the code. Full documentation can easily be completed when 
 * 
 
 <strong>Things That Work But Work In Stupid Ways</strong>
 * The option name, the prefix for settings and sections, as well as the translation text domain are all hard coded to be 'scf'. This should be an option the user sets.
-* The function scf_customzier_color_loop() creates the array needed for outputting styles to wp_head and customizer.js. That's all shiny, except the function is called in a funtion hooked to customize_register so that array is only availble in the customzier. As quick fix I am save the data to the database and then get that option in scf_auto_style() and in scf_localize_customizer().
-* scf_localize_customizer() deregisters the theme's built in customizer js. Right now its hardcoded to use the handle for said script from twentytwelve. A more unviersal solution is needed. Also in that function, on line 61 you can see the commented out way I tried to set the source for it, instead of the stupid way that actually worked. Maybe its just my local environmnet.
+* The function scf_customizer_color_loop() creates the array needed for outputting styles to wp_head and customizer.js. That's all shiny, except the function is called in a function hooked to customize_register so that array is only available in the customizer. As quick fix I am save the data to the database and then get that option in scf_auto_style() and in scf_localize_customizer().
+* scf_localize_customizer() deregisters the theme's built in customizer js. Right now its hardcoded to use the handle for said script from twentytwelve. A more universal solution is needed. Also in that function, on line 61 you can see the commented out way I tried to set the source for it, instead of the stupid way that actually worked. Maybe its just my local environment.
 
 <strong>Things That Don't Work</strong>
-* The real time previewing isn't happening. If you look in customize.js you will see two loops I wrote. One is supposed to acomplish this goal. It doesn't, nor does it give me any console errors. I am even more of an egg when it comes to js than with PHP. The second loop console.logs real nice.
+* The real time previewing isn't happening. If you look in customize.js you will see two loops I wrote. One is supposed to accomplish this goal. It doesn't, nor does it give me any console errors. I am even more of an egg when it comes to js than with PHP. The second loop console.logs real nice.
 
 In the "Enter postMessage" section of [http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/comment-page-3/#comment-11938](this article) Otto explains what I am trying to do.
 
