@@ -14,22 +14,22 @@
 * @since scf 0.1
 */
 if (! class_exists('scf_make_the_magic') ):
-class scf_make_the_magic() {
-
+class scf_make_the_magic {
+	public $customizerData;
 	/**
 	* Customizer Color Control Loop
 	*
 	* @since _sf 1.1.0
 	* @since scf 0.1
 	*/
-	if (! function_exists('scf_customzier_color_loop') ) :
 	public function scf_customzier_color_loop($colors, $countStart = 10, $section) {
 		//Not sure why I have to do this first thing
 		global $wp_customize;
 		//get the options
 		//todo: set which option in a nonstupid way.
 		//get_option('scf');
-
+		
+		
 		//start the counter at 10 or whatever was set.
 		$count = $countStart;
 		foreach ($colors as $things) {
@@ -61,7 +61,7 @@ class scf_make_the_magic() {
 			);
 			$wp_customize->add_control($control);
 			//create array to be used for the outputting styles to wp_head and customizer.js
-			$customizerData [] = array(
+			$this->customizerData[] = array(
 				'id' => $id,
 				'slug' => $slug, 
 				'selector' => $things['selector'],
@@ -89,15 +89,12 @@ class scf_make_the_magic() {
 		}
 		*/
 	}
-	endif; // ! scf_customzier_color_loop exists
 
 	/**
 	* Set styles set in customizer dynamically
 	*
 	* @since scf 1.1.0
 	*/
-
-	if (! function_exists('scf_auto_style') ) :
 	public function scf_auto_style() {
 		/*
 		//get the options array
@@ -108,7 +105,7 @@ class scf_make_the_magic() {
 		//create the css by looping through $customizerData
 		//create $return to be populated in this loop
 		$return = '';
-		foreach ($customizerData as $data) {
+		foreach ($this->customizerData as $data) {
 			$return .= $data['selector'];
 			$return .= "{";
 			$return .= $data['property'].":";
@@ -119,44 +116,38 @@ class scf_make_the_magic() {
 		echo $return;
 		echo "</style>";
 	}
-	add_action('wp_head', 'scf_auto_style');
-	endif; // ! scf_auto_style exists
-
+	//add_action('wp_head', 'scf_auto_style');
 
 	/**
 	* Add links to Customizer
 	* @since _sf 1.0.5.1
 	* @since scf 0.1
 	*/
+	function _add_options_menu() {
 	//Add WordPress customizer page to the admin menu.
-	if(!function_exists('scf_add_options_menu')) :
-
-	function scf_add_options_menu() {
-			$theme_page = add_theme_page(
-				__( 'Customize Theme', 'scf' ),   // Name of page
-				__( 'Customize Theme', 'scf' ),   // Label in menu
-				'edit_theme_options',          // Capability required
-				'customize.php'             // Menu slug, used to uniquely identify the page
-			);
-		}
-	add_action ('admin_menu', 'scf_add_options_menu');
-	endif; // ! scf_add_options_menu exists
+		$theme_page = add_theme_page(
+			__( 'Customize Theme', 'scf' ),   // Name of page
+			__( 'Customize Theme', 'scf' ),   // Label in menu
+			'edit_theme_options',          // Capability required
+			'customize.php'             // Menu slug, used to uniquely identify the page
+		);
+	}
+	//add_action ('admin_menu', 'scf_add_options_menu');
 
 	//Add WordPress customizer page to the admin bar menu.
-	if(!function_exists('scf_add_admin_bar_options_menu')) :
-		function scf_add_admin_bar_options_menu() {
-		   if ( current_user_can( 'edit_theme_options' ) ) {
-			 global $wp_admin_bar;
-			 $wp_admin_bar->add_menu( array(
-			   'parent' => false,
-			   'id' => 'theme_editor_admin_bar',
-			   'title' =>  __( 'Customize Theme', 'scf' ),
-			   'href' => admin_url( 'customize.php')
-			 ));
-		   }
-		}
-	add_action( 'wp_before_admin_bar_render', 'scf_add_admin_bar_options_menu' );
-	endif; // ! scf_add_admin_bar_options_menu exists
+	
+	function scf_add_admin_bar_options_menu() {
+	   if ( current_user_can( 'edit_theme_options' ) ) {
+		 global $wp_admin_bar;
+		 $wp_admin_bar->add_menu( array(
+		   'parent' => false,
+		   'id' => 'theme_editor_admin_bar',
+		   'title' =>  __( 'Customize Theme', 'scf' ),
+		   'href' => admin_url( 'customize.php')
+		 ));
+	   }
+	}
+	//add_action( 'wp_before_admin_bar_render', 'scf_add_admin_bar_options_menu' );
 }
 endif; //! scf_make_the_magic exists
 ?>
