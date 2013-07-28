@@ -118,8 +118,9 @@ function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 	//start the counter at 10 or whatever was set.
 	$count = $countStart;
 	foreach ($colors as $things) {
+		$theme_slug = '_sf';
 		$slug = $things['slug'];
-		$id = "_sf[{$slug}]";
+		$id = "{$theme_slug}[{$slug}]";
 		//If current array has a priority set, use it, if not use the counter.
 		if (! isset($things['priority']) ) {
 			$priority = $count;
@@ -138,7 +139,7 @@ function _sf_customzier_color_loop($colors, $countStart = 10, $section) {
 		new WP_Customize_Color_Control(
 				$wp_customize, $slug, 
 			array(
-			'label'         => __( $things['label'], '_sf' ),
+			'label'         => __( $things['label'], $theme_slug ),
 			'section'       => $section,
 			'priority'      => $priority,
 			'settings'      => $id
