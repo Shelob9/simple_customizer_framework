@@ -28,7 +28,7 @@ class scf_make_the_magic() {
 		global $wp_customize;
 		//get the options
 		//todo: set which option in a nonstupid way.
-		get_option('scf');
+		//get_option('scf');
 
 		//start the counter at 10 or whatever was set.
 		$count = $countStart;
@@ -71,6 +71,7 @@ class scf_make_the_magic() {
 			//advance priority counter
 			$count++;
 		}
+		/*
 		//save the $customizerData array in the option 'scf_cData'
 		$option_name = 'scf_cData';
 		$new_value = $customizerData;
@@ -86,6 +87,7 @@ class scf_make_the_magic() {
 			$autoload = 'yes';
 			add_option( $option_name, $new_value, $deprecated, $autoload );
 		}
+		*/
 	}
 	endif; // ! scf_customzier_color_loop exists
 
@@ -97,10 +99,12 @@ class scf_make_the_magic() {
 
 	if (! function_exists('scf_auto_style') ) :
 	public function scf_auto_style() {
+		/*
 		//get the options array
 		global $options;
 		//get the data we need fromt he option 'scf_cData' we save in the color loop.
 		$customizerData = get_option('scf_cData');
+		*/
 		//create the css by looping through $customizerData
 		//create $return to be populated in this loop
 		$return = '';
