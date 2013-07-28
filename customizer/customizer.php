@@ -15,6 +15,8 @@ if (! function_exists('scf_customzier_color_loop') ) :
 function scf_customzier_color_loop($colors, $countStart = 10, $section) {
 	//Not sure why I have to do this first thing
 	global $wp_customize;
+	//get the options
+	get_option('scf');
 
 	//start the counter at 10 or whatever was set.
 	$count = $countStart;
