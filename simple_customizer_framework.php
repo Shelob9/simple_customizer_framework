@@ -25,7 +25,13 @@ class simple_customzier_framework{
 	var $optionsList = array('scf-example.php');
 	//set your theme slug.
 	//todo: this/implement it.
-
+	
+	/**
+	* END USER: Nothing below this line needs to be messed with for normal operation.
+	*/
+	
+	//create $customizerData to carry the css info on to the header and preview js
+	public $customizerData = array();
 	
 	/**
      * Class Constructor
