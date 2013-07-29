@@ -19,7 +19,7 @@ class simple_customzier_framework{
 	* Dearest end user, please define these variables.
 	*/
 	//the location of the folder containing this file relative to theme folder.
-	var $dir = 'options';
+	public $dir = 'options';
 	//the names of settings files to be included, the example file is included as an example.
 	//seperate values with commas
 	var $optionsList = array('scf-example.php');
@@ -45,7 +45,7 @@ class simple_customzier_framework{
      * Define Path(s)
      */
     function paths(){
-        define( 'SCF_PATH', trailingslashit( get_template_directory() ).trailingslashit( $dir) );
+        define( 'SCF_PATH',  get_template_directory() .'/options' );
     }
     
     /**
@@ -56,11 +56,13 @@ class simple_customzier_framework{
 		add_action( 'wp_before_admin_bar_render', array($this, 'add_admin_bar_options_menu') );
 		add_action(	'wp_enqueue_scripts', array($this, 'localize_customizer') );
 		add_action('wp_head', array($this, 'auto_style') );
+		add_action( 'customize_register', array($this, 'customzier_color_loop' ) );
 	}
 	
 	/**
 	* Include shit
 	*/
+	/*
 	function include_shit() {
 	//include_once(SCF_PATH.'/customizer/customizer.php');
 	//load the sanitization file
@@ -72,6 +74,7 @@ class simple_customzier_framework{
 			include_once(SCF_PATH.'/settings/'.$options);
 		}
 	}
+	*/
 	/**
 	* Binds JS handlers to make Theme Customizer preview reload changes asynchronously with customizer.js
 	* Also localize the customizer options so they can be added dynamically in customizer.js
@@ -126,14 +129,18 @@ class simple_customzier_framework{
 	* @since _sf 1.1.0
 	* @since scf 0.1
 	*/
-	public function customzier_color_loop($colors, $countStart = 10, $section) {
+	
+	public function customzier_color_loop() {
 		//Not sure why I have to do this first thing
 		global $wp_customize;
 		//get the options
 		//todo: set which option in a nonstupid way.
 		//get_option('scf');
-		
-		
+		$wp_customize->add_section( 'themename_color_scheme', array(
+		'title'          => __( 'Color Scheme', 'themename' ),
+		'priority'       => 35,
+		) );
+		include(SCF_PATH.'/settings/scf-example.php');
 		//start the counter at 10 or whatever was set.
 		$count = $countStart;
 		foreach ($colors as $things) {
@@ -175,6 +182,8 @@ class simple_customzier_framework{
 			//advance priority counter
 			$count++;
 		}
+		
+		
 	}
 	/**
 	* Set styles set in customizer dynamically
