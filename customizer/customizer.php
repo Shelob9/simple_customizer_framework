@@ -12,12 +12,12 @@
 * @since scf 1.1.0
 */
 if (! function_exists('scf_customzier_color_loop') ) :
+add_action('customize_register', 'scf_customzier_color_loop');
 function scf_customzier_color_loop($colors, $countStart = 10, $section) {
 	//Not sure why I have to do this first thing
 	global $wp_customize;
 	//get the options
 	//todo: set which option in a nonstupid way.
-	get_option('scf');
 
 	//start the counter at 10 or whatever was set.
 	$count = $countStart;
@@ -48,36 +48,30 @@ function scf_customzier_color_loop($colors, $countStart = 10, $section) {
 			'settings'      => $id
 			) 
 		);
-		$wp_customize->add_control($control);
-		//create array to be used for the outputting styles to wp_head and customizer.js
-		$customizerData [] = array(
-        	'id' => $id,
-        	'slug' => $slug, 
-        	'selector' => $things['selector'],
-        	'property' => $things['property'],
-        );
-		
+		$wp_customize->add_control($control);	
 		//advance priority counter
 		$count++;
-	}
-	//save the $customizerData array in the option 'scf_cData'
-	$option_name = 'scf_cData';
-	$new_value = $customizerData;
-	if ( get_option( $option_name ) !== false ) {
-
-		// The option already exists, so we just update it.
-		update_option( $option_name, $new_value );
-
-	} else {
-
-		// The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-		$deprecated = null;
-		$autoload = 'yes';
-		add_option( $option_name, $new_value, $deprecated, $autoload );
 	}
 }
 endif; // ! scf_customzier_color_loop exists
 
+/*
+*
+*/
+function scf_customizer_data($colors) {
+//create array to be used for the outputting styles to wp_head and customizer.js
+	foreach($colors as $things) {
+		$slug = $things['slug'];
+		$id = "scf[{$slug}]";
+		$customizerData [] = array(
+			'id' => $id,
+			'slug' => $slug, 
+			'selector' => $things['selector'],
+			'property' => $things['property'],
+		);
+	}
+	return $customizerData();
+}
 /**
 * Set styles set in customizer dynamically
 *
@@ -85,11 +79,9 @@ endif; // ! scf_customzier_color_loop exists
 */
 
 if (! function_exists('scf_auto_style') ) :
-function scf_auto_style() {
+function scf_auto_style($customzierData) {
 	//get the options array
 	global $options;
-	//get the data we need fromt he option 'scf_cData' we save in the color loop.
-	$customizerData = get_option('scf_cData');
 	//create the css by looping through $customizerData
 	//create $return to be populated in this loop
 	$return = '';

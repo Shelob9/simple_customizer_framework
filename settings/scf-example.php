@@ -11,7 +11,7 @@
 * @since 0.1
 */
 if (! function_exists('scf_customize_sidebar') ) :
-add_action('customize_register', 'scf_customize_sidebar');
+
 
 function scf_customize_sidebar() {
 	
@@ -73,7 +73,9 @@ function scf_customize_sidebar() {
 		'property' => 'color',
 		'priority' => '',
 	);
-	
+	return $colors;
+}
+endif; //! scf_customize_sidebar	
 	//STEP 3: Set the initial priority value
 	$countStart = 50;
 	
@@ -82,6 +84,6 @@ function scf_customize_sidebar() {
 	
 	//STEP 4: Watch the magic happen.
 	scf_customzier_color_loop($colors, $countStart, $section);
-}
-endif; //! scf_customize_sidebar
+	scf_customizer_data($colors);
+	scf_auto_style($customzierData);
 ?>
