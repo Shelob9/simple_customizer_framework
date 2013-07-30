@@ -27,7 +27,7 @@ $optionsList = array('scf-example.php');
 
 
 /**
-* Get everything toghehter (sections, settings and sections.)
+* Get everything together (sections, settings and sections.)
 *
 * @since scf 0.1
 */
