@@ -57,6 +57,7 @@ class simple_customzier_framework{
 		add_action(	'wp_enqueue_scripts', array($this, 'localize_customizer') );
 		add_action('wp_head', array($this, 'auto_style') );
 		add_action( 'customize_register', array($this, 'customzier_color_loop' ) );
+		add_action( 'tha_header_after', array($this, 'data_dump') );
 	}
 	
 	/**
@@ -207,10 +208,26 @@ class simple_customzier_framework{
 			$return .= $options[$data['slug']].";} ";
 		}
 		//echos
+		echo "<!-- Simple Customizer Framework :) -->";
 		echo "<style>";
 		echo $return;
 		echo "</style>";
 	}
+	
+	/**
+	* For diagnostic purposes: var_dump customizerData at end of header
+	* Presumes: Theme Hook Alliance hooks are in use.
+	* Note: action is disabled by default.
+	*
+	* @package scf
+	* @since v0.1
+	*/
+	
+	public function data_dump() {
+		var_dump($this->customizerData);
+	}
+
+	
 
 }
 
