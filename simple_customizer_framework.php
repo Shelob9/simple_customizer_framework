@@ -52,20 +52,21 @@ class simple_customzier_framework{
     * Setup Actions
     */
     function setup_actions() {
-    	add_action('admin_menu', array($this, 'add_options_menu') );
+    	add_action( 'admin_menu', array($this, 'add_options_menu') );
 		add_action( 'wp_before_admin_bar_render', array($this, 'add_admin_bar_options_menu') );
 		add_action(	'wp_enqueue_scripts', array($this, 'localize_customizer') );
-		add_action('wp_head', array($this, 'auto_style') );
+		add_action( 'wp_head', array($this, 'auto_style') );
 		add_action( 'customize_register', array($this, 'customzier_color_loop' ) );
 		add_action( 'tha_header_after', array($this, 'data_dump') );
+		add_action( 'init', array($this, 'make_data') );
 	}
 	
 	/**
 	* Include shit
 	*/
 	/*
-	function include_shit() {
-	//include_once(SCF_PATH.'/customizer/customizer.php');
+	
+	include_once(SCF_PATH.'/customizer/customizer.php');
 	//load the sanitization file
 	include_once(SCF_PATH.'/customizer/customizer-sanitizer.php');
 	//load the sections file
@@ -93,7 +94,7 @@ class simple_customzier_framework{
 		$in_footer = true;
 		wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
 		//localize script with the css bits we need
-		wp_localize_script(	$handle, 'custStyle', $customizerData);
+		wp_localize_script(	$handle, 'custStyle', $this->customizerData);
 	}
 	
 	/**
@@ -125,22 +126,15 @@ class simple_customzier_framework{
 	}
 	
 	/**
-	* Customizer Color Control Loop
+	* Populate $customizerData
 	*
-	* @since _sf 1.1.0
-	* @since scf 0.1
+	* @package scf
+	* @since 0.1
 	*/
 	
-	public function customzier_color_loop() {
-		//Not sure why I have to do this first thing
-		global $wp_customize;
-		//get the options
-		//todo: set which option in a nonstupid way.
-		//get_option('scf');
-		$wp_customize->add_section( 'themename_color_scheme', array(
-		'title'          => __( 'Color Scheme', 'themename' ),
-		'priority'       => 35,
-		) );
+	function make_data() {
+		//get the settings
+		//TOD: get this from the array on 25 instead of hardcoding
 		include(SCF_PATH.'/settings/scf-example.php');
 		//start the counter at 10 or whatever was set.
 		$count = $countStart;
@@ -154,34 +148,59 @@ class simple_customzier_framework{
 			else {
 				$priority = $things['priority'];
 			}
-			$wp_customize->add_setting( $id, array(
+			//get current value
+			$options = get_option('scf');
+			$value = $options[$slug];
+			$this->customizerData[] = array(
+				'id' 			=> $id,
+				'slug' 			=> $slug, 
+				'selector' 		=> $things['selector'],
+				'property'		 => $things['property'],
+				'default' 		=> $things['default'],
+				'label'         => __( $things['label'], $theme_slug ),
+				'section'       => $sectionName,
+				'priority'      => $priority,
+				'settings'      => $id,
+				'value'			=> $value,
+			);
+		
+			//advance priority counter
+			$count++;
+		}
+	}
+	
+	
+	/**
+	* Customizer Color Control Loop
+	*
+	* @since _sf 1.1.0
+	* @since scf 0.1
+	*/
+	
+	public function customzier_color_loop() {
+		//Not sure why I have to do this first thing
+		global $wp_customize;
+		//include sections
+		include(SCF_PATH.'/scf-sections.php');
+		//create controls and settings
+		foreach ($this->customizerData as $things) {
+			$wp_customize->add_setting( $things['id'], array(
 				'type'              => 'option', 
 				'transport'     => 'postMessage',
 				'capability'     => 'edit_theme_options',
 				'default' 		=> $things['default'],
 			) );
- 
 			$control = 
 			new WP_Customize_Color_Control(
 					$wp_customize, $slug, 
 				array(
-				'label'         => __( $things['label'], $theme_slug ),
-				'section'       => $section,
-				'priority'      => $priority,
-				'settings'      => $id
+				'label'         => $things['label'],
+				'section'       => $things['section'],
+				'priority'      => $things['priority'],
+				'settings'      => $things['id'],
 				) 
 			);
 			$wp_customize->add_control($control);
-			//create array to be used for the outputting styles to wp_head and customizer.js
-			$this->customizerData[] = array(
-				'id' => $id,
-				'slug' => $slug, 
-				'selector' => $things['selector'],
-				'property' => $things['property'],
-			);
-		
-			//advance priority counter
-			$count++;
 		}
 		
 		
@@ -205,7 +224,7 @@ class simple_customzier_framework{
 			$return .= $data['selector'];
 			$return .= "{";
 			$return .= $data['property'].":";
-			$return .= $options[$data['slug']].";} ";
+			$return .= $data['value'].";} ";
 		}
 		//echos
 		echo "<!-- Simple Customizer Framework :) -->";
