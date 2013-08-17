@@ -43,6 +43,9 @@ class simple_customzier_framework{
     
      /**
      * Define Path(s)
+     *
+	 * @package scf
+	 * @since 0.1
      */
     function paths(){
         define( 'SCF_PATH',  get_template_directory() .'/options' );
@@ -50,6 +53,9 @@ class simple_customzier_framework{
     
     /**
     * Setup Actions
+    *
+	* @package scf
+	* @since 0.1
     */
     function setup_actions() {
     	add_action( 'admin_menu', array($this, 'add_options_menu') );
@@ -61,27 +67,13 @@ class simple_customzier_framework{
 		add_action( 'init', array($this, 'make_data') );
 	}
 	
-	/**
-	* Include shit
-	*/
-	/*
-	
-	include_once(SCF_PATH.'/customizer/customizer.php');
-	//load the sanitization file
-	include_once(SCF_PATH.'/customizer/customizer-sanitizer.php');
-	//load the sections file
-	include_once(SCF_PATH.'scf-sections.php');
-	//load the actual controls/settings we need IE: the point of this
-		foreach ($optionsList as $options) {
-			include_once(SCF_PATH.'/settings/'.$options);
-		}
-	}
 	*/
 	/**
 	* Binds JS handlers to make Theme Customizer preview reload changes asynchronously with customizer.js
 	* Also localize the customizer options so they can be added dynamically in customizer.js
 	*
-	* @since scf 1.1.0
+	* @package scf
+	* @since 0.1
 	*/
 	function localize_customizer() {
 		//deregister twentytwelves theme customizer js. Need a more unviersal way to do this.
@@ -99,8 +91,9 @@ class simple_customzier_framework{
 	
 	/**
 	* Add links to Customizer
-	* @since _sf 1.0.5.1
-	* @since scf 0.1
+	*
+	* @package scf
+	* @since 0.1
 	*/
 	function add_options_menu() {
 	//Add WordPress customizer page to the admin menu.
@@ -174,13 +167,16 @@ class simple_customzier_framework{
 	/**
 	* Customizer Color Control Loop
 	*
-	* @since _sf 1.1.0
-	* @since scf 0.1
+	*
+	* @package scf
+	* @since 0.1
 	*/
 	
 	public function customzier_color_loop() {
 		//Not sure why I have to do this first thing
 		global $wp_customize;
+		
+		//CREATE SECTIONS
 		//include sections
 		include(SCF_PATH.'/scf-sections.php');
 		//set counter for priorities at 100
@@ -205,7 +201,8 @@ class simple_customzier_framework{
 			//increase the counter
 			$count++;
 		}
-		//create controls and settings
+		
+		//CREATE CONTROLS AND SETTINGS
 		foreach ($this->customizerData as $things) {
 			$wp_customize->add_setting( $things['id'], array(
 				'type'              => 'option', 
@@ -229,17 +226,12 @@ class simple_customzier_framework{
 		
 	}
 	/**
-	* Set styles set in customizer dynamically
+	* Output styles set in customizer in header dynamically
 	*
-	* @since scf 1.1.0
+	* @package scf
+	* @since scf 0.1
 	*/
 	public function auto_style() {
-		/*
-		//get the options array
-		global $options;
-		//get the data we need fromt he option 'scf_cData' we save in the color loop.
-		$customizerData = get_option('scf_cData');
-		*/
 		//create the css by looping through $customizerData
 		//create $return to be populated in this loop
 		$return = '';
@@ -268,8 +260,6 @@ class simple_customzier_framework{
 	public function data_dump() {
 		var_dump($this->customizerData);
 	}
-
-	
 
 }
 
