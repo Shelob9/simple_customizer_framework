@@ -3,7 +3,7 @@
 *
 * Simple Customizer Framework
 *
-* @since scf 0.1
+* @since scf 0.2
 * Began life in _Second Foundation (1.1.0) WordPress theme
 *
 * Copyright 2013 Josh Pollock (ComplexWaveform.com)
