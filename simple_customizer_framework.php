@@ -60,7 +60,7 @@ class simple_customzier_framework{
     function setup_actions() {
     	add_action( 'admin_menu', array($this, 'add_options_menu') );
 		add_action( 'wp_before_admin_bar_render', array($this, 'add_admin_bar_options_menu') );
-		add_action(	'wp_enqueue_scripts', array($this, 'localize_customizer') );
+		add_action(	'customize_preview_init', array($this, 'localize_customizer') );
 		add_action( 'wp_head', array($this, 'auto_style') );
 		add_action( 'customize_register', array($this, 'customzier_color_loop' ) );
 		add_action( 'tha_header_after', array($this, 'data_dump') );
@@ -76,7 +76,7 @@ class simple_customzier_framework{
 	*/
 	function localize_customizer() {
 		//deregister twentytwelves theme customizer js. Need a more unviersal way to do this.
-		wp_deregister_script('twentytwelve-customizer');
+		//wp_deregister_script('twentytwelve-customizer');
 		$handle = 'customizer-preview';
 		$src = SCF_PATH.'/js/customizer.js';
 		//$src = get_template_directory_uri().'/options/js/customizer.js';
