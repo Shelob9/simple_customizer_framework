@@ -182,6 +182,28 @@ class simple_customzier_framework{
 		global $wp_customize;
 		//include sections
 		include(SCF_PATH.'/scf-sections.php');
+		//set counter for priorities at 100
+		$count = 100;
+		//make the sections happen
+		foreach ($sections as $section) {
+			//If current item has a priority set, use it, if not use the counter.
+			if (! isset($section['priority']) ) {
+				$priority = $count;
+			}
+			else {
+				$priority = $section['priority'];
+			}
+			//make the sections id from theme slug and setting slug and put it in $id
+			$id = 'scf_'.$section['slug'];
+		
+			//create the section
+			$wp_customize->add_section($id, array(
+				'title'    => __($section['label'], 'scf'),
+				'priority' => $priority,
+			));
+			//increase the counter
+			$count++;
+		}
 		//create controls and settings
 		foreach ($this->customizerData as $things) {
 			$wp_customize->add_setting( $things['id'], array(
