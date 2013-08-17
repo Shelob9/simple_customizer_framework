@@ -10,10 +10,7 @@
 * @package scf
 * @since 0.1
 */
-//if (! function_exists('scf_customize_sidebar') ) :
-//add_action('customize_register', 'scf_customize_sidebar');
 
-//function scf_customize_sidebar() {
 	
 	//STEP 1 tell us what section this goes in.
 	//This should correspond to a value set for 'slug' in sections.php
@@ -77,13 +74,4 @@
 	//STEP 3: Set the initial priority value
 	$countStart = 50;
 	
-/*	
-	//prefix the section name
-	$section = 'scf_'.$sectionName;
-	
-	//STEP 4: Watch the magic happen.
-	scf_customzier_color_loop($colors, $countStart, $section);
-}
-endif; //! scf_customize_sidebar
-*/
 ?>
